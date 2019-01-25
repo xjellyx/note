@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	obj"learngit-/my.go.learn/go_language_learn/mysqltest/obj"
+	obj"github.com/noteGo/noteGo/noteMysql/obj"
 	_ "github.com/go-sql-driver/mysql"
 )
 
