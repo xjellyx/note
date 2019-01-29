@@ -2,19 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d5cb32e4-f098-4b9f-9f38-27f7ba60b55f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/go.imports.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noteMysql/go_Mysql.go" beforeDir="false" afterPath="$PROJECT_DIR$/noteGo/noteMysql/go_Mysql.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noteMysql/obj/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/noteGo/noteMysql/obj/db.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noteRpc/json_rpc/jsonRpcClient.go" beforeDir="false" afterPath="$PROJECT_DIR$/noteGo/noteRpc/json_rpc/jsonRpcClient.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noteRpc/json_rpc/jsonRpcServer.go" beforeDir="false" afterPath="$PROJECT_DIR$/noteGo/noteRpc/json_rpc/jsonRpcServer.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noteRpc/rpc/rpcClient.go" beforeDir="false" afterPath="$PROJECT_DIR$/noteGo/noteRpc/rpc/rpcClient.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noteRpc/rpc/rpc_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/noteGo/noteRpc/rpc/rpc_server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noteSpider/GetUsdToCnyRate.go" beforeDir="false" afterPath="$PROJECT_DIR$/noteGo/noteSpider/GetUsdToCnyRate.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noteSpider/getEthPrice.go" beforeDir="false" afterPath="$PROJECT_DIR$/noteGo/noteSpider/getEthPrice.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noteSpider/getHuoBi.go" beforeDir="false" afterPath="$PROJECT_DIR$/noteGo/noteSpider/getHuoBi.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noteSpider/spiderETH.go" beforeDir="false" afterPath="$PROJECT_DIR$/noteGo/noteSpider/spiderETH.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noteSpider/spiderEthHuobi.go" beforeDir="false" afterPath="$PROJECT_DIR$/noteGo/noteSpider/spiderEthHuobi.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noteGo/nodeBlock/IntroductionBlock/block/block.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noteGo/nodeBlock/IntroductionBlock/blockchain/blockchain.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noteGo/nodeBlock/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,70 +16,16 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/noteGo/noteMysql/go_Mysql.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="4" column="46" selection-start-line="4" selection-start-column="46" selection-end-line="4" selection-end-column="46" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/noteGo/noteRpc/rpc/rpcClient.go">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/noteGo/noteRpc/rpc/rpc_server.go">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/noteGo/noteRpc/json_rpc/jsonRpcClient.go">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/noteGo/noteRpc/json_rpc/jsonRpcServer.go">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/noteGo/noteSpider/getHuoBi.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#14#94#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/noteGo/noteSpider/spiderETH.go">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/noteGo/noteSpider/getEthPrice.go">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/noteGo/noteSpider/spiderEthHuobi.go">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/noteGo/noteSpider/GetUsdToCnyRate.go">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
-  <component name="GOROOT" path="/usr/local/go" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" path="C:\Go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -95,14 +34,17 @@
       <list>
         <option value="$PROJECT_DIR$/noteMysql/go_Mysql.go" />
         <option value="$PROJECT_DIR$/noteGo/noteMysql/go_Mysql.go" />
+        <option value="$PROJECT_DIR$/noteGo/nodeBlock/IntroductionBlock/blockchain/blockchain.go" />
+        <option value="$PROJECT_DIR$/noteGo/nodeBlock/IntroductionBlock/block/block.go" />
+        <option value="$PROJECT_DIR$/noteGo/nodeBlock/main.go" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="3" />
     <option name="y" value="27" />
-    <option name="width" value="1927" />
-    <option name="height" value="1413" />
+    <option name="width" value="1386" />
+    <option name="height" value="788" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -113,23 +55,13 @@
         <subPane>
           <expand>
             <path>
-              <item name="noteGo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="noteGo" type="462c0819:PsiDirectoryNode" />
+              <item name="note" type="b2602c69:ProjectViewProjectNode" />
+              <item name="note" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="noteGo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="note" type="b2602c69:ProjectViewProjectNode" />
+              <item name="note" type="462c0819:PsiDirectoryNode" />
               <item name="noteGo" type="462c0819:PsiDirectoryNode" />
-              <item name="noteGo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="noteGo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="noteGo" type="462c0819:PsiDirectoryNode" />
-              <item name="noteGo" type="462c0819:PsiDirectoryNode" />
-              <item name="noteMysql" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="noteGo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
@@ -139,6 +71,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.gopath.indexing.explicitly.defined" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
@@ -164,7 +97,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Go Build.go build getEthPrice.go">
+  <component name="RunManager" selected="Go Build.go build main.go">
     <configuration name="go build getEthPrice.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="noteGo" />
       <working_directory value="$PROJECT_DIR$" />
@@ -183,23 +116,32 @@
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
+    <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="noteGo" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/noteGo/nodeBlock/main.go" />
+      <package value="github.com/noteGo" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build main.go" />
         <item itemvalue="Go Build.go build getEthPrice.go" />
         <item itemvalue="Go Build.go build go_Mysql.go" />
       </list>
     </recent_temporary>
   </component>
   <component name="ToolWindowManager">
-    <frame x="3" y="27" width="1927" height="1413" extended-state="0" />
-    <editor active="true" />
+    <frame x="3" y="27" width="1386" height="788" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25864822" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26244345" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3299373" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32977098" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -240,6 +182,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/noteGo/noteMysql/go_Mysql.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="4" column="46" selection-start-line="4" selection-start-column="46" selection-end-line="4" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/noteGo/noteRpc/rpc/rpcClient.go">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -273,10 +222,40 @@
     <entry file="file://$PROJECT_DIR$/noteGo/noteSpider/GetUsdToCnyRate.go">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/noteGo/noteMysql/go_Mysql.go">
+    <entry file="file://C:/Go/src/bytes/bytes.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="46" selection-start-line="4" selection-start-column="46" selection-end-line="4" selection-end-column="46" />
+        <state relative-caret-position="-169">
+          <caret line="386" column="25" selection-start-line="386" selection-start-column="22" selection-end-line="386" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/noteGo/nodeBlock/IntroductionBlock/blockchain/blockchain.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-136">
+          <caret line="23" column="23" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="23" />
+          <folding>
+            <element signature="e#20#100#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/noteGo/nodeBlock/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="24" column="24" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
+          <folding>
+            <element signature="e#14#153#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/noteGo/nodeBlock/IntroductionBlock/block/block.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="27" column="15" selection-start-line="27" selection-start-column="15" selection-end-line="27" selection-end-column="15" />
+          <folding>
+            <element signature="e#15#44#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
