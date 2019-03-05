@@ -46,14 +46,14 @@ func (a *Arith) Divide(req ArithRequest, res *ArithResponse) (err error) {
 }
 
 func main() {
-	rpc.Register(new(Arith))                        // 注册服务
+	err:=rpc.Register(new(Arith))                        // 注册服务
 	rpc.HandleHTTP()                                // 采用http协议作为rpc载体
 	lis, err := net.Listen("tcp", "127.0.0.1:8096") // 设置服务端地址
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Fprintln(os.Stdout, "%s", "start connection")
-	http.Serve(lis, nil) // 生成服务端
+	_,err=fmt.Fprintf(os.Stdout, "%s", "start connection")
+	err=http.Serve(lis, nil) // 生成服务端
 
 }
 

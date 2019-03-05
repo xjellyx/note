@@ -35,6 +35,6 @@ func main() {
 	if err = conn.Call("ArithJson.Divide", req, &res); err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(req.Num1, req.Num2, res.Quo, res.Rem)
+	fmt.Println(res,req.Num1, req.Num2, res.Quo, res.Rem)
 
 }
