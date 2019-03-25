@@ -240,7 +240,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Go Build.go build test2.go">
+  <component name="RunManager" selected="Go Build.go build go_Mysql.go">
     <configuration name="go build apitest.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="noteGo" />
       <working_directory value="$PROJECT_DIR$" />
@@ -255,6 +255,15 @@
       <working_directory value="$PROJECT_DIR$" />
       <kind value="FILE" />
       <filePath value="$PROJECT_DIR$/noteGo/noteSpider/eth.go" />
+      <package value="github.com/LnFen/note" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build go_Mysql.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="noteGo" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/noteGo/noteMysql/go_Mysql.go" />
       <package value="github.com/LnFen/note" />
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
@@ -277,22 +286,13 @@
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
-    <configuration name="go build test.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="noteGo" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/noteGo/gql/test.go" />
-      <package value="github.com/LnFen/note" />
-      <directory value="$PROJECT_DIR$/" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build go_Mysql.go" />
         <item itemvalue="Go Build.go build test2.go" />
         <item itemvalue="Go Build.go build test.go (1)" />
         <item itemvalue="Go Build.go build eth.go" />
         <item itemvalue="Go Build.go build apitest.go" />
-        <item itemvalue="Go Build.go build test.go" />
       </list>
     </recent_temporary>
   </component>

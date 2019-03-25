@@ -2,11 +2,9 @@ package main
 
 import (
 	"fmt"
-	obj"github.com/noteGo/noteGo/noteMysql/obj"
+	obj "github.com/LnFen/note/noteGo/noteMysql/obj"
 	_ "github.com/go-sql-driver/mysql"
 )
-
-
 
 type student struct {
 	Id   string `json:"id"`
@@ -15,22 +13,20 @@ type student struct {
 	Sex  string `json:"sex"`
 }
 
-
-
 func main() {
 	var db *obj.Mysql_db
-	var(
-		s=[]interface{}{}
+	var (
+		s = []interface{}{}
 		//c=make(map[string]bool)
 	)
 	db = new(obj.Mysql_db)
-	db.TableName="users"
+	db.TableName = "users"
 	db.MysqlOpen()
 	defer db.MysqlClose()
-	b,err:=db.Clounms()
-	fmt.Println(b,err)
-	for _,v:=range b{
-	s=append(s,v["column_name"])
+	b, err := db.Clounms()
+	fmt.Println(b, err)
+	for _, v := range b {
+		s = append(s, v["column_name"])
 	}
 	fmt.Println(s)
 
