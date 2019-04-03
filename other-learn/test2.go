@@ -26,7 +26,7 @@ func main() {
 	u := uuid.NewV5(uuid.UUID{}, "nanghjy")
 	fmt.Println(u)
 	str := `{"user":"root", "password": "123456", "host": "127.0.0.1", "port": "3306", 
-"sslmode": "disable","database":"project"}`
+"sslmode": "disable"}`
 	if db, err = orm.New(orm.DriverNameMysql, str); err != nil {
 		return
 	}

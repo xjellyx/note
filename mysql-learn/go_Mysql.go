@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	obj "github.com/LnFen/note/noteGo/noteMysql/obj"
+	obj "github.com/LnFen/note/mysql-learn/obj"
 	_ "github.com/go-sql-driver/mysql"
 )
 
