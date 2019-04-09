@@ -1,10 +1,8 @@
 package main
 
-import (
-	"fmt"
-	"time"
-)
+import "fmt"
 
 func main() {
-	fmt.Println(time.Now().String())
+	a := []int{0, 1, 2, 3, 4, 5, 6}
+	fmt.Println(a[:5])
 }

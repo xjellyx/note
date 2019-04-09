@@ -2,18 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d5cb32e4-f098-4b9f-9f38-27f7ba60b55f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/error.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/os-learn/os-proc.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/os-learn/os.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/os-learn/os_file.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/other-learn/demo1.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bufio/bufio.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bufio/bufio_read.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bufio/bufio_write1.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bufio/bufio_writer2.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gorsa-learn/create_rsa.go" beforeDir="false" afterPath="$PROJECT_DIR$/gorsa-learn/create_rsa.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/other-learn/go-tool.go" beforeDir="false" afterPath="$PROJECT_DIR$/other-learn/go-tool.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/private.pem" beforeDir="false" afterPath="$PROJECT_DIR$/private.pem" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public.pem" beforeDir="false" afterPath="$PROJECT_DIR$/public.pem" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spider-learn/getEthPrice.go" beforeDir="false" afterPath="$PROJECT_DIR$/spider-learn/getEthPrice.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/other-learn/demo1.go" beforeDir="false" afterPath="$PROJECT_DIR$/other-learn/demo1.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,13 +32,22 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/os-learn/os-proc.go">
+        <entry file="file://$PROJECT_DIR$/bufio/bufio.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="841">
-              <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+            <state relative-caret-position="691">
+              <caret line="47" selection-start-line="47" selection-end-line="47" />
               <folding>
-                <element signature="e#15#46#0" expanded="true" />
+                <element signature="e#14#44#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/other-learn/demo1.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -65,10 +68,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/noteGo/noteThrift/gen-go/echo/echo-remote/echo-remote.go" />
-        <option value="$PROJECT_DIR$/noteGo/noteThrift/serve.go" />
-        <option value="$PROJECT_DIR$/noteGo/noteThrift/gen-go/echo/echo.go" />
-        <option value="$PROJECT_DIR$/noteGo/noteThrift/userbase.thrift" />
         <option value="$PROJECT_DIR$/noteGo/noteThrift/rpcbase.thrift" />
         <option value="$PROJECT_DIR$/noteGo/noteThrift/user.thrift" />
         <option value="$PROJECT_DIR$/noteGo/noteThrift/gen-go/user/user-consts.go" />
@@ -112,16 +111,20 @@
         <option value="$PROJECT_DIR$/gorsa-learn/create_rsa.go" />
         <option value="$PROJECT_DIR$/other-learn/go-tool.go" />
         <option value="$PROJECT_DIR$/spider-learn/getEthPrice.go" />
-        <option value="$PROJECT_DIR$/other-learn/demo1.go" />
         <option value="$PROJECT_DIR$/os-learn/os_file.go" />
         <option value="$PROJECT_DIR$/os-learn/os.go" />
         <option value="$PROJECT_DIR$/os-learn/os-proc.go" />
+        <option value="$PROJECT_DIR$/bufio/bufio2.go" />
+        <option value="$PROJECT_DIR$/bufio/bufio_writer2.go" />
+        <option value="$PROJECT_DIR$/bufio/bufio_write1.go" />
+        <option value="$PROJECT_DIR$/other-learn/demo1.go" />
+        <option value="$PROJECT_DIR$/bufio/bufio.go" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="27" />
-    <option name="width" value="1708" />
+    <option name="width" value="1480" />
     <option name="height" value="1406" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -143,12 +146,21 @@
             <path>
               <item name="note" type="b2602c69:ProjectViewProjectNode" />
               <item name="note" type="462c0819:PsiDirectoryNode" />
-              <item name="os-learn" type="462c0819:PsiDirectoryNode" />
+              <item name="bufio" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="note" type="b2602c69:ProjectViewProjectNode" />
               <item name="note" type="462c0819:PsiDirectoryNode" />
               <item name="other-learn" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="note" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+            <path>
+              <item name="note" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Go SDK 1.11.4" type="20ee2d1f:SyntheticLibraryElementNode" />
             </path>
           </expand>
           <select />
@@ -185,7 +197,43 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Go Build.go build os-proc.go">
+  <component name="RunManager" selected="Go Build.go build bufio.go">
+    <configuration name="go build bufio.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="noteGo" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/bufio/bufio.go" />
+      <package value="github.com/LnFen/note" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build bufio_read.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="noteGo" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/bufio/bufio_read.go" />
+      <package value="github.com/LnFen/note" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build bufio_write1.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="noteGo" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/bufio/bufio_write1.go" />
+      <package value="github.com/LnFen/note" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build bufio_writer2.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="noteGo" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/bufio/bufio_writer2.go" />
+      <package value="github.com/LnFen/note" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
     <configuration name="go build demo1.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="noteGo" />
       <working_directory value="$PROJECT_DIR$" />
@@ -195,62 +243,26 @@
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
-    <configuration name="go build getEthPrice.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="noteGo" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/spider-learn/getEthPrice.go" />
-      <package value="github.com/LnFen/note" />
-      <directory value="$PROJECT_DIR$/" />
-      <method v="2" />
-    </configuration>
-    <configuration name="go build os-proc.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="noteGo" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/os-learn/os-proc.go" />
-      <package value="github.com/LnFen/note" />
-      <directory value="$PROJECT_DIR$/" />
-      <method v="2" />
-    </configuration>
-    <configuration name="go build os_file.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="noteGo" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/os-learn/os_file.go" />
-      <package value="github.com/LnFen/note" />
-      <directory value="$PROJECT_DIR$/" />
-      <method v="2" />
-    </configuration>
-    <configuration name="go build os.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="noteGo" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/os-learn/os.go" />
-      <package value="github.com/LnFen/note" />
-      <directory value="$PROJECT_DIR$/" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build os-proc.go" />
-        <item itemvalue="Go Build.go build os.go" />
-        <item itemvalue="Go Build.go build os_file.go" />
+        <item itemvalue="Go Build.go build bufio.go" />
         <item itemvalue="Go Build.go build demo1.go" />
-        <item itemvalue="Go Build.go build getEthPrice.go" />
+        <item itemvalue="Go Build.go build bufio_writer2.go" />
+        <item itemvalue="Go Build.go build bufio_write1.go" />
+        <item itemvalue="Go Build.go build bufio_read.go" />
       </list>
     </recent_temporary>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="27" width="1532" height="1406" extended-state="0" />
+    <frame x="0" y="27" width="1480" height="1406" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19272237" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17178771" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32939324" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.25689518" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.25689518" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39968652" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -294,46 +306,6 @@
     <integration-enabled>true</integration-enabled>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/block-learn/IntroductionBlock/block/block.go">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/block-learn/IntroductionBlock/blockchain/blockchain.go">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/block-learn/intorduction_main.go">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mysql-learn/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mysql-learn/go_Mysql.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="23" column="16" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rpc-learn/rpc/rpcClient.go">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rpc-learn/rpc/rpc_server.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="875">
-          <caret line="43" column="27" selection-start-line="43" selection-start-column="27" selection-end-line="43" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rpc-learn/json_rpc/jsonRpcClient.go">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rpc-learn/json_rpc/jsonRpcServer.go">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/mysql-learn/obj/db.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1747">
@@ -489,16 +461,6 @@
     <entry file="file://$PROJECT_DIR$/other-learn/test.go">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/other-learn/demo1.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
-          <folding>
-            <element signature="e#14#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gorsa-learn/create_rsa.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
@@ -595,10 +557,89 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/os-learn/os-proc.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="841">
-          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+        <state relative-caret-position="252">
+          <caret line="25" column="5" lean-forward="true" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
           <folding>
-            <element signature="e#15#46#0" expanded="true" />
+            <element signature="e#14#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/go/src/strings/reader.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="741">
+          <caret line="149" column="5" selection-start-line="149" selection-start-column="5" selection-end-line="149" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/go/src/bufio/scan.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="64" column="5" selection-start-line="64" selection-start-column="5" selection-end-line="64" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bufio/bufio_read.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="691">
+          <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
+          <folding>
+            <element signature="e#14#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/go/src/strconv/atoi.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="155" column="5" selection-start-line="155" selection-start-column="5" selection-end-line="155" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bufio/bufio_write1.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="900">
+          <caret line="41" column="23" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bufio/bufio_writer2.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="20" column="59" selection-start-line="20" selection-start-column="59" selection-end-line="20" selection-end-column="59" />
+          <folding>
+            <element signature="e#14#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/go/src/bytes/buffer.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="491">
+          <caret line="449" column="5" selection-start-line="449" selection-start-column="5" selection-end-line="449" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/other-learn/demo1.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/go/src/bufio/bufio.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="567" column="17" selection-start-line="567" selection-start-column="17" selection-end-line="567" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bufio/bufio.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="691">
+          <caret line="47" selection-start-line="47" selection-end-line="47" />
+          <folding>
+            <element signature="e#14#44#0" expanded="true" />
           </folding>
         </state>
       </provider>
