@@ -59,4 +59,6 @@ func main() {
 		fmt.Println(_ret)
 	}
 	fmt.Println(data.AvailableSupply)
+	a, _ := json.Marshal(data)
+	fmt.Println(string(a))
 }

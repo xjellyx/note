@@ -9,7 +9,7 @@ import (
 func main() {
 	go func() {
 		for {
-			log.Println(Add("https://github.com/EDDYCJY"))
+			log.Println(add0("https://github.com/EDDYCJY"))
 		}
 	}()
 
@@ -18,7 +18,7 @@ func main() {
 
 var datas []string
 
-func Add(str string) string {
+func add0(str string) string {
 	data := []byte(str)
 	sData := string(data)
 	datas = append(datas, sData)
