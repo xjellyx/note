@@ -1,12 +1,10 @@
 package main
 
 import (
-	"github.com/noteGo/noteGo/nodeBlock/IntroductionBlock/web"
-
+	"github.com/LnFen/note/block-learn/IntroductionBlock/web"
 )
 
-
-func main()  {
+func main() {
 
 	web.Run()
 
