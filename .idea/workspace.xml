@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d5cb32e4-f098-4b9f-9f38-27f7ba60b55f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/thrift-rpc/client/client.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/thrift-rpc/demo.thrift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/thrift-rpc/serve/server.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/thrift-rpc/thrift.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/thrift-rpc/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/block-learn/IntroductionBlock/blockchain/blockchain.go" beforeDir="false" afterPath="$PROJECT_DIR$/block-learn/IntroductionBlock/blockchain/blockchain.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/block-learn/IntroductionBlock/web/web.go" beforeDir="false" afterPath="$PROJECT_DIR$/block-learn/IntroductionBlock/web/web.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/block-learn/intorduction_main.go" beforeDir="false" afterPath="$PROJECT_DIR$/block-learn/intorduction_main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/private.pem" beforeDir="false" afterPath="$PROJECT_DIR$/private.pem" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public.pem" beforeDir="false" afterPath="$PROJECT_DIR$/public.pem" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,11 +36,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/thrift-rpc/serve/server.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="450">
               <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/thrift-rpc/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="25">
+                <caret line="1" column="42" selection-start-line="1" selection-start-column="42" selection-end-line="1" selection-end-column="42" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -71,7 +73,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/pet/resolver/pet.go" />
         <option value="$PROJECT_DIR$/pet/resolver/tag.go" />
         <option value="$PROJECT_DIR$/pet/resolver/testdata.go" />
         <option value="$PROJECT_DIR$/pet/resolver/user.go" />
@@ -122,6 +123,7 @@
         <option value="$PROJECT_DIR$/thrift-rpc/gen-go/demo/demo.go" />
         <option value="$PROJECT_DIR$/thrift-rpc/client/client.go" />
         <option value="$PROJECT_DIR$/thrift-rpc/serve/server.go" />
+        <option value="$PROJECT_DIR$/thrift-rpc/README.md" />
       </list>
     </option>
   </component>
@@ -150,18 +152,6 @@
               <item name="note" type="b2602c69:ProjectViewProjectNode" />
               <item name="note" type="462c0819:PsiDirectoryNode" />
               <item name="thrift-rpc" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="note" type="b2602c69:ProjectViewProjectNode" />
-              <item name="note" type="462c0819:PsiDirectoryNode" />
-              <item name="thrift-rpc" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="note" type="b2602c69:ProjectViewProjectNode" />
-              <item name="note" type="462c0819:PsiDirectoryNode" />
-              <item name="thrift-rpc" type="462c0819:PsiDirectoryNode" />
-              <item name="serve" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="note" type="b2602c69:ProjectViewProjectNode" />
@@ -269,12 +259,12 @@
     <frame x="0" y="27" width="1958" height="1406" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12879582" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12879582" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32939324" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.25689518" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.25689518" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39968652" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -318,13 +308,6 @@
     <integration-enabled>true</integration-enabled>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///usr/local/go/src/strings/reader.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="741">
-          <caret line="149" column="5" selection-start-line="149" selection-start-column="5" selection-end-line="149" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/go/src/bufio/scan.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
@@ -667,6 +650,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thrift-rpc/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="25">
+            <caret line="1" column="42" selection-start-line="1" selection-start-column="42" selection-end-line="1" selection-end-column="42" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
