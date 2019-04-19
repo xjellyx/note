@@ -1,11 +1,12 @@
 package main
 
+/*
 import (
+	"encoding/json"
 	"errors"
 	"github.com/graphql-go/graphql"
 	"github.com/graphql-go/graphql-go-handler"
 	"net/http"
-	"strconv"
 )
 
 type Goods struct {
@@ -67,9 +68,11 @@ var goodsInputType = graphql.NewInputObject(
 		}, "price": &graphql.InputObjectFieldConfig{
 			Type: graphql.Float,
 		}, "url": &graphql.InputObjectFieldConfig{
-			Type: graphql.String,
+			Type:        graphql.String,
+			Description: "用户",
 		},
 		},
+		Description: "输入",
 	},
 )
 
@@ -83,18 +86,15 @@ var mutationType = graphql.NewObject(
 			},
 			},
 			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-				input, isOk := p.Args["input"].(map[string]string)
+				input, isOk := p.Args["input"].(map[string]interface{})
 				if !isOk {
 					err := errors.New("Field 'addGoods' is missing required arguments: input. ")
 					return nil, err
 				}
-				a, err := strconv.ParseFloat(input["price"], 64)
-				result := Goods{
-					Name:  input["name"],
-					Price: a,
-					Url:   input["url"],
-				} // 处理数据
-				return result, err
+				var g = new(Goods)
+				data, err := json.Marshal(input)
+				err = json.Unmarshal([]byte(data), &g)
+				return g, err
 			},
 		},
 		},
@@ -102,8 +102,9 @@ var mutationType = graphql.NewObject(
 )
 var schema, _ = graphql.NewSchema(
 	graphql.SchemaConfig{
-		Query:    queryType,
-		Mutation: mutationType,
+		Query:        queryType,
+		Mutation:     mutationType,
+		Subscription: queryType,
 	},
 )
 
@@ -113,11 +114,15 @@ func Register() *handler.Handler {
 		Pretty:   true,
 		GraphiQL: true,
 	})
+
 	return h
 }
 
 func main() {
 	h := Register()
-	http.Handle("/graphql", h)
+	http.HandleFunc("/graphql", func(w http.ResponseWriter, r *http.Request) {
+		h.ServeHTTP(w, r)
+	})
 	http.ListenAndServe("127.0.0.1:8081", nil)
 }
+*/

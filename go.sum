@@ -16,6 +16,12 @@ github.com/LnFen/go-restful v0.0.0-20190328030317-9c9463c342cb h1:hz++t+P19hGdPl
 github.com/LnFen/go-restful v0.0.0-20190328030317-9c9463c342cb/go.mod h1:BbzFxgxSK0D0byJfsF2ryFrZyjk+8qcYETzsPMM/QG0=
 github.com/LnFen/go-restful v0.0.0-20190401075119-9a4d0b30e342 h1:SP/7bHERcd8UXRZUz4H4xedhDxOrEfr2mCLqTC7EQvs=
 github.com/LnFen/go-restful v0.0.0-20190401075119-9a4d0b30e342/go.mod h1:CjgSeaPHXnmav0eXR1+430T4wgUTGoQcbF3+wGBi1Lc=
+github.com/LnFen/handler v0.0.0-20190419090359-63b85062ab15 h1:WExZ5f9tUVyi+qDixywuT7lIC9S8OfBDzZwPwti0rTU=
+github.com/LnFen/handler v0.0.0-20190419090359-63b85062ab15/go.mod h1:SSY4iQYDwVRFe3KGtUb2tqtuSf5lTcRs9C3gmlxpRHE=
+github.com/LnFen/handler v0.0.0-20190419092336-891cd2225e97 h1:Ul13UjHmXLEvFX4eDFgRdwbrH3I4yjaDpfGmPjke8Qw=
+github.com/LnFen/handler v0.0.0-20190419092336-891cd2225e97/go.mod h1:SSY4iQYDwVRFe3KGtUb2tqtuSf5lTcRs9C3gmlxpRHE=
+github.com/LnFen/handler v0.2.3 h1:ywgt4Gtq2avIbP8QeYE6DvZVc7Cx5It2SusOdYPpLjI=
+github.com/LnFen/handler v0.2.3/go.mod h1:NlDjRsee9733eLjgzXL2zjINqvrq1/BEmWNWFf4qvR8=
 github.com/PuerkitoBio/goquery v1.5.0 h1:uGvmFXOA73IKluu/F84Xd1tt/z07GYm8X49XKHP7EJk=
 github.com/PuerkitoBio/goquery v1.5.0/go.mod h1:qD2PgZ9lccMbQlc7eEOjaeRlFQON7xY8kdmcsrnKqMg=
 github.com/Shopify/goreferrer v0.0.0-20181106222321-ec9c9a553398 h1:WDC6ySpJzbxGWFh4aMxFFC28wwGp5pEuoTtvA4q/qQ4=
@@ -81,7 +87,10 @@ github.com/gorilla/mux v1.7.1/go.mod h1:1lud6UwP+6orDFRuTfBEV8e9/aOM/c4fVVCaMa2z
 github.com/gorilla/securecookie v1.1.1 h1:miw7JPhV+b/lAHSXz4qd/nN9jRiAFV5FwjeKyCS8BvQ=
 github.com/gorilla/securecookie v1.1.1/go.mod h1:ra0sb63/xPlUeL+yeDciTfxMRAA+MP+HVt/4epWDjd4=
 github.com/gorilla/websocket v1.4.0/go.mod h1:E7qHFY5m1UJ88s3WnNqhKjPHQ0heANvMoAMk2YaljkQ=
+github.com/graph-gophers/graphql-go v0.0.0-20181008023426-a2b6fc39dd10 h1:2rEnR+hRitXRBi8ozdghgDAD4ZXhBKd8VDYECXEM8QI=
 github.com/graph-gophers/graphql-go v0.0.0-20181008023426-a2b6fc39dd10/go.mod h1:aRnZGurV3LlZ1Y+ygyx1mAV6OUfq+nu6OgpJ6jKgZ3g=
+github.com/graph-gophers/graphql-go v0.0.0-20190225005345-3e8838d4614c h1:YyFUsspLqAt3noyPCLz7EFK/o1LpC1j/6MjU0bSVOQ4=
+github.com/graph-gophers/graphql-go v0.0.0-20190225005345-3e8838d4614c/go.mod h1:uJhtPXrcJLqyi0H5IuMFh+fgW+8cMMakK3Txrbk/WJE=
 github.com/graphql-go/graphql v0.7.8 h1:769CR/2JNAhLG9+aa8pfLkKdR0H+r5lsQqling5WwpU=
 github.com/graphql-go/graphql v0.7.8/go.mod h1:k6yrAYQaSP59DC5UVxbgxESlmVyojThKdORUqGDGmrI=
 github.com/graphql-go/graphql-go-handler v0.2.3 h1:REPF3uupSxo7z7R1rb3VlVTtiCXOSGOSJ1DybyVhOnw=
@@ -152,6 +161,7 @@ github.com/mozillazg/go-pinyin v0.14.0/go.mod h1:bO+dztNW6O2lSJdYLha7LO3bujXzjjU
 github.com/objcoding/wxpay v1.0.6/go.mod h1:z7rH38P+iS3ibWDABSnNjYzYOnqqORB0QDZukzkRwnc=
 github.com/onsi/ginkgo v1.6.0/go.mod h1:lLunBs/Ym6LB5Z9jYTR76FiuTmxDTDusOGeTQH+WWjE=
 github.com/onsi/gomega v1.4.2/go.mod h1:ex+gbHU/CVuBBDIJjb2X0qEXbFg53c61hWP/1CpauHY=
+github.com/opentracing/opentracing-go v1.0.2 h1:3jA2P6O1F9UOrWVpwrIo17pu01KWvNWg4X946/Y5Zwg=
 github.com/opentracing/opentracing-go v1.0.2/go.mod h1:UkNAQd3GIcIGf0SeVgPpRdFStlNbqXla1AfSYxPUl2o=
 github.com/pkg/errors v0.8.1 h1:iURUrRGxPUNPdy5/HRSm+Yj6okJ6UtLINN0Q9M4+h3I=
 github.com/pkg/errors v0.8.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
@@ -236,6 +246,8 @@ golang.org/x/sys v0.0.0-20180909124046-d0be0721c37e h1:o3PsSEY8E4eXWkXrIP9YJALUk
 golang.org/x/sys v0.0.0-20180909124046-d0be0721c37e/go.mod h1:STP8DvDyc/dI5b8T5hshtkjS+E42TnysNCUPdjciGhY=
 golang.org/x/sys v0.0.0-20190204203706-41f3e6584952/go.mod h1:STP8DvDyc/dI5b8T5hshtkjS+E42TnysNCUPdjciGhY=
 golang.org/x/sys v0.0.0-20190403152447-81d4e9dc473e/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
+golang.org/x/sys v0.0.0-20190412213103-97732733099d h1:+R4KGOnez64A81RvjARKc4UT5/tI9ujCIVX+P5KiHuI=
+golang.org/x/sys v0.0.0-20190412213103-97732733099d/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/text v0.3.0 h1:g61tztE5qeGQ89tm6NTjjM9VPIm088od1l6aSorWRWg=
 golang.org/x/text v0.3.0/go.mod h1:NqM8EUOU14njkJ3fqMW+pc6Ldnwhi/IjpwHt7yyuwOQ=
 golang.org/x/time v0.0.0-20180412165947-fbb02b2291d2/go.mod h1:tRJNPiyCQ0inRvYxbN9jk5I+vvW/OXSQhTDSoE431IQ=
