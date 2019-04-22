@@ -20,6 +20,8 @@ github.com/LnFen/handler v0.0.0-20190419090359-63b85062ab15 h1:WExZ5f9tUVyi+qDix
 github.com/LnFen/handler v0.0.0-20190419090359-63b85062ab15/go.mod h1:SSY4iQYDwVRFe3KGtUb2tqtuSf5lTcRs9C3gmlxpRHE=
 github.com/LnFen/handler v0.0.0-20190419092336-891cd2225e97 h1:Ul13UjHmXLEvFX4eDFgRdwbrH3I4yjaDpfGmPjke8Qw=
 github.com/LnFen/handler v0.0.0-20190419092336-891cd2225e97/go.mod h1:SSY4iQYDwVRFe3KGtUb2tqtuSf5lTcRs9C3gmlxpRHE=
+github.com/LnFen/handler v0.0.0-20190422033725-01bb408b68af h1:lB3u5r23PuyLAMCXZukB/2RpuCUaxCkUM1qU5vWpPig=
+github.com/LnFen/handler v0.0.0-20190422033725-01bb408b68af/go.mod h1:5fHulebxlxvV6kLREIxFAJHwEEffNqqceS3aLsLHXSM=
 github.com/LnFen/handler v0.2.3 h1:ywgt4Gtq2avIbP8QeYE6DvZVc7Cx5It2SusOdYPpLjI=
 github.com/LnFen/handler v0.2.3/go.mod h1:NlDjRsee9733eLjgzXL2zjINqvrq1/BEmWNWFf4qvR8=
 github.com/PuerkitoBio/goquery v1.5.0 h1:uGvmFXOA73IKluu/F84Xd1tt/z07GYm8X49XKHP7EJk=
@@ -95,6 +97,7 @@ github.com/graphql-go/graphql v0.7.8 h1:769CR/2JNAhLG9+aa8pfLkKdR0H+r5lsQqling5W
 github.com/graphql-go/graphql v0.7.8/go.mod h1:k6yrAYQaSP59DC5UVxbgxESlmVyojThKdORUqGDGmrI=
 github.com/graphql-go/graphql-go-handler v0.2.3 h1:REPF3uupSxo7z7R1rb3VlVTtiCXOSGOSJ1DybyVhOnw=
 github.com/graphql-go/graphql-go-handler v0.2.3/go.mod h1:U0D1gHbzw0hqkCddhgUFBd8irDqLQ+yl2FKgKeXmZmM=
+github.com/graphql-go/handler v0.2.3/go.mod h1:leLF6RpV5uZMN1CdImAxuiayrYYhOk33bZciaUGaXeU=
 github.com/grpc-ecosystem/go-grpc-prometheus v1.2.0/go.mod h1:8NvIoxWQoOIhqOTXgfV/d3M/q6VIi02HzZEHgUlZvzk=
 github.com/grpc-ecosystem/grpc-gateway v1.5.1/go.mod h1:RSKVYQBd5MCa4OVpNdGskqpgL2+G+NZTnrVHpWWfpdw=
 github.com/hpcloud/tail v1.0.0/go.mod h1:ab1qPbhIpdTxEkNHXyeSf5vhxWSCs/tWer42PpOxQnU=

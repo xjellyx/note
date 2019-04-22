@@ -23,9 +23,12 @@ func (q *query) Hello() string {
 
 func main() {
 	var s = graphql.MustParseSchema(sch, &query{})
-	h := handler.HttpHandler(s, true, true)
-	http.HandleFunc("/graphql", func(w http.ResponseWriter, r *http.Request) {
-		h.ServeHTTP(w, r)
-	})
+	h := handler.New(
+		&handler.Config{
+			Schema:   s,
+			Pretty:   true,
+			GraphiQL: true},
+	)
+	http.Handle("/", h)
 	http.ListenAndServe(":8899", nil)
 }

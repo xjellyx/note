@@ -2,7 +2,7 @@ module github.com/LnFen/note
 
 require (
 	github.com/LnFen/go-restful v0.0.0-20190401075119-9a4d0b30e342 // indirect
-	github.com/LnFen/handler v0.0.0-20190419092336-891cd2225e97 // indirect
+	github.com/LnFen/handler v0.0.0-20190422033725-01bb408b68af // indirect
 	github.com/PuerkitoBio/goquery v1.5.0 // indirect
 	github.com/apache/thrift v0.12.0
 	github.com/betacraft/yaag v1.0.0 // indirect

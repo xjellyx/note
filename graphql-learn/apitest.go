@@ -1,6 +1,5 @@
 package main
 
-/*
 import (
 	"encoding/json"
 	"errors"
@@ -120,9 +119,9 @@ func Register() *handler.Handler {
 
 func main() {
 	h := Register()
-	http.HandleFunc("/graphql", func(w http.ResponseWriter, r *http.Request) {
-		h.ServeHTTP(w, r)
-	})
+	//http.HandleFunc("/graphql", func(w http.ResponseWriter, r *http.Request) {
+	//	h.ServeHTTP(w, r)
+	//})
+	http.Handle("/", h)
 	http.ListenAndServe("127.0.0.1:8081", nil)
 }
-*/
