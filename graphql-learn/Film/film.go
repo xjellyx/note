@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/LnFen/handler"
-	"github.com/graph-gophers/graphql-go"
+	"github.com/LnFen/graphql-api/ctrl"
+	"github.com/LnFen/graphql-api/router"
+	"github.com/julienschmidt/httprouter"
 	"net/http"
 )
 
@@ -22,7 +23,8 @@ var schemaStr = `
         }
         type Query {
             film: Film
-        }
+			all: [Film]!
+}
         type Film {
             name   : String!
             country: String!
@@ -47,10 +49,48 @@ var Hidden_Man = &film{
 type filmResolver struct {
 	f *film
 }
-type Resolver struct{}
 
-func (r *Resolver) Film() *filmResolver {
+// NodeRoot 普通节点
+type NodeRoot struct {
+	ctrl.Node
+	ctrl.NodeHandler
+}
+
+// Ctrl 是业务API
+type Ctrl struct {
+	ctrl.CTRL // 标准框架
+}
+
+var Root = &NodeRoot{}
+var Api = &Ctrl{}
+
+func (r *NodeRoot) Film() *filmResolver {
 	return &filmResolver{Hidden_Man}
+}
+func (r *NodeRoot) All() (ret []*filmResolver) {
+	var f *filmResolver
+	f = new(filmResolver)
+	f.f = &film{
+		Name:    "邪不压正",
+		Stars:   []string{"姜文", "彭于晏", "廖凡", "周韵", "许晴"},
+		Country: "China",
+		Year:    2018,
+		Runtime: 137,
+		Color:   true,
+		Score:   7.1,
+	}
+	ret = append(ret, f)
+	f.f = &film{
+		Name:    "dasds",
+		Stars:   []string{"姜文", "彭于晏", "廖凡", "周韵", "许晴"},
+		Country: "sdasd",
+		Year:    2018,
+		Runtime: 137,
+		Color:   true,
+		Score:   7.1,
+	}
+	ret = append(ret, f)
+	return
 }
 func (f *filmResolver) Name() string {
 	return f.f.Name
@@ -78,14 +118,12 @@ func (f *filmResolver) Score() float64 {
 	return f.f.Score
 }
 func main() {
-	var schema = graphql.MustParseSchema(schemaStr, &Resolver{})
-	h := handler.New(
-		&handler.Config{
-			Schema:   schema,
-			GraphiQL: true,
-			Pretty:   true,
-		},
-	)
-	http.Handle("/graphql", h)
-	http.ListenAndServe(":1234", nil)
+	var h = httprouter.New()
+	node, _ := ctrl.NewNode(&Api.CTRL, schemaStr, Root)
+	r, _ := router.NewRouter(nil)
+	r.Prefix = "/api/test"
+	r.ALL("/graphql", node.Handler)
+	*r.CorsAllow = router.CorsAllowAll
+	r.BindRouter(h)
+	http.ListenAndServe(":1234", h)
 }
