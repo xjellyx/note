@@ -7,11 +7,14 @@ git.yichui.net/docs/go-user v0.0.5/go.mod h1:ABBosnFOkuh2X8fMOIVXThrHS7nVLqcFfAs
 git.yichui.net/docs/go-wallet v0.0.5/go.mod h1:PfmhJBJsIyxZRkwjEEhCZWSfsmo6To/Lclwd7ODZvSo=
 git.yichui.net/docs/models.thrift v0.12.11/go.mod h1:Frp7qGY1uGBBdnaPPXDMTTAmEeCBqPpVtPqddXWG9TU=
 git.yichui.net/docs/models.thrift v0.12.12/go.mod h1:Frp7qGY1uGBBdnaPPXDMTTAmEeCBqPpVtPqddXWG9TU=
+git.yichui.net/docs/models.thrift v0.12.17/go.mod h1:Frp7qGY1uGBBdnaPPXDMTTAmEeCBqPpVtPqddXWG9TU=
 git.yichui.net/tudy/go-bytebank v0.0.0-20190419094941-fb4cb8d3e112 h1:kau1keW6Lw0lH6NZr+WZvY/TaFC2TMBFo+sFoqqQOaM=
 git.yichui.net/tudy/go-bytebank v0.0.0-20190419094941-fb4cb8d3e112/go.mod h1:olxCM/6LqSSEG7Zyh+952Shc4UnoZ5ytDVwIswQ5cfw=
 git.yichui.net/tudy/go-rest v1.3.7/go.mod h1:gVeH483/3yUsQ6RwPLevL9k4UuYf7cG6ubNiU51A3XA=
 git.yichui.net/tudy/go-rest v1.3.12 h1:PhdIS2NvdDDwCYnCILsR6P1WhoObKIg8J6n2btLx5lg=
 git.yichui.net/tudy/go-rest v1.3.12/go.mod h1:OYQyWRE4pdIljEajOqChOOySb7ZlReyyBfAoj+/Aru4=
+git.yichui.net/tudy/go-rest v1.3.17 h1:F7Thp8PP5lL5IaFkM2bhlP5uUSyuDKnR4Fq95lO1skM=
+git.yichui.net/tudy/go-rest v1.3.17/go.mod h1:oggweuc3tiZOtDMPyhdXhIy+kvz61xRa/8Cn1rzyXic=
 git.yichui.net/tudy/v2-sorm v0.0.10 h1:pTCJgHob8eiPRWMqah2w0+b9q1ugKbZOXOKu+mIZlGs=
 git.yichui.net/tudy/v2-sorm v0.0.10/go.mod h1:Tun33pgkZZQEbJRpvdSV6Ur78EkjF52hsHIz/FuVsQs=
 github.com/360EntSecGroup-Skylar/excelize v1.4.1 h1:l55mJb6rkkaUzOpSsgEeKYtS6/0gHwBYyfo5Jcjv/Ks=
@@ -248,7 +251,12 @@ github.com/suboat/sorm v0.2.1-0.20190318063030-5de5f0f1c022 h1:5V9vz39l66dgx75tT
 github.com/suboat/sorm v0.2.1-0.20190318063030-5de5f0f1c022/go.mod h1:VOMXx/p9SWQtIruA1bElXrf1UqmYV12Ck3ZajQASqiM=
 github.com/suboat/sorm v0.2.1-0.20190412094245-cf3aeddc0c3c h1:iwotr9vgpnvSpo9z9zQ/S13LllGeDFiGvK61CR8pZnQ=
 github.com/suboat/sorm v0.2.1-0.20190412094245-cf3aeddc0c3c/go.mod h1:VOMXx/p9SWQtIruA1bElXrf1UqmYV12Ck3ZajQASqiM=
+github.com/suboat/sorm v0.2.1-0.20190529022223-aa087682bfb0/go.mod h1:I4H/KDEmsJqoYqP12wYaw0A/+bBrrpuRFLYSSSoBL+s=
 github.com/syndtr/goleveldb v0.0.0-20180815032940-ae2bd5eed72d/go.mod h1:Z4AUp2Km+PwemOoO/VB5AOx9XSsIItzFjoJlOSiYmn0=
+github.com/tealeg/xlsx v1.0.3 h1:BXsDIQYBPq2HgbwUxrsVXIrnO0BDxmsdUfHSfvwfBuQ=
+github.com/tealeg/xlsx v1.0.3/go.mod h1:uxu5UY2ovkuRPWKQ8Q7JG0JbSivrISjdPzZQKeo74mA=
+github.com/tealeg/xlsx2csv v0.0.0-20170717074554-61833cb971d4 h1:2glLcdzM0CxQTS2kmplPqFyDFY8jQ74vdKL5iqTc+gQ=
+github.com/tealeg/xlsx2csv v0.0.0-20170717074554-61833cb971d4/go.mod h1:CAZ4nkX+nfeNIuzMXY/9ElHZ3r7OgHWTU5pWVceibbM=
 github.com/tebeka/strftime v0.0.0-20140926081919-3f9c7761e312/go.mod h1:o6CrSUtupq/A5hylbvAsdydn0d5yokJExs8VVdx4wwI=
 github.com/tensorflow/tensorflow v1.13.1 h1:ygn0+ztXusm6RGVP4Od5IF+8h5sAgD5qbeTvqYyMnjo=
 github.com/tensorflow/tensorflow v1.13.1/go.mod h1:itOSERT4trABok4UOoG+X4BoKds9F3rIsySdn+Lvu90=

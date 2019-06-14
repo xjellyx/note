@@ -2,6 +2,7 @@ module github.com/LnFen/note
 
 require (
 	git.yichui.net/tudy/go-bytebank v0.0.0-20190419094941-fb4cb8d3e112 // indirect
+	git.yichui.net/tudy/go-rest v1.3.17 // indirect
 	github.com/360EntSecGroup-Skylar/excelize v1.4.1 // indirect
 	github.com/LnFen/go-restful v0.0.0-20190401075119-9a4d0b30e342 // indirect
 	github.com/LnFen/graphql-api v0.0.0-20190424023100-739f0302897e // indirect
@@ -14,7 +15,9 @@ require (
 	github.com/gorilla/securecookie v1.1.1 // indirect
 	github.com/json-iterator/go v1.1.6 // indirect
 	github.com/kataras/iris v11.1.1+incompatible
-	github.com/suboat/sorm v0.2.1-0.20190412094245-cf3aeddc0c3c
+	github.com/suboat/sorm v0.2.1-0.20190529022223-aa087682bfb0
+	github.com/tealeg/xlsx v1.0.3 // indirect
+	github.com/tealeg/xlsx2csv v0.0.0-20170717074554-61833cb971d4 // indirect
 	github.com/tensorflow/tensorflow v1.13.1 // indirect
 	github.com/valyala/tcplisten v0.0.0-20161114210144-ceec8f93295a // indirect
 	golang.org/x/crypto v0.0.0-20190411191339-88737f569e3a // indirect
