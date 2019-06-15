@@ -19,11 +19,11 @@ type Client struct {
 }
 
 var (
-	client      = NewClient(nil)
+	client      *Client
 	transport   thrift.TTransport
 	xiaomingUId = "fb189006-9a8b-4b50-a343-f221be1cce7b"
 	xiaohongUid = "a98ed979-881b-49a1-b52d-5747eedd3fe8"
-	c           = &example.BaseServiceClient{}
+	c           *example.BaseServiceClient
 )
 
 func setClient() {
@@ -50,6 +50,7 @@ func setClient() {
 
 	// 打开客户端
 	c = example.NewBaseServiceClientFactory(transport, protocolFactory)
+	fmt.Println(c.GetStudentByUID(DefaultXCtx, xiaomingUId))
 }
 
 func (c *Client) GetStudentByUID(ctx context.Context, uid string) (ret *example.Student, err error) {
@@ -60,9 +61,6 @@ func (c *Client) GetStudentByUID(ctx context.Context, uid string) (ret *example.
 	return
 }
 func GetStudentByUID(ctx context.Context, uid string) (ret *example.Student, err error) {
-	i := 1
-	i++
-	println(i)
 	if ret, err = client.GetStudentByUID(ctx, uid); err != nil {
 		return
 	}
@@ -77,6 +75,8 @@ func (c *Client) ModifyStudent(ctx context.Context, uid string, form *example.Fo
 	return
 }
 
+var DefaultXCtx = context.Background()
+
 func main() {
 	setClient()
 	// 打开开运输模式
@@ -88,29 +88,29 @@ func main() {
 		log.Fatalln("Error opening:", HOST+":"+PORT)
 	}
 	defer transport.Close()
-	var DefaultXCtx = context.Background()
-	var (
-		data  = new(example.Student)
-		data2 = new(example.Student)
-	)
-	fmt.Println(c.GetStudentByUID(DefaultXCtx, xiaomingUId), "aaaaaaaaaaaaa")
 
-	if data, err = GetStudentByUID(DefaultXCtx, xiaomingUId); err != nil {
-		panic(err)
-	} else {
-		fmt.Println("小明的信息", data.Age, data.Sex, data.ClassName, data.Name)
-	}
-
+	//var (
+	//	ctx   = DefaultXCtx
+	//	data  = new(example.Student)
+	//	data2 = new(example.Student)
+	//)
 	//
-	var (
-		form = new(example.FormStudent)
-	)
-	form.ClassName = "高三三班"
-	if data2, err = client.ModifyStudent(DefaultXCtx, xiaohongUid, form); err != nil {
-		panic(err)
-	} else {
-		fmt.Println("小红的信息", data2.ClassName, data2.Age, data2.Name, data2.Sex)
-	}
+	//if data, err = GetStudentByUID(ctx, xiaomingUId); err != nil {
+	//	panic(err)
+	//} else {
+	//	fmt.Println("小明的信息", data.Age, data.Sex, data.ClassName, data.Name)
+	//}
+	//
+	////
+	//var (
+	//	form = new(example.FormStudent)
+	//)
+	//form.ClassName = "高三三班"
+	//if data2, err = client.ModifyStudent(ctx, xiaohongUid, form); err != nil {
+	//	panic(err)
+	//} else {
+	//	fmt.Println("小红的信息", data2.ClassName, data2.Age, data2.Name, data2.Sex)
+	//}
 
 }
 
