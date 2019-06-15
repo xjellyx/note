@@ -5,8 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/apache/thrift/lib/go/thrift"
-	"github.com/srlemon/note/thrift-rpc/gen-go/example"
-	"reflect"
+	"github.com/srlemon/note/thrift-rpc/gen-go/demo"
 )
 
 // 服务
@@ -18,72 +17,62 @@ const (
 	PORT = "8898"
 )
 
-// 初始化数据,给后面需要时提供提供数据
-var students []*example.Student
+func main() {
+	var (
+		handler          = new(Sever) //
+		processor        *demo.BaseServiceProcessor
+		serveTransport   *thrift.TServerSocket
+		transportFactory thrift.TTransportFactory
+		protocolFactory  *thrift.TBinaryProtocolFactory
+		err              error
+	)
+	// new 一个处理器
+	processor = demo.NewBaseServiceProcessor(handler)
+	// 创建服务
+	if serveTransport, err = thrift.NewTServerSocket(HOST + ":" + PORT); err != nil {
+		panic(err)
+	}
+	// 开机工厂模式
+	transportFactory = thrift.NewTFramedTransportFactory(thrift.NewTTransportFactory())
+	protocolFactory = thrift.NewTBinaryProtocolFactoryDefault()
 
-// 初始化数据
-func init() {
-	students = append(students, &example.Student{
-		UID:       "fb189006-9a8b-4b50-a343-f221be1cce7b",
-		Name:      "小明",
-		Age:       18,
-		ClassName: "一班",
-		Sex:       "boy",
-	})
-	students = append(students, &example.Student{
-		UID:       "a98ed979-881b-49a1-b52d-5747eedd3fe8",
-		Name:      "小红",
-		Age:       18,
-		ClassName: "二班",
-		Sex:       "girl",
-	})
+	// 开启服务
+	serve := thrift.NewTSimpleServer4(processor, serveTransport, transportFactory, protocolFactory)
+	fmt.Printf("Running at:%s", HOST+":"+PORT)
+	if err = serve.Serve(); err != nil {
+		panic(err)
+	}
+
 }
 
-func (s *Sever) GetStudentByUID(ctx context.Context, uid string) (ret *example.Student, err error) {
+func (s *Sever) GetStudentByUID(ctx context.Context, uid string) (ret *demo.Student, err error) {
 	if len(uid) == 0 {
 		err = errors.New("uid is nil")
 		return
 	}
 
-	ret = new(example.Student)
 	// 获取数据
-	// (方法一)
 	for _, v := range students {
-		obj := reflect.ValueOf(v)
-		for i := 0; i < obj.Elem().NumField(); i++ {
-			if obj.Type().Field(i).Name == "UID" { // 获取UID属性
-				if obj.Elem().Field(i).String() == uid { // 判断uid是否存在
-					ret = new(example.Student)
-					ret = v
-					break
-				} else {
-					continue // uid不存在,跳出循环
-				}
-			} else {
-				continue // 不是uid属性跳出循环
-			}
+		if v.UID == uid {
+			ret = new(demo.Student)
+			ret = v
+		} else {
+			continue
 		}
 	}
 
-	// 其实上面可以有另一种写法,我只是想摸索reflect包才那样写的
-	// (方法二) 很简便的,比上面的逻辑简单很多,你可以注释上面的代码试一试这个
-	//for _, v := range students {
-	//	if v.UID == uid {
-	//		ret = new(example.Student)
-	//		ret = v
-	//	} else {
-	//		continue
-	//	}
-	//}
-
+	// 判断是否有数据
 	if ret == nil {
+		err = errors.New("student is not exist")
+		return
+	} else if ret != nil && len(ret.UID) == 0 {
 		err = errors.New("student is not exist")
 	}
 	return
 }
 
 // 修改学生信息
-func (s *Sever) ModifyStudent(ctx context.Context, uid string, form *example.FormStudent) (ret *example.Student, err error) {
+func (s *Sever) ModifyStudent(ctx context.Context, uid string, form *demo.FormStudent) (ret *demo.Student, err error) {
 	if len(uid) == 0 {
 		err = errors.New("uid is nil")
 		return
@@ -92,14 +81,14 @@ func (s *Sever) ModifyStudent(ctx context.Context, uid string, form *example.For
 	}
 
 	var (
-		data *example.Student
+		data *demo.Student
 		num  int
 	)
 
 	// 判断是否存在该学生
 	for _, v := range students {
 		if v.UID == uid {
-			data = new(example.Student)
+			data = new(demo.Student)
 			data = v
 		} else {
 			continue
@@ -134,32 +123,39 @@ func (s *Sever) ModifyStudent(ctx context.Context, uid string, form *example.For
 		}
 	}
 
+	// 判断是否有数据
+	if ret == nil {
+		err = errors.New("student is not exist")
+		return
+	} else if ret != nil && len(ret.UID) == 0 {
+		err = errors.New("student is not exist")
+	}
+
 	return
 }
-func main() {
-	var (
-		handler          = new(Sever) //
-		processor        *example.BaseServiceProcessor
-		serveTransport   *thrift.TServerSocket
-		transportFactory thrift.TTransportFactory
-		protocolFactory  *thrift.TBinaryProtocolFactory
-		err              error
-	)
-	// new 一个处理器
-	processor = example.NewBaseServiceProcessor(handler)
-	// 创建服务
-	if serveTransport, err = thrift.NewTServerSocket(HOST + ":" + PORT); err != nil {
-		panic(err)
-	}
-	// 开机工厂模式
-	transportFactory = thrift.NewTFramedTransportFactory(thrift.NewTTransportFactory())
-	protocolFactory = thrift.NewTBinaryProtocolFactoryDefault()
 
-	// 开启服务
-	serve := thrift.NewTSimpleServer4(processor, serveTransport, transportFactory, protocolFactory)
-	fmt.Printf("Running at:%s", HOST+":"+PORT)
-	if err = serve.Serve(); err != nil {
-		panic(err)
-	}
+func (s *Sever) GetData(ctx context.Context, data *demo.Data) (ret *demo.Data, err error) {
 
+	ret = data
+
+	return
+}
+
+var students []*demo.Student
+
+func init() {
+	students = append(students, &demo.Student{
+		UID:       "fb189006-9a8b-4b50-a343-f221be1cce7b",
+		Name:      "小明",
+		Age:       18,
+		ClassName: "一班",
+		Sex:       "boy",
+	})
+	students = append(students, &demo.Student{
+		UID:       "a98ed979-881b-49a1-b52d-5747eedd3fe8",
+		Name:      "小红",
+		Age:       18,
+		ClassName: "二班",
+		Sex:       "girl",
+	})
 }

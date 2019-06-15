@@ -14,7 +14,7 @@ import (
         "strconv"
         "strings"
         "github.com/apache/thrift/lib/go/thrift"
-        "github.com/srlemon/node/thrift-rpc/gen-go/example"
+        "github.com/srlemon/node/strings-learn/gen-go/demo"
 )
 
 
@@ -22,6 +22,7 @@ func Usage() {
   fmt.Fprintln(os.Stderr, "Usage of ", os.Args[0], " [-h host:port] [-u url] [-f[ramed]] function [arg1 [arg2...]]:")
   flag.PrintDefaults()
   fmt.Fprintln(os.Stderr, "\nFunctions:")
+  fmt.Fprintln(os.Stderr, "  Data getData(Data data)")
   fmt.Fprintln(os.Stderr, "  Student getStudentByUID(string uid)")
   fmt.Fprintln(os.Stderr, "  Student modifyStudent(string uid, FormStudent form)")
   fmt.Fprintln(os.Stderr)
@@ -138,13 +139,38 @@ func main() {
   }
   iprot := protocolFactory.GetProtocol(trans)
   oprot := protocolFactory.GetProtocol(trans)
-  client := example.NewBaseServiceClient(thrift.NewTStandardClient(iprot, oprot))
+  client := demo.NewBaseServiceClient(thrift.NewTStandardClient(iprot, oprot))
   if err := trans.Open(); err != nil {
     fmt.Fprintln(os.Stderr, "Error opening socket to ", host, ":", port, " ", err)
     os.Exit(1)
   }
   
   switch cmd {
+  case "getData":
+    if flag.NArg() - 1 != 1 {
+      fmt.Fprintln(os.Stderr, "GetData requires 1 args")
+      flag.Usage()
+    }
+    arg9 := flag.Arg(1)
+    mbTrans10 := thrift.NewTMemoryBufferLen(len(arg9))
+    defer mbTrans10.Close()
+    _, err11 := mbTrans10.WriteString(arg9)
+    if err11 != nil {
+      Usage()
+      return
+    }
+    factory12 := thrift.NewTJSONProtocolFactory()
+    jsProt13 := factory12.GetProtocol(mbTrans10)
+    argvalue0 := demo.NewData()
+    err14 := argvalue0.Read(jsProt13)
+    if err14 != nil {
+      Usage()
+      return
+    }
+    value0 := argvalue0
+    fmt.Print(client.GetData(context.Background(), value0))
+    fmt.Print("\n")
+    break
   case "getStudentByUID":
     if flag.NArg() - 1 != 1 {
       fmt.Fprintln(os.Stderr, "GetStudentByUID requires 1 args")
@@ -162,19 +188,19 @@ func main() {
     }
     argvalue0 := flag.Arg(1)
     value0 := argvalue0
-    arg8 := flag.Arg(2)
-    mbTrans9 := thrift.NewTMemoryBufferLen(len(arg8))
-    defer mbTrans9.Close()
-    _, err10 := mbTrans9.WriteString(arg8)
-    if err10 != nil {
+    arg17 := flag.Arg(2)
+    mbTrans18 := thrift.NewTMemoryBufferLen(len(arg17))
+    defer mbTrans18.Close()
+    _, err19 := mbTrans18.WriteString(arg17)
+    if err19 != nil {
       Usage()
       return
     }
-    factory11 := thrift.NewTJSONProtocolFactory()
-    jsProt12 := factory11.GetProtocol(mbTrans9)
-    argvalue1 := example.NewFormStudent()
-    err13 := argvalue1.Read(jsProt12)
-    if err13 != nil {
+    factory20 := thrift.NewTJSONProtocolFactory()
+    jsProt21 := factory20.GetProtocol(mbTrans18)
+    argvalue1 := demo.NewFormStudent()
+    err22 := argvalue1.Read(jsProt21)
+    if err22 != nil {
       Usage()
       return
     }

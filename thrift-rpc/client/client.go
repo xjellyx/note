@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/apache/thrift/lib/go/thrift"
-	"github.com/srlemon/note/thrift-rpc/gen-go/example"
+	"github.com/srlemon/note/thrift-rpc/gen-go/demo"
 	"log"
 	"net"
 )
@@ -15,15 +15,14 @@ const (
 )
 
 type Client struct {
-	BaseClient *example.BaseServiceClient
+	BaseClient *demo.BaseServiceClient
 }
 
 var (
-	client      = NewClient(nil)
+	client      = new(Client)
 	transport   thrift.TTransport
 	xiaomingUId = "fb189006-9a8b-4b50-a343-f221be1cce7b"
 	xiaohongUid = "a98ed979-881b-49a1-b52d-5747eedd3fe8"
-	c           = &example.BaseServiceClient{}
 )
 
 func setClient() {
@@ -49,33 +48,10 @@ func setClient() {
 	protocolFactory = thrift.NewTBinaryProtocolFactoryDefault()
 
 	// 打开客户端
-	c = example.NewBaseServiceClientFactory(transport, protocolFactory)
+	client.BaseClient = demo.NewBaseServiceClientFactory(transport, protocolFactory)
 }
 
-func (c *Client) GetStudentByUID(ctx context.Context, uid string) (ret *example.Student, err error) {
-	ret = new(example.Student)
-	if ret, err = c.GetStudentByUID(ctx, uid); err != nil {
-		return
-	}
-	return
-}
-func GetStudentByUID(ctx context.Context, uid string) (ret *example.Student, err error) {
-	i := 1
-	i++
-	println(i)
-	if ret, err = client.GetStudentByUID(ctx, uid); err != nil {
-		return
-	}
-	return
-}
-
-func (c *Client) ModifyStudent(ctx context.Context, uid string, form *example.FormStudent) (ret *example.Student, err error) {
-	ret = new(example.Student)
-	if ret, err = c.ModifyStudent(ctx, uid, form); err != nil {
-		return
-	}
-	return
-}
+var DefaultXCtx = context.Background()
 
 func main() {
 	setClient()
@@ -88,29 +64,8 @@ func main() {
 		log.Fatalln("Error opening:", HOST+":"+PORT)
 	}
 	defer transport.Close()
-	var DefaultXCtx = context.Background()
-	var (
-		data  = new(example.Student)
-		data2 = new(example.Student)
-	)
-	fmt.Println(c.GetStudentByUID(DefaultXCtx, xiaomingUId), "aaaaaaaaaaaaa")
 
-	if data, err = GetStudentByUID(DefaultXCtx, xiaomingUId); err != nil {
-		panic(err)
-	} else {
-		fmt.Println("小明的信息", data.Age, data.Sex, data.ClassName, data.Name)
-	}
-
-	//
-	var (
-		form = new(example.FormStudent)
-	)
-	form.ClassName = "高三三班"
-	if data2, err = client.ModifyStudent(DefaultXCtx, xiaohongUid, form); err != nil {
-		panic(err)
-	} else {
-		fmt.Println("小红的信息", data2.ClassName, data2.Age, data2.Name, data2.Sex)
-	}
+	fmt.Println(client.BaseClient.ModifyStudent(DefaultXCtx, xiaomingUId, &demo.FormStudent{ClassName: "sasdsad"}))
 
 }
 

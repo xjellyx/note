@@ -1,57 +1,30 @@
 package main
 
 import (
-	"git.yichui.net/tudy/go-rest"
-	"git.yichui.net/tudy/go-rest/log"
-	"runtime"
+	"fmt"
+	"reflect"
 )
 
-var LogPanic rest.Logger
-
 func main() {
-
-	if err := test2(10, 2); err != nil {
-		println(err.Error())
+	tonydon := &user1{"TangXiaodong", 100, "0000123"}
+	object := reflect.ValueOf(tonydon)
+	myref := object.Elem()
+	typeOfType := myref.Type()
+	for i := 0; i < myref.NumField(); i++ {
+		field := myref.Field(i)
+		fmt.Printf("%d. %s %s = %v \n", i, typeOfType.Field(i).Name, field.Type(), field.Interface())
 	}
-
-	/*	if err := test2(11, 2); err != nil {
-		panic(err)
-	}*/
+	tonydon.SayHello()
+	v := object.MethodByName("SayHello")
+	v.Call([]reflect.Value{})
 }
 
-// PanicRecoverError 统一处理panic, 并更新error
-func PanicRecoverError(logger rest.Logger, err *error) {
-	buf := make([]byte, 64<<10)
-	if logger == nil && LogPanic != nil {
-		logger = LogPanic
-	} else {
-		//logger = log.Log
-	}
-	r := recover()
-	if r != nil {
-		buf = buf[:runtime.Stack(buf, false)]
-		logger.Errorf(`[panic-recover] %s,%v`, string(buf), r)
-	} else {
-		return
-	}
-
-	return
+type user1 struct {
+	Name string
+	Age  int
+	Id   string
 }
 
-func test1(a, b int) (err error) {
-	defer PanicRecoverError(LogPanic, &err)
-	var s *string
-	println(len(*s))
-	return
-}
-
-func test2(a, b int) (err error) {
-	defer rest.PanicRecoverError(LogPanic, &err)
-	var s *string
-	println(len(*s))
-	return
-}
-
-func init() {
-	LogPanic, _ = log.NewLog(nil)
+func (u *user1) SayHello() {
+	fmt.Println("I'm " + u.Name + ", Id is " + u.Id + ". Nice to meet you! ")
 }
