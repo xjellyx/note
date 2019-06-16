@@ -66,6 +66,7 @@ func main() {
 	defer transport.Close()
 
 	fmt.Println(client.BaseClient.ModifyStudent(DefaultXCtx, xiaomingUId, &demo.FormStudent{ClassName: "sasdsad"}))
+	fmt.Println(client.BaseClient.GetStudentByUID(DefaultXCtx, xiaohongUid))
 
 }
 
