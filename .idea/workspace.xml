@@ -2,7 +2,87 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d5cb32e4-f098-4b9f-9f38-27f7ba60b55f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/thrift-rpc/client/client.go" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-rpc/client/client.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/other_/seg_.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/block-learn/IntroductionBlock/block/block.go" beforeDir="false" afterPath="$PROJECT_DIR$/block_/IntroductionBlock/block/block.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/block-learn/IntroductionBlock/blockchain/blockchain.go" beforeDir="false" afterPath="$PROJECT_DIR$/block_/IntroductionBlock/blockchain/blockchain.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/block-learn/IntroductionBlock/web/web.go" beforeDir="false" afterPath="$PROJECT_DIR$/block_/IntroductionBlock/web/web.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/block-learn/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/block_/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/block-learn/intorduction_main.go" beforeDir="false" afterPath="$PROJECT_DIR$/block_/intorduction_main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/btc/main.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flag-learn/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/flag_/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gorsa-learn/create_rsa.go" beforeDir="false" afterPath="$PROJECT_DIR$/gorsa_/create_rsa.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphql-learn/Film/film.go" beforeDir="false" afterPath="$PROJECT_DIR$/graphql_/Film/film.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphql-learn/Film/film_func.go" beforeDir="false" afterPath="$PROJECT_DIR$/graphql_/Film/film_func.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphql-learn/apitest.go" beforeDir="false" afterPath="$PROJECT_DIR$/graphql_/apitest.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphql-learn/demo1.go" beforeDir="false" afterPath="$PROJECT_DIR$/graphql_/demo1.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphql-learn/demo2.go" beforeDir="false" afterPath="$PROJECT_DIR$/graphql_/demo2.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphql-learn/hello-world.go" beforeDir="false" afterPath="$PROJECT_DIR$/graphql_/hello-world.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphql-learn/sss.go" beforeDir="false" afterPath="$PROJECT_DIR$/graphql_/sss.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphql-learn/test.go" beforeDir="false" afterPath="$PROJECT_DIR$/graphql_/test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lris-learn/demo-1.go" beforeDir="false" afterPath="$PROJECT_DIR$/lris_/demo-1.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lris-learn/demo/ctrl/ctrl.go" beforeDir="false" afterPath="$PROJECT_DIR$/lris_/demo/ctrl/ctrl.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lris-learn/demo/ctrl/midd.go" beforeDir="false" afterPath="$PROJECT_DIR$/lris_/demo/ctrl/midd.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lris-learn/demo/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/lris_/demo/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lris-learn/demo/model/movie.go" beforeDir="false" afterPath="$PROJECT_DIR$/lris_/demo/model/movie.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lris-learn/demo/model/repositories.go" beforeDir="false" afterPath="$PROJECT_DIR$/lris_/demo/model/repositories.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lris-learn/demo/serve/serve.go" beforeDir="false" afterPath="$PROJECT_DIR$/lris_/demo/serve/serve.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lris-learn/demo/view/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/lris_/demo/view/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lris-learn/demo/view/name.html" beforeDir="false" afterPath="$PROJECT_DIR$/lris_/demo/view/name.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lris-learn/demo/view/view.go" beforeDir="false" afterPath="$PROJECT_DIR$/lris_/demo/view/view.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lris-learn/demo2.go" beforeDir="false" afterPath="$PROJECT_DIR$/lris_/demo2.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lris-learn/demo3.go" beforeDir="false" afterPath="$PROJECT_DIR$/lris_/demo3.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lris-learn/demo4.go" beforeDir="false" afterPath="$PROJECT_DIR$/lris_/demo4.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lris-learn/demo5.go" beforeDir="false" afterPath="$PROJECT_DIR$/lris_/demo5.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lris-learn/demo6.go" beforeDir="false" afterPath="$PROJECT_DIR$/lris_/demo6.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lris-learn/demo7.go" beforeDir="false" afterPath="$PROJECT_DIR$/lris_/demo7.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lris-learn/demo8.go" beforeDir="false" afterPath="$PROJECT_DIR$/lris_/demo8.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lris-learn/demo9.go" beforeDir="false" afterPath="$PROJECT_DIR$/lris_/demo9.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lris-learn/mvc/ctrl/ctrl.go" beforeDir="false" afterPath="$PROJECT_DIR$/lris_/mvc/ctrl/ctrl.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lris-learn/mvc/ctrl/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/lris_/mvc/ctrl/router.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lris-learn/mvc/form.go" beforeDir="false" afterPath="$PROJECT_DIR$/lris_/mvc/form.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lris-learn/mvc/model/model.go" beforeDir="false" afterPath="$PROJECT_DIR$/lris_/mvc/model/model.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lris-learn/mvc/project.go" beforeDir="false" afterPath="$PROJECT_DIR$/lris_/mvc/project.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lris-learn/mvc/serve/serve.go" beforeDir="false" afterPath="$PROJECT_DIR$/lris_/mvc/serve/serve.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysql-learn/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/rpc_/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysql-learn/go_Mysql.go" beforeDir="false" afterPath="$PROJECT_DIR$/sql_/go_Mysql.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysql-learn/obj/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/sql_/obj/db.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/os-learn/os-proc.go" beforeDir="false" afterPath="$PROJECT_DIR$/os_/os-proc.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/os-learn/os.go" beforeDir="false" afterPath="$PROJECT_DIR$/os_/os.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/os-learn/os_file.go" beforeDir="false" afterPath="$PROJECT_DIR$/os_/os_file.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/other-learn/bilibili.go" beforeDir="false" afterPath="$PROJECT_DIR$/other_/bilibili.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/other-learn/btc.go" beforeDir="false" afterPath="$PROJECT_DIR$/other_/btc.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/other-learn/csv.go" beforeDir="false" afterPath="$PROJECT_DIR$/other_/csv.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/other-learn/demo1.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/other-learn/demo2.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/other-learn/demo3.go" beforeDir="false" afterPath="$PROJECT_DIR$/other_/demo3.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/other-learn/demo4.go" beforeDir="false" afterPath="$PROJECT_DIR$/other_/demo4.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/other-learn/demo5.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/other-learn/demo6.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/other-learn/demo7.go" beforeDir="false" afterPath="$PROJECT_DIR$/other_/demo7.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/other-learn/go-tool.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/other-learn/gotest.go" beforeDir="false" afterPath="$PROJECT_DIR$/other_/sorm_.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/other-learn/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/other-learn/test2.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/other-learn/test3.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-learn/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/spider_/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-learn/json_rpc/client.go" beforeDir="false" afterPath="$PROJECT_DIR$/rpc_/json_rpc/client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-learn/json_rpc/jsonRpcClient.go" beforeDir="false" afterPath="$PROJECT_DIR$/rpc_/json_rpc/jsonRpcClient.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-learn/json_rpc/jsonRpcServer.go" beforeDir="false" afterPath="$PROJECT_DIR$/rpc_/json_rpc/jsonRpcServer.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-learn/json_rpc/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/rpc_/json_rpc/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-learn/jsonrpc_omnicore.go" beforeDir="false" afterPath="$PROJECT_DIR$/rpc_/jsonrpc_omnicore.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-learn/rpc/rpcClient.go" beforeDir="false" afterPath="$PROJECT_DIR$/rpc_/rpc/rpcClient.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-learn/rpc/rpc_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/rpc_/rpc/rpc_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spider-learn/GetUsdToCnyRate.go" beforeDir="false" afterPath="$PROJECT_DIR$/spider_/GetUsdToCnyRate.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spider-learn/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/sql_/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spider-learn/eth.go" beforeDir="false" afterPath="$PROJECT_DIR$/spider_/eth.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spider-learn/getEthPrice.go" beforeDir="false" afterPath="$PROJECT_DIR$/spider_/getEthPrice.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spider-learn/getHuoBi.go" beforeDir="false" afterPath="$PROJECT_DIR$/spider_/getHuoBi.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spider-learn/spiderETH.go" beforeDir="false" afterPath="$PROJECT_DIR$/spider_/spiderETH.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spider-learn/spiderEthHuobi.go" beforeDir="false" afterPath="$PROJECT_DIR$/spider_/spiderEthHuobi.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/strconv-learn/strconv.go" beforeDir="false" afterPath="$PROJECT_DIR$/strconv_/strconv.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,41 +107,39 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/thrift-rpc/serve/server.go">
+        <entry file="file://$PROJECT_DIR$/os_/os.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1751">
-              <caret line="28" column="16" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
+            <state relative-caret-position="110">
+              <caret line="133" selection-start-line="133" selection-end-line="133" />
               <folding>
-                <element signature="e#14#137#0" expanded="true" />
+                <element signature="n#!!block;n#main#1" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/other_/demo4.go">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/rpc_/json_rpc/server.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="154">
+              <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/thrift-rpc/client/client.go">
+        <entry file="file://$PROJECT_DIR$/sql_/go_Mysql.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="68" column="74" selection-start-line="68" selection-start-column="74" selection-end-line="68" selection-end-column="74" />
+            <state relative-caret-position="462">
+              <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
               <folding>
-                <element signature="e#14#151#0" expanded="true" />
+                <element signature="e#14#112#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/thrift-rpc/main.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-867" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/thrift-rpc/thrift.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="91" />
             </state>
           </provider>
         </entry>
@@ -80,22 +158,13 @@
       <find>demo</find>
     </findStrings>
   </component>
-  <component name="GOROOT" path="/usr/local/go" />
+  <component name="GOROOT" path="$PROJECT_DIR$/../../../../../bin/go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/other-learn/index.html" />
-        <option value="$PROJECT_DIR$/lris-learn/mvc/model/model.go" />
-        <option value="$PROJECT_DIR$/lris-learn/mvc/project.go" />
-        <option value="$PROJECT_DIR$/lris-learn/mvc/ctrl/router.go" />
-        <option value="$PROJECT_DIR$/lris-learn/mvc/serve/serve.go" />
-        <option value="$PROJECT_DIR$/lris-learn/mvc/form.go" />
-        <option value="$PROJECT_DIR$/lris-learn/mvc/ctrl/ctrl.go" />
-        <option value="$PROJECT_DIR$/lris-learn/demo9.go" />
-        <option value="$PROJECT_DIR$/graphql-learn/test.go" />
         <option value="$PROJECT_DIR$/rpc-learn/jsonrpc_omnicore.go" />
         <option value="$PROJECT_DIR$/graphql-learn/demo2.go" />
         <option value="$PROJECT_DIR$/graphql-learn/apitest.go" />
@@ -123,7 +192,6 @@
         <option value="$PROJECT_DIR$/rpc-learn/json_rpc/server.go" />
         <option value="$PROJECT_DIR$/go.mod" />
         <option value="$PROJECT_DIR$/go.sum" />
-        <option value="$PROJECT_DIR$/other-learn/test3.go" />
         <option value="$PROJECT_DIR$/thrift-rpc/gen-go/example/demo.go" />
         <option value="$PROJECT_DIR$/thrift-rpc/serve/server1.go" />
         <option value="$PROJECT_DIR$/strings-learn/gen-go/demo/base_service-remote/base_service-remote.go" />
@@ -138,13 +206,24 @@
         <option value="$PROJECT_DIR$/strings-learn/serve/server.go" />
         <option value="$PROJECT_DIR$/thrift-rpc/demo.thrift" />
         <option value="$PROJECT_DIR$/thrift-rpc/client/client.go" />
+        <option value="$PROJECT_DIR$/other-learn/test3.go" />
+        <option value="$PROJECT_DIR$/other-learn/test4.go" />
+        <option value="$PROJECT_DIR$/other-learn/test2.go" />
+        <option value="$PROJECT_DIR$/mysql-learn/go_Mysql.go" />
+        <option value="$PROJECT_DIR$/mysql-learn/obj/db.go" />
+        <option value="$PROJECT_DIR$/block_/intorduction_main.go" />
+        <option value="$PROJECT_DIR$/block_/IntroductionBlock/blockchain/blockchain.go" />
+        <option value="$PROJECT_DIR$/block_/IntroductionBlock/web/web.go" />
+        <option value="$PROJECT_DIR$/sql_/obj/db.go" />
+        <option value="$PROJECT_DIR$/sql_/go_Mysql.go" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="4">
+    <option name="x" value="917" />
     <option name="y" value="27" />
-    <option name="width" value="1211" />
-    <option name="height" value="741" />
+    <option name="width" value="1643" />
+    <option name="height" value="1413" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -154,6 +233,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -163,13 +243,13 @@
             </path>
             <path>
               <item name="note" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="note" type="462c0819:PsiDirectoryNode" />
+              <item name="sql_" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -193,17 +273,17 @@
     <option name="SHOW_DIALOG" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/strings-learn" />
-      <recent name="$PROJECT_DIR$/lris-learn" />
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/lris-learn/demo2" />
-      <recent name="$PROJECT_DIR$/thrift-rpc/serve" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/thrift-rpc" />
       <recent name="$PROJECT_DIR$/strings-learn" />
       <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/other-learn" />
+      <recent name="$PROJECT_DIR$/strings-learn" />
+      <recent name="$PROJECT_DIR$/lris-learn" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/lris-learn/demo2" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -218,7 +298,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Go Build.go build client.go (1)">
+  <component name="RunManager" selected="Go Build.go build intorduction_main.go">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="note" />
       <working_directory value="$PROJECT_DIR$/" />
@@ -229,47 +309,47 @@
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
-    <configuration name="go build client.go (1)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="go build demo5.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="note" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/thrift-rpc/client/client.go" />
+      <filePath value="$PROJECT_DIR$/other-learn/demo5.go" />
       <package value="github.com/LnFen/note" />
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
-    <configuration name="go build client.go (2)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="go build demo6.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="note" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/strings-learn/client/client.go" />
+      <filePath value="$PROJECT_DIR$/other-learn/demo6.go" />
       <package value="github.com/LnFen/note" />
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
-    <configuration name="go build data.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="go build go-tool.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="note" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/strings-learn/serve/data/data.go" />
+      <filePath value="$PROJECT_DIR$/other-learn/go-tool.go" />
       <package value="github.com/LnFen/note" />
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
-    <configuration name="go build server.go (2)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="go build intorduction_main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="note" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/strings-learn/serve/server.go" />
+      <filePath value="$PROJECT_DIR$/block_/intorduction_main.go" />
       <package value="github.com/LnFen/note" />
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
-    <configuration name="go build server.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="go build test2.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="note" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/thrift-rpc/serve/server.go" />
+      <filePath value="$PROJECT_DIR$/other-learn/test2.go" />
       <package value="github.com/LnFen/note" />
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
@@ -287,24 +367,24 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build client.go (1)" />
-        <item itemvalue="Go Build.go build client.go (2)" />
-        <item itemvalue="Go Build.go build server.go (2)" />
-        <item itemvalue="Go Build.go build data.go" />
-        <item itemvalue="Go Build.go build server.go" />
+        <item itemvalue="Go Build.go build intorduction_main.go" />
+        <item itemvalue="Go Build.go build test2.go" />
+        <item itemvalue="Go Build.go build go-tool.go" />
+        <item itemvalue="Go Build.go build demo6.go" />
+        <item itemvalue="Go Build.go build demo5.go" />
       </list>
     </recent_temporary>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="27" width="1366" height="741" extended-state="6" />
+    <frame x="917" y="27" width="1643" height="1413" extended-state="4" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21818182" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13215859" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32939324" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.38196722" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32913387" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.38188976" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39968652" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -356,163 +436,12 @@
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/thrift-rpc/serve/server.go</url>
           <line>85</line>
-          <properties />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../../../../pkg/mod/github.com/coreos/etcd@v3.3.13+incompatible/clientv3/watch.go" />
-    <entry file="file://$USER_HOME$/bin/go/src/encoding/csv/reader.go" />
-    <entry file="file://$PROJECT_DIR$/etcd/etcd_func.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="15" column="27" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
-          <folding>
-            <element signature="e#14#67#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/etcd/etcd.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="11" column="30" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/bin/go/src/strings/strings.go" />
-    <entry file="file://$USER_HOME$/bin/go/src/builtin/builtin.go" />
-    <entry file="file://$USER_HOME$/bin/go/src/time/format.go" />
-    <entry file="file://$PROJECT_DIR$/other-learn/gotest.go">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/other-learn/csv.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4070">
-          <caret line="195" column="87" selection-start-line="195" selection-start-column="87" selection-end-line="195" selection-end-column="87" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../pkg/mod/git.yichui.net/tudy/go-rest@v1.3.17/utils_shotcut.go" />
-    <entry file="file://$USER_HOME$/bin/go/src/regexp/regexp.go" />
-    <entry file="file://$PROJECT_DIR$/other-learn/demo3.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="62" column="16" selection-start-line="62" selection-start-column="16" selection-end-line="62" selection-end-column="16" />
-          <folding>
-            <element signature="n#!!block;n#process#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/other-learn/go-tool.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="26" column="35" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/go/src/net/rpc/client.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="320" column="22" selection-start-line="320" selection-start-column="22" selection-end-line="320" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/go/src/net/ip.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rpc-learn/json_rpc/jsonRpcClient.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" column="27" selection-start-line="29" selection-start-column="10" selection-end-line="29" selection-end-column="27" />
-          <folding>
-            <element signature="e#14#68#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/other-learn/demo7.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rpc-learn/json_rpc/jsonRpcServer.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-408" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rpc-learn/json_rpc/server.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-39">
-          <caret line="40" column="25" lean-forward="true" selection-start-line="40" selection-start-column="25" selection-end-line="40" selection-end-column="25" />
-          <folding>
-            <element signature="e#14#81#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rpc-learn/json_rpc/client.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="1" lean-forward="true" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
-          <folding>
-            <element signature="e#14#57#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/os-learn/os.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="133" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/os-learn/os-proc.go">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.tml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/other-learn/test2.go">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/other-learn/test3.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="11" column="14" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="14" />
-          <folding>
-            <element signature="e#14#42#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../pkg/mod/github.com/apache/thrift@v0.12.0/lib/go/thrift/simple_server.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="65">
-          <caret line="50" column="5" selection-start-line="50" selection-start-column="5" selection-end-line="50" selection-end-column="5" />
-          <folding>
-            <element signature="n#!!block;n#NewTSimpleServer4#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../pkg/mod/github.com/apache/thrift@v0.12.0/lib/go/thrift/transport_factory.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="36" column="5" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../../../pkg/mod/github.com/apache/thrift@v0.12.0/lib/go/thrift/client.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -520,26 +449,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/thrift-rpc/gen-go/example/demo.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="547" column="29" selection-start-line="547" selection-start-column="25" selection-end-line="547" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thrift-rpc/serve/server1.go">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/strings-learn/demo/demo-consts.go">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/strings-learn/demo/demo.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="22" column="9" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/thrift-rpc/gen-go/example/demo.go" />
+    <entry file="file://$PROJECT_DIR$/thrift-rpc/serve/server1.go" />
+    <entry file="file://$PROJECT_DIR$/strings-learn/demo/demo-consts.go" />
+    <entry file="file://$PROJECT_DIR$/strings-learn/demo/demo.go" />
     <entry file="file://$PROJECT_DIR$/thrift-rpc/gen-go/demo/demo.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1" />
@@ -549,13 +462,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="16" column="58" selection-start-line="16" selection-start-column="54" selection-end-line="16" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thrift-rpc/thrift.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
@@ -573,69 +479,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/thrift-rpc/gen-go/example/base_service-remote/base_service-remote.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-612">
-          <caret line="33" column="29" lean-forward="true" selection-start-line="16" selection-start-column="51" selection-end-line="16" selection-end-column="58" />
-          <folding>
-            <element signature="e#128#390#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thrift-rpc/gen-go/example/example.go">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thrift-rpc/gen-go/example/example-consts.go">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thrift-rpc/gen-go/example/GoUnusedProtection__.go">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thrift-rpc/client/client.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="95" column="11" selection-start-line="95" selection-start-column="11" selection-end-line="95" selection-end-column="11" />
-          <folding>
-            <element signature="e#14#151#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thrift-rpc/serve/server.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="20" selection-start-line="20" selection-end-line="138" />
-          <folding>
-            <element signature="e#14#158#0" expanded="true" />
-            <element signature="n#!!block;n#init#0" />
-            <element signature="n#!!block;n#GetStudentByUID#0" />
-            <element signature="e#1564#2465#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thrift-rpc/example.thrift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" selection-start-line="2" selection-end-line="20" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/go/src/reflect/type.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="925" selection-start-line="925" selection-end-line="925" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/strings-learn/serve/data/data.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="35" column="5" lean-forward="true" selection-start-line="29" selection-start-column="4" selection-end-line="35" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/thrift-rpc/gen-go/example/base_service-remote/base_service-remote.go" />
+    <entry file="file://$PROJECT_DIR$/thrift-rpc/gen-go/example/example.go" />
+    <entry file="file://$PROJECT_DIR$/thrift-rpc/gen-go/example/example-consts.go" />
+    <entry file="file://$PROJECT_DIR$/thrift-rpc/gen-go/example/GoUnusedProtection__.go" />
+    <entry file="file://$PROJECT_DIR$/thrift-rpc/example.thrift" />
+    <entry file="file:///usr/local/go/src/reflect/type.go" />
+    <entry file="file://$PROJECT_DIR$/strings-learn/serve/data/data.go" />
     <entry file="file://$PROJECT_DIR$/thrift-rpc/demo.thrift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -671,6 +521,214 @@
           <caret line="68" column="74" selection-start-line="68" selection-start-column="74" selection-end-line="68" selection-end-column="74" />
           <folding>
             <element signature="e#14#151#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../../bin/go/src/regexp/regexp.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22990">
+          <caret line="1054" column="18" selection-start-line="1054" selection-start-column="18" selection-end-line="1054" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../pkg/mod/github.com/huichen/sego@v0.0.0-20180617034105-3f3c8a8cfacc/tools/benchmark.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="119" column="36" selection-start-line="119" selection-start-column="36" selection-end-line="119" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../pkg/mod/github.com/huichen/sego@v0.0.0-20180617034105-3f3c8a8cfacc/utils.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../pkg/mod/github.com/suboat/sorm@v0.2.0/orm.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="40" column="4" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../pkg/mod/github.com/go-ego/gse@v0.0.0-20190608170801-18055d8ea545/dict_util.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2508">
+          <caret line="126" column="1" selection-start-line="126" selection-start-column="1" selection-end-line="126" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/other_/bilibili.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-52560" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/other_/csv.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="614">
+          <caret line="195" column="87" selection-start-line="195" selection-start-column="87" selection-end-line="195" selection-end-column="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/other-learn/demo1.go">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/other-learn/demo2.go">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/other-learn/demo5.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-396">
+          <folding>
+            <element signature="e#14#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/other-learn/demo6.go">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/other_/demo3.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-179">
+          <caret line="40" column="9" lean-forward="true" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/other_/dictionary.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="511">
+          <caret line="479666" column="4" selection-start-line="479666" selection-end-line="479666" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/other_/demo4.go">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/other-learn/go-tool.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#14#52#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/other_/sorm_.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-528" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/other-learn/test2.go">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rpc_/json_rpc/server.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/other-learn/test4.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+          <folding>
+            <element signature="e#14#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/os_/os.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="133" selection-start-line="133" selection-end-line="133" />
+          <folding>
+            <element signature="n#!!block;n#main#1" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/other_/seg_.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="43" column="18" lean-forward="true" selection-start-line="43" selection-start-column="18" selection-end-line="43" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/strconv_/strconv.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-443" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/btc/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#14#82#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/block_/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/block_/IntroductionBlock/block/block.go">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/block_/IntroductionBlock/blockchain/blockchain.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+          <folding>
+            <element signature="e#20#88#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/block_/IntroductionBlock/web/web.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+          <folding>
+            <element signature="e#13#237#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/block_/intorduction_main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" column="11" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="11" />
+          <folding>
+            <element signature="e#14#83#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sql_/obj/db.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2109">
+          <caret line="130" column="42" selection-start-line="130" selection-start-column="42" selection-end-line="130" selection-end-column="42" />
+          <folding>
+            <element signature="e#13#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sql_/go_Mysql.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
+          <folding>
+            <element signature="e#14#112#0" expanded="true" />
           </folding>
         </state>
       </provider>
