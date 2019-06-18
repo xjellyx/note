@@ -1,13 +1,17 @@
 #!/bin/bash
+PWD_NOW=$PWD
+CON_NAME=mymysql
+docker stop ${CON_NAME} > /dev/null 2>&1
+docker rm ${CON_NAME} > /dev/null 2>&1
 docker run -d \
   --restart=always \
-  --name = mysql \
+  --name ${CON_NAME} \
   -p 33306:3306 \
   -e MYSQL_ROOT_PASSWORD=mysql \
   -e MYSQL_DATABASE=business \
   -e MYSQL_USER=business \
   -e MYSQL_PASSWORD=business \
   -e TZ=Asia/Shanghai \
-  -d mysql:8.0 --default-authentication-plugin=mysql_native_password
+  mysql:5.7
 # waiting for init
 sleep 5

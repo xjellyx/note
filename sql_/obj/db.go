@@ -3,6 +3,7 @@ package obj
 import (
 	"database/sql"
 	"fmt"
+	"io/ioutil"
 	"log"
 )
 
@@ -12,14 +13,14 @@ type DB struct {
 }
 
 var (
-	dbhost     = "127.0.0.1:3306"
+	dbhost     = "127.0.0.1:33306"
 	dbusername = "business"
 	dbpassword = "business"
 	dbname     = "business"
 )
 
 // Open
-func (f *DB) Open() (err error) {
+func (d *DB) Open() (err error) {
 	var (
 		db *sql.DB
 	)
@@ -27,13 +28,13 @@ func (f *DB) Open() (err error) {
 		return
 	}
 	log.Println("打开数据库成功！！！")
-	f.db = db
+	d.db = db
 	return
 }
 
-// CLose
-func (f *DB) Close() {
-	defer f.db.Close()
+// Close
+func (d *DB) Close() {
+	defer d.db.Close()
 }
 
 //
@@ -69,11 +70,12 @@ func scanRow(rows *sql.Rows) (dbRow, error) {
 
 type dbRow map[string]interface{}
 
-func (f *DB) QueryFind(str string, args ...interface{}) (ret []dbRow, err error) {
+// QueryFind 查看
+func (d *DB) QueryFind(str string, args ...interface{}) (ret []dbRow, err error) {
 	var (
 		rows *sql.Rows
 	)
-	if rows, err = f.db.Query(str); err != nil {
+	if rows, err = d.db.Query(str); err != nil {
 		log.Println(err)
 		return
 	}
@@ -87,11 +89,13 @@ func (f *DB) QueryFind(str string, args ...interface{}) (ret []dbRow, err error)
 	}
 	return
 }
-func (f *DB) SelectAll(tableName string, args ...interface{}) (ret []dbRow, err error) {
+
+// SelectAll 查看全部 TODO 这里供学习使用,实际项目不能这样写，数据量多的会影响性能
+func (d *DB) SelectAll(tableName string, args ...interface{}) (ret []dbRow, err error) {
 	var (
 		rows *sql.Rows
 	)
-	if rows, err = f.db.Query(fmt.Sprintf(`SELECT *FROM %s`, tableName), args...); err != nil {
+	if rows, err = d.db.Query(fmt.Sprintf(`SELECT *FROM %s`, tableName), args...); err != nil {
 		return
 	}
 	defer rows.Close()
@@ -104,13 +108,15 @@ func (f *DB) SelectAll(tableName string, args ...interface{}) (ret []dbRow, err 
 	}
 	return
 }
-func (f *DB) Column() (ret []dbRow, err error) {
+
+// Column
+func (d *DB) Column() (ret []dbRow, err error) {
 	var (
 		rows *sql.Rows
 	)
 	str := `SELECT count(*) FROM information_schema.tables WHERE table_name='%s'`
-	str = fmt.Sprintf(str, f.TableName)
-	if rows, err = f.db.Query(str); err != nil {
+	str = fmt.Sprintf(str, d.TableName)
+	if rows, err = d.db.Query(str); err != nil {
 		return
 	}
 	defer rows.Close()
@@ -123,14 +129,59 @@ func (f *DB) Column() (ret []dbRow, err error) {
 	}
 	return
 }
-func (f *DB) Columns() (ret []dbRow, err error) {
+
+// Columns
+func (d *DB) Columns() (ret []dbRow, err error) {
 	var columnLis = make([]dbRow, 0)
 	str := `SELECT column_name FROM information_schema.columns WHERE table_name="%s"`
-	str = fmt.Sprintf(str, f.TableName)
-	if columnLis, err = f.QueryFind(str); err != nil {
+	str = fmt.Sprintf(str, d.TableName)
+	if columnLis, err = d.QueryFind(str); err != nil {
 		log.Println("select column ", err)
 		return
 	}
 	ret = columnLis
+	return
+}
+
+// Create 建表
+func (d *DB) Create(sqlStr string) (ret *sql.Result, err error) {
+	var (
+		res sql.Result
+	)
+	if res, err = d.db.Exec(sqlStr); err != nil {
+		return
+	}
+
+	ret = &res
+	return
+}
+
+// ParamSQL 解析sql文件
+func (d *DB) ParamSQL(filePath string) (ret string, err error) {
+	var (
+		data []byte
+	)
+	if data, err = ioutil.ReadFile(filePath); err != nil {
+		return
+	}
+
+	ret = string(data)
+	return
+}
+
+// Insert 插入数据
+func (d *DB) Insert(sqlStr string) (err error) {
+	if _, err = d.db.Exec(sqlStr); err != nil {
+		return
+	}
+
+	return
+}
+
+// Update 更新数据
+func (d *DB) Update(sqlStr string) (err error) {
+	if _, err = d.db.Exec(sqlStr); err != nil {
+		return
+	}
 	return
 }
