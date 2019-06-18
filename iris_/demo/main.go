@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/LnFen/note/lris-learn/demo/ctrl"
-	"github.com/LnFen/note/lris-learn/demo/model"
-	"github.com/LnFen/note/lris-learn/demo/serve"
+	"github.com/srlemon/note/iris_/demo/ctrl"
+	"github.com/srlemon/note/iris_/demo/model"
+	"github.com/srlemon/note/iris_/demo/serve"
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/_examples/mvc/overview/web/controllers"
 	"github.com/kataras/iris/mvc"

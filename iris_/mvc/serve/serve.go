@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	"github.com/LnFen/note/lris-learn/mvc/ctrl"
-	"github.com/LnFen/note/lris-learn/mvc/model"
 	"github.com/kataras/iris"
 	"github.com/suboat/sorm"
 	"github.com/suboat/sorm/driver/mysql"

@@ -1,10 +1,10 @@
 package ctrl
 
 import (
-	"github.com/LnFen/note/lris-learn/mvc"
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/mvc"
 	"github.com/kataras/iris/sessions"
+	project "github.com/srlemon/note/iris_/mvc"
 )
 
 type AdminCTRL struct {

@@ -1,8 +1,8 @@
 package ctrl
 
 import (
-	"github.com/LnFen/note/lris-learn/demo/model"
-	"github.com/LnFen/note/lris-learn/demo/serve"
+	"github.com/srlemon/note/iris_/demo/model"
+	"github.com/srlemon/note/iris_/demo/serve"
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/core/errors"
 )

@@ -1,6 +1,6 @@
 package serve
 
-import "github.com/LnFen/note/lris-learn/demo/model"
+import "github.com/srlemon/note/iris_/demo/model"
 
 type MovieService interface {
 	GetAll() []model.Movie

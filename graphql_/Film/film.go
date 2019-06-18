@@ -1,8 +1,6 @@
 package main
 
 import (
-	"github.com/LnFen/graphql-api/ctrl"
-	"github.com/LnFen/graphql-api/router"
 	"github.com/julienschmidt/httprouter"
 	"net/http"
 )
