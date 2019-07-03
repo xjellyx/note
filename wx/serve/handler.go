@@ -2,7 +2,6 @@ package serve
 
 import (
 	"encoding/json"
-	"fmt"
 	"git.yichui.net/tudy/wechat-go/wxweb"
 	"github.com/suboat/sorm/log"
 	"regexp"
@@ -49,11 +48,16 @@ func handlerInit(sess *wxweb.Session, data *wxweb.ReceivedMessage) {
 			recentArr = strings.Split(t, ",")
 		}
 	}
-	for _, v := range recentArr {
-		if strings.Contains(v, "@@") {
-			groupArr = append(groupArr, v)
-		} else if string(v[0]) == "@" && string(v[1]) != "@" {
-			friendArr = append(friendArr, v)
+
+	if len(recentArr) > 0 {
+		for _, v := range recentArr {
+			if strings.Contains(v, "@@") {
+				groupArr = append(groupArr, v)
+			} else if len(v) > 0 {
+				if string(v[0]) == "@" && string(v[1]) != "@" {
+					friendArr = append(friendArr, v)
+				}
+			}
 		}
 	}
 	if err = initFriend(sess, friendArr, false); err != nil {
@@ -71,9 +75,12 @@ func initFriend(sess *wxweb.Session, friendArr []string, isHandler bool) (err er
 		friendMap = make(map[string]int)
 		paramArr  []*wxweb.User
 	)
-	for _, v := range sess.Cm.GetAll() {
-		if string(v.UserName[0]) == "@" && string(v.UserName[0]) != "@" {
-			friendMap[v.UserName] += 1
+	val := sess.Cm.GetAll()
+	if len(val) > 0 {
+		for _, v := range sess.Cm.GetAll() {
+			if string(v.UserName[0]) == "@" && string(v.UserName[0]) != "@" {
+				friendMap[v.UserName] += 1
+			}
 		}
 	}
 	if len(friendArr) > 0 {
@@ -131,8 +138,11 @@ func handlerTextFriend(sess *wxweb.Session, msg *wxweb.ReceivedMessage) {
 	var (
 		err error
 	)
-	fmt.Println(msg.Content)
-	if _, _, err = sess.SendText(msg.Content+"你说啥", sess.Bot.UserName, msg.FromUserName); err != nil {
+	if msg.FromUserName == "" {
+
+	}
+	if _, _, err = sess.SendText("哈哈哈", sess.Bot.UserName, msg.FromUserName); err != nil {
 		return
 	}
+
 }

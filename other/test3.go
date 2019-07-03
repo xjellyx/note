@@ -1,9 +1,9 @@
 package main
 
 import (
-	"fmt"
 	"git.yichui.net/tudy/wechat-go/wxweb"
-	"strings"
+	"log"
+	"os"
 )
 
 var (
@@ -11,8 +11,13 @@ var (
 )
 
 func main() {
-	fmt.Println(strings.ContainsAny("@@sdsdas;oljk;lgfa", ""))
-
+	f, err := os.Create("/home/allen/test.jpg")
+	if err != nil {
+		log.Fatal(err)
+	}
+	if _, err = f.Write([]byte("sdsd")); err != nil {
+		log.Println(err)
+	}
 }
 
 func register(sess *wxweb.Session) (err error) {
