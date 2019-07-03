@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+// GetConfig 获取配置文件
 func (c *Client) GetConfig() (ret *clientv3.Config) {
 	ret = new(clientv3.Config)
 	if c != nil {
@@ -19,7 +20,7 @@ func (c *Client) GetConfig() (ret *clientv3.Config) {
 	return
 }
 
-// 取超时
+// GetTimeout 取超时
 func (c *Client) GetTimeout() (ret time.Duration) {
 	if c.Timeout > 0 {
 		ret = time.Duration(c.Timeout) * time.Second

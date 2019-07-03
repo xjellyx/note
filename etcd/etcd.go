@@ -7,6 +7,7 @@ import (
 	"sync"
 )
 
+// Client 客户端
 type Client struct {
 	closeChan chan struct{}    // 关闭通道
 	client    *clientv3.Client // v3 client
@@ -34,6 +35,7 @@ type Client struct {
 	Ctx context.Context
 }
 
+// NewClient 新建一个客户端
 func NewClient(s *Client) (ret *Client, err error) {
 	if s != nil {
 		ret = s
