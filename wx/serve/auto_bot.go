@@ -31,7 +31,16 @@ var (
 		ApiKey: "6915d16fbece46c7a1960952cbbcc9c6",
 		UserId: "4ee9d81bc165928f",
 	}
-	Bots       = []UserInfo{Bot1, Bot2, Bot3, Bot4, Bot5}
+	Bot6 = UserInfo{
+		ApiKey:"172b62aa346b4bbfa12fc0f13d9e49cc",
+		UserId:"6abf66ce7e198ec6",
+	}
+	Bot7 = UserInfo{
+		ApiKey:"bb9e8e848c874f8ca040e9e45a2212c6",
+		UserId:"734d7c964ca2b364",
+	}
+	// Bot1, Bot2, Bot3, Bot4, Bot5,
+	Bots       = []UserInfo{Bot6,Bot7}
 	index      = 0
 	ErrorReply = ""
 )
