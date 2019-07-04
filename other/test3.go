@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"git.yichui.net/tudy/wechat-go/wxweb"
-	"log"
-	"os"
+	"io/ioutil"
+	"net/http"
+	"strings"
 )
 
 var (
@@ -11,12 +13,18 @@ var (
 )
 
 func main() {
-	f, err := os.Create("/home/allen/test.jpg")
-	if err != nil {
-		log.Fatal(err)
-	}
-	if _, err = f.Write([]byte("sdsd")); err != nil {
-		log.Println(err)
+	path := "http://img3.imgtn.bdimg.com/it/u=2585830458,3269303407&fm=26&gp=0.jpg"
+	ss := strings.Split(path, "/")
+	fmt.Println(ss[len(ss)-1])
+	if data, _err := http.Get("https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1815312391,2410878200&fm=26&gp=0.jpg"); _err != nil {
+		panic(_err)
+	} else {
+		defer data.Body.Close()
+		body, _err := ioutil.ReadAll(data.Body)
+		if _err != nil {
+			panic(_err)
+		}
+		fmt.Println(string((body)))
 	}
 }
 
