@@ -143,6 +143,15 @@ func handlerTextFriend(sess *wxweb.Session, msg *wxweb.ReceivedMessage) {
 		log.Println(msg.FromUserName, "============", sess.Bot.UserName)
 		return
 	}
+	if msg.IsGroup {
+		log.Printf(`"%s" 是一个群`, msg.GroupName)
+		return
+	}
+	if msg.RecommendInfo.NickName == `A罩杯` {
+		log.Println("这个人很毒辣,别招惹她")
+		return
+	}
+
 	if reply, err = GetBotReply(msg.Content); err != nil {
 		log.Error("[GetBotReply] err: ", err)
 	}

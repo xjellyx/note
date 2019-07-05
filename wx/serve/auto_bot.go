@@ -32,17 +32,18 @@ var (
 		UserId: "4ee9d81bc165928f",
 	}
 	Bot6 = UserInfo{
-		ApiKey:"172b62aa346b4bbfa12fc0f13d9e49cc",
-		UserId:"6abf66ce7e198ec6",
+		ApiKey: "172b62aa346b4bbfa12fc0f13d9e49cc",
+		UserId: "6abf66ce7e198ec6",
 	}
 	Bot7 = UserInfo{
-		ApiKey:"bb9e8e848c874f8ca040e9e45a2212c6",
-		UserId:"734d7c964ca2b364",
+		ApiKey: "bb9e8e848c874f8ca040e9e45a2212c6",
+		UserId: "734d7c964ca2b364",
 	}
-	// Bot1, Bot2, Bot3, Bot4, Bot5,
-	Bots       = []UserInfo{Bot6,Bot7}
+	//
+	Bots       = []UserInfo{Bot1, Bot2, Bot3, Bot4, Bot5, Bot6, Bot7}
 	index      = 0
 	ErrorReply = ""
+	count      = 0
 )
 
 // GetBotReply 获取机器人的回答
@@ -66,58 +67,52 @@ func GetBotReply(content string) (ret string, err error) {
 		}
 		r string
 	)
-	count := 0
-	for true {
-		// 设置请求参数
-		botNow := Bots[index]
-		dataReq.UserInfo = botNow
-		bs, _ := json.Marshal(dataReq)
-		body := bytes.NewBuffer(bs)
-		req, _ := http.NewRequest("POST", url, body)
-		// 发送请求
-		if resp, _err := client.Do(req); _err != nil {
-			err = _err
-			log.Errorf(`client Do error:%v`, err)
-			return
-		} else {
-			// 读取返回的body
-			bss, _ := ioutil.ReadAll(resp.Body)
-			// 关闭body
-			resp.Body.Close()
-			// 解析成json
-			json.Unmarshal(bss, &dataResp)
-		}
-		// 解析interface
-		for _, v := range dataResp.Results {
-			if _name, _ok := v.(map[string]interface{}); _ok {
-				if name, ok := _name["values"]; ok {
-					if name1, ok1 := name.(map[string]interface{}); ok1 {
-						if _ret, ok2 := name1["text"]; ok2 {
-							r = _ret.(string)
-						}
+
+	// 设置请求参数
+	botNow := Bots[index]
+	dataReq.UserInfo = botNow
+	bs, _ := json.Marshal(dataReq)
+	body := bytes.NewBuffer(bs)
+	req, _ := http.NewRequest("POST", url, body)
+	// 发送请求
+	if resp, _err := client.Do(req); _err != nil {
+		err = _err
+		log.Errorf(`client Do error:%v`, err)
+		return
+	} else {
+		// 读取返回的body
+		bss, _ := ioutil.ReadAll(resp.Body)
+		// 关闭body
+		resp.Body.Close()
+		// 解析成json
+		json.Unmarshal(bss, &dataResp)
+	}
+	// 解析interface
+	for _, v := range dataResp.Results {
+		if _name, _ok := v.(map[string]interface{}); _ok {
+			if name, ok := _name["values"]; ok {
+				if name1, ok1 := name.(map[string]interface{}); ok1 {
+					if _ret, ok2 := name1["text"]; ok2 {
+						r = _ret.(string)
 					}
 				}
 			}
 		}
-		//
-		count++
-		if count >= len(Bots) {
-			break
-		}
-		// 如果发送失败则重新尝试
-		if dataResp.Intent.Code != 10004 {
-			index++
-			if index >= len(Bots) {
-				index = 0
-			}
-			// 休息一下，避免被ban
-			time.Sleep(time.Second)
-			continue
-		} else {
-			break
-		}
-
 	}
+	//
+	count++
+
+	// 如果发送失败则重新尝试
+	if dataResp.Intent.Code != 10004 {
+		index++
+		if index >= len(Bots) {
+			index = 0
+		}
+		GetBotReply(content)
+		// 休息一下，避免被ban
+		time.Sleep(time.Second)
+	}
+
 	if dataResp.Intent.Code != 10004 {
 		// 故障时回复
 		r = ErrorReply
