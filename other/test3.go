@@ -44,7 +44,7 @@ func pubContentPure(in string) (out string) {
 func pubParseCancelCode(con string) (ret string, ret2 string) {
 	var (
 		code  string
-		finds = RegCancelCode.FindAllStringSubmatch(con, -1)
+		finds= RegCancelCode.FindAllStringSubmatch(con, -1)
 	)
 	if len(finds) > 0 {
 		if finds[0][1] == "取消" || finds[0][1] == "撤销" {
@@ -60,3 +60,9 @@ func pubParseCancelCode(con string) (ret string, ret2 string) {
 	ret = code
 	return
 }
+
+type LoginForm struct {
+	User     string  `form:"user" binding:"required"`
+	Password *string `form:"password" binding:"required"`
+}
+
