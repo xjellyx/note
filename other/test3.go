@@ -3,32 +3,60 @@ package main
 import (
 	"fmt"
 	"git.yichui.net/tudy/wechat-go/wxweb"
-	"io/ioutil"
-	"net/http"
+	"regexp"
+	"strconv"
 	"strings"
 )
 
 var (
+	_err =fmt.Errorf("%s", "wrong input content")
+	err error
+	reply string
 	sess *wxweb.Session
 )
-
+var RegCancelCode = regexp.MustCompile("(取消|撤消)?\\s*([3-9][0-9]{2}[1-7])\\s*(取消|撤消)?")
+var RegEmoji = regexp.MustCompile(`<span class="emoji emoji([0-9a-z]+)"></span>`)
 func main() {
-	path := "http://img3.imgtn.bdimg.com/it/u=2585830458,3269303407&fm=26&gp=0.jpg"
-	ss := strings.Split(path, "/")
-	fmt.Println(ss[len(ss)-1])
-	if data, _err := http.Get("https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1815312391,2410878200&fm=26&gp=0.jpg"); _err != nil {
-		panic(_err)
-	} else {
-		defer data.Body.Close()
-		body, _err := ioutil.ReadAll(data.Body)
-		if _err != nil {
-			panic(_err)
-		}
-		fmt.Println(string((body)))
-	}
+	s:=pubContentPure("取消 4004")
+	fmt.Println(pubParseCancelCode(s))
 }
 
-func register(sess *wxweb.Session) (err error) {
 
+
+func pubContentPure(in string) (out string) {
+	out = RegEmoji.ReplaceAllStringFunc(in, func(iStr string) (oStr string) {
+		arr := RegEmoji.FindStringSubmatch(iStr)
+		if len(arr) == 2 {
+			var outArr []string
+			for i := 0; i < len(arr[1]); i++ {
+				if (i+1)%5 == 0 {
+					_s, _ := strconv.Unquote(`"\U` + "000" + arr[1][i-4:i+1] + `"`)
+					outArr = append(outArr, _s)
+				}
+			}
+			oStr = strings.Join(outArr, "")
+		}
+		return
+	})
+	return
+}
+
+func pubParseCancelCode(con string) (ret string, ret2 string) {
+	var (
+		code  string
+		finds = RegCancelCode.FindAllStringSubmatch(con, -1)
+	)
+	if len(finds) > 0 {
+		if finds[0][1] == "取消" || finds[0][1] == "撤销" {
+			ret2 = finds[0][1]
+			code = finds[0][2]
+		} else if finds[0][len(finds[0])-1] == "取消" || finds[0][len(finds[0])-1] == "撤销" {
+			code = finds[0][2]
+			ret2 = finds[0][len(finds[0])-1]
+		}
+
+	}
+
+	ret = code
 	return
 }

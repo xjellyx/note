@@ -136,6 +136,7 @@ func initFriend(sess *wxweb.Session, friendArr []string, isHandler bool) (err er
 // handlerTextFriend
 func handlerTextFriend(sess *wxweb.Session, msg *wxweb.ReceivedMessage) {
 	var (
+		data *wxweb.User
 		err   error
 		reply string
 	)
@@ -143,7 +144,11 @@ func handlerTextFriend(sess *wxweb.Session, msg *wxweb.ReceivedMessage) {
 		log.Println(msg.FromUserName, "============", sess.Bot.UserName)
 		return
 	}
-	if reply, err = GetBotReply(msg.Content); err != nil {
+	data=sess.Cm.GetContactByUserName(msg.FromUserName)
+	if data!=nil{
+		log.Println("aaaaaaaaaaaaaaa",data.RemarkName)
+	}
+	if reply, err = GetBotReply2(msg.Content); err != nil {
 		log.Error("[GetBotReply] err: ", err)
 	}
 

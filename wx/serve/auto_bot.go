@@ -43,6 +43,8 @@ var (
 	Bots       = []UserInfo{Bot6,Bot7}
 	index      = 0
 	ErrorReply = ""
+	count int
+	url = "http://openapi.tuling123.com/openapi/api/v2"
 )
 
 // GetBotReply 获取机器人的回答
@@ -66,7 +68,6 @@ func GetBotReply(content string) (ret string, err error) {
 		}
 		r string
 	)
-	count := 0
 	for true {
 		// 设置请求参数
 		botNow := Bots[index]
@@ -123,6 +124,69 @@ func GetBotReply(content string) (ret string, err error) {
 		r = ErrorReply
 	}
 	ret = r
+	return
+}
+
+func GetBotReply2(content string)(ret string,err error)  {
+	 var(
+	 	clien = &http.Client{}
+	 	req = BotRequest{
+	 		Perception:Perception{
+	 			InputText:InputText{
+	 				Text:content,
+				},
+			},
+		}
+	 	result struct{
+			Results []interface{}
+			Intent  struct {
+				Code int
+			}
+		}
+	 )
+
+	 req.UserInfo=Bots[index]
+	bs,_:=json.Marshal(req)
+	body:=bytes.NewBuffer(bs)
+	if r,_err:=http.NewRequest("POST",url,body);_err!=nil{
+		return
+	}else {
+		if resp,_err:=clien.Do(r);_err!=nil{
+			return
+		}else {
+			defer resp.Body.Close()
+			_body,_:=ioutil.ReadAll(resp.Body)
+			json.Unmarshal(_body,&result)
+		}
+	}
+
+	// 解析
+	for _,v:=range result.Results{
+		if v2,ok2:=v.(map[string]interface{});ok2{
+			if v3,ok3:=v2["values"];ok3{
+				if v4,ok4:=v3.(map[string]interface{});ok4{
+					if text,ok5:=v4["text"].(string);ok5{
+						ret=text
+					}
+				}
+			}
+		}
+	}
+
+	count++
+	// 递归
+	if count<=len(Bots) && result.Intent.Code!=10004{
+		index ++
+		if index>=len(Bots){
+			index=0
+		}
+		GetBotReply2(content)
+	}
+
+	if result.Intent.Code!=10004{
+		ret = ""
+	}
+
 	return
 }
 
