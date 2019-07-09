@@ -18,6 +18,7 @@ require (
 	github.com/go-vgo/gt v0.0.0-20190419182310-1cb5a3ee0f26 // indirect
 	github.com/gorilla/mux v1.7.2
 	github.com/huichen/sego v0.0.0-20180617034105-3f3c8a8cfacc // indirect
+	github.com/importcjj/sensitive v0.0.0-20190611120559-289e87ec4108 // indirect
 	github.com/iris-contrib/blackfriday v2.0.0+incompatible // indirect
 	github.com/iris-contrib/formBinder v0.0.0-20190104093907-fbd5963f41e1 // indirect
 	github.com/iris-contrib/go.uuid v2.0.0+incompatible // indirect
@@ -33,6 +34,7 @@ require (
 	github.com/shurcooL/sanitized_anchor_name v1.0.0 // indirect
 	github.com/smartystreets/goconvey v0.0.0-20190330032615-68dc04aab96a // indirect
 	github.com/suboat/sorm v0.2.1-0.20190529022223-aa087682bfb0
+	github.com/tencentcloud/tencentcloud-sdk-go v0.0.0-20190604072421-3054d2e457cb // indirect
 	github.com/tidwall/gjson v1.2.1 // indirect
 	github.com/tidwall/match v1.0.1 // indirect
 	github.com/tidwall/pretty v1.0.0 // indirect

@@ -144,6 +144,8 @@ github.com/hashicorp/golang-lru v0.5.0/go.mod h1:/m3WP610KZHVQ1SGc6re/UDhFvYD7pJ
 github.com/hpcloud/tail v1.0.0/go.mod h1:ab1qPbhIpdTxEkNHXyeSf5vhxWSCs/tWer42PpOxQnU=
 github.com/huichen/sego v0.0.0-20180617034105-3f3c8a8cfacc h1:3LXYtoxQGFSjIL5ZJAn4PceSpwRohuTKYL1W4kJ7G8g=
 github.com/huichen/sego v0.0.0-20180617034105-3f3c8a8cfacc/go.mod h1:+/Bm7uk1bnJJMi9l6P88FgHeGtscOQiYbxW1j+BmgBY=
+github.com/importcjj/sensitive v0.0.0-20190611120559-289e87ec4108 h1:+8ShsQ1TCRYvZvLlQkekhVDLAHtm/V4nOTZWq1VedbU=
+github.com/importcjj/sensitive v0.0.0-20190611120559-289e87ec4108/go.mod h1:zLVdX6Ed2SvCbEamKmve16U0E03UkdJo4ls1TBfmc8Q=
 github.com/iris-contrib/blackfriday v2.0.0+incompatible h1:o5sHQHHm0ToHUlAJSTjW9UWicjJSDDauOOQ2AHuIVp4=
 github.com/iris-contrib/blackfriday v2.0.0+incompatible/go.mod h1:UzZ2bDEoaSGPbkg6SAB4att1aAwTmVIx/5gCVqeyUdI=
 github.com/iris-contrib/formBinder v0.0.0-20190104093907-fbd5963f41e1 h1:7GsNnSLoVceNylMpwcfy5aFNz/S5/TV25crb34I5PEo=
@@ -275,6 +277,8 @@ github.com/suboat/sorm v0.2.0/go.mod h1:VOMXx/p9SWQtIruA1bElXrf1UqmYV12Ck3ZajQAS
 github.com/suboat/sorm v0.2.1-0.20190529022223-aa087682bfb0 h1:dhCqBaG3morTvVxTO7VLI0nsMEu3PUoH2rG3tbnsJQY=
 github.com/suboat/sorm v0.2.1-0.20190529022223-aa087682bfb0/go.mod h1:I4H/KDEmsJqoYqP12wYaw0A/+bBrrpuRFLYSSSoBL+s=
 github.com/tebeka/strftime v0.0.0-20140926081919-3f9c7761e312/go.mod h1:o6CrSUtupq/A5hylbvAsdydn0d5yokJExs8VVdx4wwI=
+github.com/tencentcloud/tencentcloud-sdk-go v0.0.0-20190604072421-3054d2e457cb h1:nhwjS2HFTKLg/X2qBNExR/0Bx20VWlGe/hT+tKX9+MA=
+github.com/tencentcloud/tencentcloud-sdk-go v0.0.0-20190604072421-3054d2e457cb/go.mod h1:0PfYow01SHPMhKY31xa+EFz2RStxIqj6JFAJS+IkCi4=
 github.com/tidwall/gjson v1.2.1 h1:j0efZLrZUvNerEf6xqoi0NjWMK5YlLrR7Guo/dxY174=
 github.com/tidwall/gjson v1.2.1/go.mod h1:c/nTNbUr0E0OrXEhq1pwa8iEgc2DOt4ZZqAt1HtCkPA=
 github.com/tidwall/match v1.0.1 h1:PnKP62LPNxHKTwvHHZZzdOAOCtsJTjo6dZLCwpKm5xc=
