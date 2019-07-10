@@ -3,6 +3,7 @@ module github.com/srlemon/note
 go 1.12
 
 require (
+	git.yichui.net/tudy/go-rest v1.3.19-0.20190702082149-7c02078469fb
 	git.yichui.net/tudy/wechat-go v0.0.0-20190703055236-a4a840fbc739
 	github.com/Joker/jade v1.0.0 // indirect
 	github.com/Shopify/goreferrer v0.0.0-20181106222321-ec9c9a553398 // indirect
@@ -30,11 +31,13 @@ require (
 	github.com/klauspost/cpuid v1.2.1 // indirect
 	github.com/microcosm-cc/bluemonday v1.0.2 // indirect
 	github.com/nats-io/nats.go v1.8.1 // indirect
+	github.com/pkg/errors v0.8.1
 	github.com/ryanuber/columnize v2.1.0+incompatible // indirect
+	github.com/satori/go.uuid v1.2.0
 	github.com/shurcooL/sanitized_anchor_name v1.0.0 // indirect
 	github.com/smartystreets/goconvey v0.0.0-20190330032615-68dc04aab96a // indirect
 	github.com/suboat/sorm v0.2.1-0.20190529022223-aa087682bfb0
-	github.com/tencentcloud/tencentcloud-sdk-go v0.0.0-20190604072421-3054d2e457cb // indirect
+	github.com/tencentcloud/tencentcloud-sdk-go v0.0.0-20190604072421-3054d2e457cb
 	github.com/tidwall/gjson v1.2.1 // indirect
 	github.com/tidwall/match v1.0.1 // indirect
 	github.com/tidwall/pretty v1.0.0 // indirect
