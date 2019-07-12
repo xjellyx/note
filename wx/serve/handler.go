@@ -136,39 +136,41 @@ func initFriend(sess *wxweb.Session, friendArr []string, isHandler bool) (err er
 // handlerTextFriend
 func handlerTextFriend(sess *wxweb.Session, msg *wxweb.ReceivedMessage) {
 	var (
-		data  *wxweb.User
-		err   error
-		reply string
+		data       *wxweb.User
+		err        error
+		reply      string
+		remarkName string
 	)
 	if msg.FromUserName == sess.Bot.UserName {
 		log.Println(msg.FromUserName, "============", sess.Bot.UserName)
 		return
 	}
-
+	// 标记已读
+	sess.Api.WebWxStatusNotifyAsync(sess.WxWebCommon, sess.WxWebXcg, msg)
 	data = sess.Cm.GetContactByUserName(msg.FromUserName)
 	if data != nil {
-		log.Println("aaaaaaaaaaaaaaa", data.RemarkName)
+		// log.Println("aaaaaaaaaaaaaaa", data.RemarkName)
+		remarkName = data.RemarkName
 	}
-	if reply, err = GetBotReply2(msg.Content); err != nil {
 
-		if msg.IsGroup {
-			log.Printf(`"%s" 是一个群`, msg.GroupName)
-			return
-		}
-		if msg.RecommendInfo.NickName == `A罩杯` {
-			log.Println("这个人很毒辣,别招惹她")
-			return
-		}
-
-		if reply, err = GetBotReply(msg.Content); err != nil {
-			log.Error("[GetBotReply] err: ", err)
-		}
-
-		if len(reply) > 0 {
-			if _, _, err = sess.SendText(reply, sess.Bot.UserName, msg.FromUserName); err != nil {
-				log.Error("[sedText] err: ", err)
-			}
-		}
-
+	if msg.IsGroup {
+		log.Printf(`"%s" 是一个群`, msg.GroupName)
+		return
 	}
+	if remarkName == `A罩杯` {
+		log.Println("这个人很毒辣,别招惹她")
+		return
+	}
+
+	if reply, err = GetBotReply(msg.Content); err != nil {
+		log.Error("[GetBotReply] err: ", err)
+	}
+
+	if len(reply) > 0 {
+		if _, _, err = sess.SendText(reply, sess.Bot.UserName, msg.FromUserName); err != nil {
+			log.Error("[sedText] err: ", err)
+		}
+	}
+	// wxweb.WebWxGetIcon(sess.WxWebCommon, sess.WxWebXcg, sess.Cookies, msg.FromUserName, strconv.Itoa(data.ChatRoomId))
+
 }
