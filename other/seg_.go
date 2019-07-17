@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	orm "github.com/suboat/sorm"
-
 	"github.com/go-ego/gse"
 )
 
@@ -40,23 +38,27 @@ func segCut() {
 }
 
 func main() {
-	// Loading the default dictionary
-	seg.LoadDict()
-	// Load the dictionary
-	// seg.LoadDict("/data/allen/gocode/src/github.com/srlemon/note/dictionary.txt" + "/src/github.com/go-ego/gse/data/dict/dictionary.txt")
+	//// Loading the default dictionary
+	//seg.LoadDict()
+	//// Load the dictionary
+	//// seg.LoadDict("/data/allen/gocode/src/github.com/srlemon/note/dictionary.txt" + "/src/github.com/go-ego/gse/data/dict/dictionary.txt")
+	//
+	//cut()
+	//
+	//var (
+	//	q     = orm.M{}
+	//	orArr []interface{}
+	//)
+	//
+	//for _, _s := range []string{"aa", "bb"} {
+	//	orArr = append(orArr, map[string]interface{}{
+	//		"name": _s,
+	//	})
+	//}
+	//q[orm.TagQueryKeyOr] = orArr
 
-	cut()
-
-	var (
-		q     = orm.M{}
-		orArr []interface{}
-	)
-
-	for _, _s := range []string{"aa", "bb"} {
-		orArr = append(orArr, map[string]interface{}{
-			"name": _s,
-		})
-	}
-	q[orm.TagQueryKeyOr] = orArr
+	str := "我"
+	fmt.Println(len(str))
+	fmt.Println(len([]rune(str)))
 
 }

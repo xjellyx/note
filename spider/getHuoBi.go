@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"strconv"
 	"time"
 )
 
@@ -43,7 +44,7 @@ func getBody() (ret []byte, err error) {
 	uEnc := base64.URLEncoding.EncodeToString([]byte(secretKet))
 	keyUrl := url.QueryEscape(uEnc)
 	url := apiUrl + str4 + str3 + str1 + str2 + "Timestamp=" + Timestamp0 + "&" + "Signature=" + keyUrl
-	fmt.Println(url)
+
 	reqest, err = http.NewRequest("GET", url, nil)
 	reqest.Header.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML,"+
 		" like Gecko) Chrome/39.0.2171.71 Safari/537.36")
@@ -51,6 +52,10 @@ func getBody() (ret []byte, err error) {
 		panic(err)
 		return
 	}
+	reqest.Header.Add("authority", "api.huobipro.com")
+	reqest.Header.Add("upgrade-insecure-requests", strconv.Itoa(1))
+	reqest.Header.Add("scheme", "https")
+	reqest.Header.Add("accept", `text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b`)
 	if resp, err = client.Do(reqest); err != nil {
 		panic(err)
 		return

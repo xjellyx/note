@@ -1,0 +1,14 @@
+version: "3"
+services:
+  redis:
+    image: redis:5
+    container_name: my_redis
+    restart: always
+    ports:
+      - 6379:6379
+    volumes:
+      - "/data/redis/data:/data"
+      - "/data/redis/conf:/user/local/etc/redis"
+    command:
+      # /bin/bash -c "redis-server /etc/redis/redis.conf"
+      redis-server --requirepass 123456

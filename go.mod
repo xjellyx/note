@@ -18,8 +18,10 @@ require (
 	github.com/gin-gonic/gin v1.4.0
 	github.com/go-ego/gse v0.0.0-20190608170801-18055d8ea545
 	github.com/go-ego/re v0.0.0-20180729124648-a578f59c3f34 // indirect
+	github.com/go-redis/redis v6.15.2+incompatible // indirect
 	github.com/go-vgo/gt v0.0.0-20190419182310-1cb5a3ee0f26 // indirect
 	github.com/gorilla/mux v1.7.2
+	github.com/graphql-go/graphql v0.7.8 // indirect
 	github.com/huichen/sego v0.0.0-20180617034105-3f3c8a8cfacc // indirect
 	github.com/iris-contrib/blackfriday v2.0.0+incompatible // indirect
 	github.com/iris-contrib/formBinder v0.0.0-20190104093907-fbd5963f41e1 // indirect
