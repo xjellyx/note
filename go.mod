@@ -26,6 +26,7 @@ require (
 	github.com/iris-contrib/blackfriday v2.0.0+incompatible // indirect
 	github.com/iris-contrib/formBinder v0.0.0-20190104093907-fbd5963f41e1 // indirect
 	github.com/iris-contrib/go.uuid v2.0.0+incompatible // indirect
+	github.com/jasonlvhit/gocron v0.0.0-20190723002004-e4b4887e68d0 // indirect
 	github.com/jinzhu/gorm v1.9.9 // indirect
 	github.com/kataras/golog v0.0.0-20180321173939-03be10146386 // indirect
 	github.com/kataras/iris v11.1.1+incompatible

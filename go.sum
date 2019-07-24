@@ -163,6 +163,8 @@ github.com/iris-contrib/formBinder v0.0.0-20190104093907-fbd5963f41e1 h1:7GsNnSL
 github.com/iris-contrib/formBinder v0.0.0-20190104093907-fbd5963f41e1/go.mod h1:i8kTYUOEstd/S8TG0ChTXQdf4ermA/e8vJX0+QruD9w=
 github.com/iris-contrib/go.uuid v2.0.0+incompatible h1:XZubAYg61/JwnJNbZilGjf3b3pB80+OQg2qf6c8BfWE=
 github.com/iris-contrib/go.uuid v2.0.0+incompatible/go.mod h1:iz2lgM/1UnEf1kP0L/+fafWORmlnuysV2EMP8MW+qe0=
+github.com/jasonlvhit/gocron v0.0.0-20190723002004-e4b4887e68d0 h1:5EolV14iTWzyrenq690sMb3XH8Yyaub/dYmGtWq5IGI=
+github.com/jasonlvhit/gocron v0.0.0-20190723002004-e4b4887e68d0/go.mod h1:rwi/esz/h+4oWLhbWWK7f6dtmgLzxeZhnwGr7MCsTNk=
 github.com/jehiah/go-strftime v0.0.0-20171201141054-1d33003b3869/go.mod h1:cJ6Cj7dQo+O6GJNiMx+Pa94qKj+TG8ONdKHgMNIyyag=
 github.com/jfreymuth/oggvorbis v1.0.0/go.mod h1:abe6F9QRjuU9l+2jek3gj46lu40N4qlYxh2grqkLEDM=
 github.com/jfreymuth/vorbis v1.0.0/go.mod h1:8zy3lUAm9K/rJJk223RKy6vjCZTWC61NA2QD06bfOE0=
