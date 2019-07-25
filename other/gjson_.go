@@ -1,36 +1,44 @@
 package main
 
-/*
-#include <stdio.h>
-int test(int a, int b){
-return a + b;
-}
-
-
-*/
-import "C"
 import (
+	"encoding/binary"
+	"flag"
 	"fmt"
-	"github.com/tidwall/gjson"
+	"net"
+	"os"
+	"time"
 )
 
-var jstr = `{
-  "name": {"first": "Tom", "last": {"Anderson": "sdhoaishd"}},
-  "age":37,
-  "children": ["Sara","Alex","Jack"],
-  "fav.movie": "Deer Hunter",
-  "friends": [
-    {"first": "Dale", "last": "Murphy", "age": 44},
-    {"first": "Roger", "last": "Craig", "age": 68},
-    {"first": "Jane", "last": "Murphy", "age": 47}
-  ]
-}`
+var host = flag.String("host", "", "host")
+var port = flag.String("port", "1120", "port")
 
 func main() {
-	r := gjson.Get(jstr, "name.last")
-	fmt.Println(r.String())
-	a := C.int(10)
-	b := C.int(20)
-	fmt.Println(C.test(a, b))
-
+	flag.Parse()
+	addr, err := net.ResolveUDPAddr("udp", *host+":"+*port)
+	if err != nil {
+		fmt.Println("Can't resolve address: ", err)
+		os.Exit(1)
+	}
+	conn, err := net.ListenUDP("udp", addr)
+	if err != nil {
+		fmt.Println("Error listening:", err)
+		os.Exit(1)
+	}
+	defer conn.Close()
+	for {
+		handleClient(conn)
+	}
+}
+func handleClient(conn *net.UDPConn) {
+	data := make([]byte, 1024)
+	n, remoteAddr, err := conn.ReadFromUDP(data)
+	if err != nil {
+		fmt.Println("failed to read UDP msg because of ", err.Error())
+		return
+	}
+	daytime := time.Now().Unix()
+	fmt.Println(n, remoteAddr)
+	b := make([]byte, 4)
+	binary.BigEndian.PutUint32(b, uint32(daytime))
+	conn.WriteToUDP(b, remoteAddr)
 }
