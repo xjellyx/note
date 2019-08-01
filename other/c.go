@@ -1,43 +1,22 @@
 package main
 
 import (
-	"encoding/binary"
-	"flag"
-	"fmt"
-	"net"
+	"net/http"
 	"os"
-	"time"
 )
 
-var host2 = flag.String("host", "localhost", "host")
-var port2 = flag.String("port", "1120", "port")
-
-//go run timeclient.go -host time.nist.gov
 func main() {
-	flag.Parse()
-	addr, err := net.ResolveUDPAddr("udp", *host2+":"+*port2)
-	if err != nil {
-		fmt.Println("Can't resolve address: ", err)
-		os.Exit(1)
+
+	http.HandleFunc("/getFile", demo)
+	http.ListenAndServe(":8080", nil)
+
+}
+
+func demo(w http.ResponseWriter, r *http.Request) {
+	file := "/home/srlemon/Downloads/NVIDIA-Linux-x86_64-430.40.run"
+	_, err := os.Stat(file)
+	if ok := os.IsExist(err); !ok {
+		http.NotFound(w, r)
 	}
-	conn, err := net.DialUDP("udp", nil, addr)
-	if err != nil {
-		fmt.Println("Can't dial: ", err)
-		os.Exit(1)
-	}
-	defer conn.Close()
-	_, err = conn.Write([]byte(""))
-	if err != nil {
-		fmt.Println("failed:", err)
-		os.Exit(1)
-	}
-	data := make([]byte, 4)
-	_, err = conn.Read(data)
-	if err != nil {
-		fmt.Println("failed to read UDP msg because of ", err)
-		os.Exit(1)
-	}
-	t := binary.BigEndian.Uint32(data)
-	fmt.Println(time.Unix(int64(t), 0).String())
-	os.Exit(0)
+	http.ServeFile(w, r, file)
 }

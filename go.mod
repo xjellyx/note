@@ -10,6 +10,7 @@ require (
 	github.com/adamzy/cedar-go v0.0.0-20170805034717-80a9c64b256d // indirect
 	github.com/apache/thrift v0.12.0
 	github.com/aymerick/raymond v2.0.2+incompatible // indirect
+	github.com/cheggaaa/pb/v3 v3.0.1 // indirect
 	github.com/coreos/etcd v3.3.9+incompatible
 	github.com/eknkc/amber v0.0.0-20171010120322-cdade1c07385 // indirect
 	github.com/faiface/beep v1.0.1 // indirect
@@ -20,6 +21,7 @@ require (
 	github.com/go-ego/re v0.0.0-20180729124648-a578f59c3f34 // indirect
 	github.com/go-redis/redis v6.15.2+incompatible // indirect
 	github.com/go-vgo/gt v0.0.0-20190419182310-1cb5a3ee0f26 // indirect
+	github.com/google/gopacket v1.1.17 // indirect
 	github.com/gorilla/mux v1.7.2
 	github.com/graphql-go/graphql v0.7.8 // indirect
 	github.com/huichen/sego v0.0.0-20180617034105-3f3c8a8cfacc // indirect
@@ -41,6 +43,7 @@ require (
 	github.com/shurcooL/sanitized_anchor_name v1.0.0 // indirect
 	github.com/smartystreets/goconvey v0.0.0-20190330032615-68dc04aab96a // indirect
 	github.com/suboat/sorm v0.2.1-0.20190704040525-49b9c2184bc6
+	github.com/tealeg/xlsx v1.0.3 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go v0.0.0-20190604072421-3054d2e457cb
 	github.com/tidwall/gjson v1.2.1
 	github.com/tidwall/match v1.0.1 // indirect
@@ -52,5 +55,6 @@ require (
 	golang.org/x/crypto v0.0.0-20190617133340-57b3e21c3d56 // indirect
 	golang.org/x/sync v0.0.0-20190423024810-112230192c58 // indirect
 	gopkg.in/bsm/ratelimit.v1 v1.0.0-20160220154919-db14e161995a // indirect
+	gopkg.in/cheggaaa/pb.v1 v1.0.28 // indirect
 	gopkg.in/redis.v4 v4.2.4 // indirect
 )

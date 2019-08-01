@@ -1,44 +1,43 @@
 package main
 
 import (
-	"encoding/binary"
-	"flag"
 	"fmt"
-	"net"
-	"os"
-	"time"
+	"github.com/tealeg/xlsx"
+	"strings"
 )
 
-var host = flag.String("host", "", "host")
-var port = flag.String("port", "1120", "port")
+// RowRule
+type RowRule struct {
+	RuleName string   // 名称,问题
+	Word     []string // 关键词
+	Content  []string // 回复语
+}
 
 func main() {
-	flag.Parse()
-	addr, err := net.ResolveUDPAddr("udp", *host+":"+*port)
+	var (
+		data  *RowRule
+		datas []*RowRule
+	)
+	file, err := xlsx.OpenFile("/data/gocode/src/github.com/srlemon/note/other/关键词回复demo.xlsx")
 	if err != nil {
-		fmt.Println("Can't resolve address: ", err)
-		os.Exit(1)
-	}
-	conn, err := net.ListenUDP("udp", addr)
-	if err != nil {
-		fmt.Println("Error listening:", err)
-		os.Exit(1)
-	}
-	defer conn.Close()
-	for {
-		handleClient(conn)
-	}
-}
-func handleClient(conn *net.UDPConn) {
-	data := make([]byte, 1024)
-	n, remoteAddr, err := conn.ReadFromUDP(data)
-	if err != nil {
-		fmt.Println("failed to read UDP msg because of ", err.Error())
+		fmt.Println(err)
 		return
 	}
-	daytime := time.Now().Unix()
-	fmt.Println(n, remoteAddr)
-	b := make([]byte, 4)
-	binary.BigEndian.PutUint32(b, uint32(daytime))
-	conn.WriteToUDP(b, remoteAddr)
+	// 解析数据
+	for _, sheet := range file.Sheets {
+		for _, row := range sheet.Rows[1:] {
+			// TODO 总共有三个列,目前先在这里写死
+			if len(row.Cells) >= 3 {
+				data = new(RowRule)
+				data.RuleName = row.Cells[0].String()
+				// 通过#号来分割关键词和content
+				data.Word = strings.Split(row.Cells[1].String(), "#")
+				data.Content = strings.Split(row.Cells[2].String(), "#")
+				datas = append(datas, data)
+			}
+		}
+	}
+
+	fmt.Println(datas)
+
 }

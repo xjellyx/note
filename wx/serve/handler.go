@@ -136,10 +136,10 @@ func initFriend(sess *wxweb.Session, friendArr []string, isHandler bool) (err er
 // handlerTextFriend
 func handlerTextFriend(sess *wxweb.Session, msg *wxweb.ReceivedMessage) {
 	var (
-		data       *wxweb.User
-		err        error
-		reply      string
-		remarkName string
+		data  *wxweb.User
+		err   error
+		reply string
+		// remarkName string
 	)
 	if msg.FromUserName == sess.Bot.UserName {
 		log.Println(msg.FromUserName, "============", sess.Bot.UserName)
@@ -150,17 +150,17 @@ func handlerTextFriend(sess *wxweb.Session, msg *wxweb.ReceivedMessage) {
 	data = sess.Cm.GetContactByUserName(msg.FromUserName)
 	if data != nil {
 		// log.Println("aaaaaaaaaaaaaaa", data.RemarkName)
-		remarkName = data.RemarkName
+		// remarkName = data.RemarkName
 	}
 
 	if msg.IsGroup {
 		log.Printf(`"%s" 是一个群`, msg.GroupName)
 		return
 	}
-	if remarkName == `A罩杯` {
-		log.Println("这个人很毒辣,别招惹她")
-		return
-	}
+	//if remarkName == `A罩杯` {
+	//	log.Println("这个人很毒辣,别招惹她")
+	//	return
+	//}
 
 	if reply, err = GetBotReply(msg.Content); err != nil {
 		log.Error("[GetBotReply] err: ", err)

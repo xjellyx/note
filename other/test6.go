@@ -1,13 +1,17 @@
 package main
 
 import (
-	"fmt"
-	"golang.org/x/crypto/bcrypt"
+	"log"
+	"net/http"
 )
 
 func main() {
-	p, e := bcrypt.GenerateFromPassword([]byte("123456789"), bcrypt.DefaultCost)
-	fmt.Println(string(p), e)
-	e = bcrypt.CompareHashAndPassword(p, []byte("123456789"))
-	fmt.Println(e)
+	//注册一个函数，响应某一个路由
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("hello this is version 1!!"))
+	})
+	//这里可以单独写一个函数传递给当前的路由
+	log.Println("Start version v1")
+	log.Fatal(http.ListenAndServe(":4000", nil))
+
 }
