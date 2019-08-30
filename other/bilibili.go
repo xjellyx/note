@@ -28,16 +28,18 @@ func main() {
 	go func() {
 		test(ch)
 	}()
-	time.Sleep(time.Second * 3)
+	// 关闭chan
+	defer close(ch)
+	// 等待总工程完成
+	time.Sleep(time.Second * 5)
 
 }
 
 func test(ch chan string) {
 	for {
 		select {
-		case <-ch:
-			v := <-ch
-			fmt.Printf("验收该工程队完成,%s", v)
+		case v := <-ch:
+			fmt.Printf("验收该工程队完成,%s \n", v)
 		default:
 
 		}
@@ -49,7 +51,7 @@ func workOne(ch chan string) {
 	workTime := time.Millisecond * 3000 // 完成工程时间
 	time.Sleep(workTime)
 	fmt.Println("修建完成: workOne")
-	ch <- workThreeDone
+	ch <- workOneDone
 }
 
 // workTwo 工程队2修建一部分
@@ -57,7 +59,7 @@ func workTwo(ch chan string) {
 	workTime := time.Millisecond * 2500 // 完成工程时间
 	time.Sleep(workTime)
 	fmt.Println("修建完成: workTwo")
-	ch <- workThreeDone
+	ch <- workTwoDone
 }
 
 // workThree 工程队3修建一部分

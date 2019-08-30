@@ -3,6 +3,7 @@ module github.com/srlemon/note
 go 1.12
 
 require (
+	git.yichui.net/tudy/go-filepool v0.0.0-20190809075729-daa8091b06d8 // indirect
 	git.yichui.net/tudy/go-rest v1.3.20-0.20190710033133-1c15b5db9ea6
 	git.yichui.net/tudy/wechat-go v0.0.0-20190711013625-3359bfb74fc3
 	github.com/Joker/jade v1.0.0 // indirect
@@ -23,7 +24,9 @@ require (
 	github.com/go-vgo/gt v0.0.0-20190419182310-1cb5a3ee0f26 // indirect
 	github.com/google/gopacket v1.1.17 // indirect
 	github.com/gorilla/mux v1.7.2
+	github.com/graph-gophers/graphql-go v0.0.0-20190724201507-010347b5f9e6 // indirect
 	github.com/graphql-go/graphql v0.7.8 // indirect
+	github.com/graphql-go/graphql-go-handler v0.2.3 // indirect
 	github.com/huichen/sego v0.0.0-20180617034105-3f3c8a8cfacc // indirect
 	github.com/iris-contrib/blackfriday v2.0.0+incompatible // indirect
 	github.com/iris-contrib/formBinder v0.0.0-20190104093907-fbd5963f41e1 // indirect
@@ -41,6 +44,7 @@ require (
 	github.com/ryanuber/columnize v2.1.0+incompatible // indirect
 	github.com/satori/go.uuid v1.2.0
 	github.com/shurcooL/sanitized_anchor_name v1.0.0 // indirect
+	github.com/sirupsen/logrus v1.4.2 // indirect
 	github.com/smartystreets/goconvey v0.0.0-20190330032615-68dc04aab96a // indirect
 	github.com/suboat/sorm v0.2.1-0.20190704040525-49b9c2184bc6
 	github.com/tealeg/xlsx v1.0.3 // indirect
