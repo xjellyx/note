@@ -1,63 +1,24 @@
 package main
 
 import (
-	"context"
-	"encoding/json"
 	"fmt"
-	"github.com/coreos/etcd/clientv3"
-	"time"
+	"log"
+	"net"
+	"net/http"
 )
 
-type user struct {
-	Name string
-	Age  int
+func getRemoteIp(w http.ResponseWriter, r *http.Request) {
+	// get client ip address
+	ip, _, _ := net.SplitHostPort(r.RemoteAddr)
+
+	// print out the ip address
+	fmt.Fprintf(w, ip)
 }
 
 func main() {
-	cli, err := clientv3.New(
-		clientv3.Config{
-			Endpoints:   []string{"localhost:2379", "localhost:32774"},
-			DialTimeout: 5 * time.Second,
-		})
+	http.HandleFunc("/", getRemoteIp)         //设置访问的路由
+	err := http.ListenAndServe(":56667", nil) //设置监听的端口
 	if err != nil {
-		panic(err)
+		log.Fatal("Server ERROR: ", err)
 	}
-	defer cli.Close()
-	go func() {
-		rch := cli.Watch(context.Background(), "", clientv3.WithPrefix())
-		for v := range rch {
-			for _, ev := range v.Events {
-				fmt.Println(string(ev.Kv.Key), string(ev.Kv.Value))
-			}
-		}
-	}()
-	time.Sleep(time.Second)
-	// 设置 key1 的值为 value1
-	a := user{
-		Name: "Tom",
-		Age:  18,
-	}
-	k1 := "key1"
-	d, _ := json.Marshal(a)
-	if resp, err := cli.Put(context.TODO(), k1, string(d), clientv3.WithPrevKV()); err != nil {
-		println(err)
-	} else {
-		fmt.Println(resp)
-	}
-
-	//  // 设置 key1 的值为 value2, 并返回前一个值
-	v2 := "value2"
-	if resp, err := cli.Put(context.TODO(), k1, v2, clientv3.WithPrevKV()); err != nil {
-		panic(err)
-	} else {
-		fmt.Println(resp)
-	}
-
-	v3 := "value3"
-	if resp, err := cli.Put(context.TODO(), k1, v3, clientv3.WithPrevKV()); err != nil {
-		panic(err)
-	} else {
-		fmt.Println(resp)
-	}
-
 }

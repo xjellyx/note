@@ -5,6 +5,8 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	uuid "github.com/satori/go.uuid"
 	"github.com/srlemon/note/sql/obj"
+	"reflect"
+	"strings"
 )
 
 type student struct {
@@ -15,6 +17,19 @@ type student struct {
 }
 
 func main() {
+
+	typeS := reflect.TypeOf(student{})
+	switch typeS.Kind() {
+	case reflect.Struct:
+		num := typeS.NumField()
+		for i := 0; i < num; i++ {
+			fmt.Println(strings.ToLower(typeS.Field(i).Name))
+		}
+	}
+	item := []string{"name", "age", "id", "sex"}
+
+	d := strings.Join(item, ",")
+	fmt.Println(d)
 	var db *obj.DB
 	var (
 		s = new(student)

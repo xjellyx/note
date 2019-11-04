@@ -19,7 +19,7 @@ func main() {
 		pubKey, priKey []byte
 		n              int
 	)
-	flag.IntVar(&bits, "b", 1024, "密钥长度，默认为1024位")
+	flag.IntVar(&bits, "b", 2048, "密钥长度，默认为1024位")
 	flag.Parse()
 	if err = genRsaKey(bits); err != nil {
 		panic(err)
@@ -57,7 +57,7 @@ func genRsaKey(bits int) (err error) {
 	// 解析
 	derStream := x509.MarshalPKCS1PrivateKey(privateKey)
 	block := &pem.Block{
-		Type:  "私钥", // 私钥type
+		Type:  "srlemon", // 私钥type
 		Bytes: derStream,
 	}
 	if file, err = os.Create("private.pem"); err != nil {
@@ -72,7 +72,7 @@ func genRsaKey(bits int) (err error) {
 		return
 	}
 	block = &pem.Block{
-		Type:  "公钥",
+		Type:  "srlemon",
 		Bytes: derPkix,
 	}
 	if file, err = os.Create("public.pem"); err != nil {

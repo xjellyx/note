@@ -1,20 +1,62 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+	"net"
+)
 
-type Student struct{
-	Name string // 姓名
-	Age int // 年龄
-	Id string // 学号
-	Class string // 班级
+func externalIP() (net.IP, error) {
+	ifaces, err := net.Interfaces()
+	if err != nil {
+		return nil, err
+	}
+	for _, iface := range ifaces {
+		if iface.Flags&net.FlagUp == 0 {
+			continue // interface down
+		}
+		if iface.Flags&net.FlagLoopback != 0 {
+			continue // loopback interface
+		}
+		addrs, err := iface.Addrs()
+		if err != nil {
+			return nil, err
+		}
+		for _, addr := range addrs {
+			ip := getIpFromAddr(addr)
+			if ip == nil {
+				continue
+			}
+			return ip, nil
+		}
+	}
+	return nil, errors.New("connected to the network?")
 }
 
-func main(){
-	var s = new(Student)
-	s.Name = "詹姆斯"
-	s.Age = 35
-	s.Id = "23"
-	s.Class = "湖人"
+func getIpFromAddr(addr net.Addr) net.IP {
+	var ip net.IP
+	switch v := addr.(type) {
+	case *net.IPNet:
+		ip = v.IP
+	case *net.IPAddr:
+		ip = v.IP
+	}
+	if ip == nil || ip.IsLoopback() {
+		return nil
+	}
+	ip = ip.To4()
+	if ip == nil {
+		return nil // not an ipv4 address
+	}
 
-	fmt.Println(s)
+	return ip
+}
+
+func main() {
+	ip, err := externalIP()
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println(ip.String())
 }

@@ -1,34 +1,32 @@
 package main
 
 import (
+	"crypto/sha1"
+	"encoding/hex"
 	"fmt"
+	"io"
+	"os"
 )
 
-func main() {
-	var (
-		// 无缓冲
-		// chan1 = make(chan int)
-		// 有缓冲
-		chan2 = make(chan int, 11)
-	)
-	chan2 <- 98
-	if v, ok := <-chan2; ok {
-		// 读取之后缓存的数据被清除
-		fmt.Println(v)
-	}
-
-	// 写如10个数据到缓冲区
-	for i := 0; i < 10; i++ {
-		chan2 <- i
-	}
-	// 再写入数据
-	chan2 <- 9898
-	for v := range chan2 {
-		fmt.Println(v)
-		// 这里输入chan里面的任何一个value
-		if v == 9898 {
-			// 关闭管道
-			close(chan2)
+func gethash(path string) (hash string) {
+	file, err := os.Open(path)
+	if err == nil {
+		h_ob := sha1.New()
+		_, err = io.Copy(h_ob, file)
+		if err == nil {
+			hash := h_ob.Sum(nil)
+			hashvalue := hex.EncodeToString(hash)
+			_=os.Rename(path,hashvalue)
+			return hashvalue
 		}
 	}
+
+	defer file.Close()
+	return
+}
+func main() {
+	path := "/data/fedora-data/gocode/src/github.com/srlemon/note/1.jpeg"
+	//path:="md5.go"
+	hash := gethash(path)
+	fmt.Printf("%s hash: %s \n", path, hash)
 }

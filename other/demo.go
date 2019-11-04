@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"git.yichui.net/tudy/go-rest"
 	"github.com/tealeg/xlsx"
 	"io"
 	"io/ioutil"
