@@ -1,14 +1,24 @@
 version: "3"
 services:
-  redis:
-    image: redis:5
-    container_name: my_redis
+  lobby:
+    image: centos
     restart: always
     ports:
-      - 6379:6379
+      - "8989:8989"
+      - "9097:9097"
+    working_dir: "/project"
     volumes:
-      - "/data/redis/data:/data"
-      - "/data/redis/conf:/user/local/etc/redis"
+      - ./project/conf:/project/conf
+      - /etc/localtime:/etc/localtime:ro
+      - ./project/lobby:/lobby
+      - ./project/lobby.sh:/lobby.sh
+      - ./project/hhdz.sh/:/hhdz.sh
     command:
-      # /bin/bash -c "redis-server /etc/redis/redis.conf"
-      redis-server --requirepass 123456
+      ["/lobby.sh","/hhdz.sh"]
+
+
+
+
+
+
+

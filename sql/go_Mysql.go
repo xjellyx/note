@@ -4,6 +4,7 @@ import (
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	uuid "github.com/satori/go.uuid"
+	"github.com/srlemon/note/log"
 	"github.com/srlemon/note/sql/obj"
 	"reflect"
 	"strings"
@@ -41,7 +42,7 @@ func main() {
 
 	str, err := db.ParamSQL("/data/allen/gocode/src/github.com/srlemon/note/sql_/test.sql")
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
 	fmt.Println(str)
 

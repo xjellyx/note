@@ -57,7 +57,7 @@ func genRsaKey(bits int) (err error) {
 	// 解析
 	derStream := x509.MarshalPKCS1PrivateKey(privateKey)
 	block := &pem.Block{
-		Type:  "srlemon", // 私钥type
+		Type:  "serve", // 私钥type
 		Bytes: derStream,
 	}
 	if file, err = os.Create("private.pem"); err != nil {
@@ -72,7 +72,7 @@ func genRsaKey(bits int) (err error) {
 		return
 	}
 	block = &pem.Block{
-		Type:  "srlemon",
+		Type:  "serve",
 		Bytes: derPkix,
 	}
 	if file, err = os.Create("public.pem"); err != nil {

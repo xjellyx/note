@@ -1,138 +1,156 @@
 package main
 
 import (
-	"bytes"
-	"encoding/json"
 	"fmt"
-	"github.com/tealeg/xlsx"
-	"io"
-	"io/ioutil"
-	"mime/multipart"
-	"net/http"
-	"path/filepath"
+	structpb "github.com/golang/protobuf/ptypes/struct"
+	"github.com/shopspring/decimal"
+	"github.com/spf13/viper"
 	"time"
 )
 
-type d struct {
-	a string
-	b string
-	c string
-	d string
+type ss struct {
+	Viper *viper.Viper `yaml:"-"`
+	Conf  *Conf
+}
+
+type Conf struct {
+	DBHost string `json:"db_host"`
+	DBPort string `json:"db_port"`
+	Data   Data
+}
+type Data struct {
+	Name          string `json:"name"`
+	TransportFlow string `json:"transportFlow"`
 }
 
 func main() {
-	var (
-		file  *xlsx.File
-		sheet *xlsx.Sheet
-		row   *xlsx.Row
-		cell  *xlsx.Cell
-		err   error
-		datas = []d{}
-	)
-	datas = append(datas, d{"a1", "b1", "c1", "d1"})
-	datas = append(datas, d{"a2", "b2", "c2", "d2"})
-	datas = append(datas, d{"a13", "b13", "c13", "d13"})
-	file = xlsx.NewFile()
-	if sheet, err = file.AddSheet("Sheet1"); err != nil {
-		return
-	}
-	row = sheet.AddRow()
-	// 第一列
-	cell = row.AddCell()
-	cell.Value = "标准问题"
-	// 第二列
-	cell = row.AddCell()
-	cell.Value = "分类"
-	// 第三列
-	cell = row.AddCell()
-	cell.Value = "答案"
-	// 第四列
-	cell = row.AddCell()
-	cell.Value = "相似问题"
-	for _, v := range datas {
-		_row := sheet.AddRow()
-		cell = _row.AddCell()
-		cell.Value = v.a
-
-		cell = _row.AddCell()
-		cell.Value = v.b
-
-		cell = _row.AddCell()
-		cell.Value = v.c
-
-		cell = _row.AddCell()
-		cell.Value = v.d
-	}
-
-	if err = file.Save("demo.xlsx"); err != nil {
-		return
-	}
-	fileDir := "/home/srlemon/金融.xlsx"
-	b, _err := ioutil.ReadFile(fileDir)
-	if _err != nil {
-		panic(_err)
-	}
-
-	s, _ := PubHashFromFilepool(b)
-	d := rest.PubJsonMust(s)
-	var _d struct {
-		Data struct {
-			Hash string
-		}
-	}
-	if err = json.Unmarshal([]byte(d), &_d); err != nil {
-		return
-	}
-
-	fmt.Println(_d.Data.Hash)
-
+	a := time.Now().Unix()
+	time.Sleep(time.Second * 5)
+	b := time.Now().Unix()
+	fmt.Println(b - a)
+	//http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	//	body, _ := proto.Marshal(&protobuf.SAHHDZJoinRoom{
+	//		IRet: proto.Int32(54 + 564564654),
+	//	})
+	//	w.Write(body)
+	//
+	//})
+	//
+	//http.ListenAndServe("192.168.31.184:12345", nil)
 }
 
-// PubHashFromFilepool 上传文件获取hash
-func PubHashFromFilepool(input []byte) (ret string, err error) {
-	start := time.Now()
-	var (
-		body      = &bytes.Buffer{}
-		inputBody = bytes.NewBuffer(input)
-		writer    = multipart.NewWriter(body)
-		resp      *http.Response
-		fw        io.Writer
-		url       = "https://api.yichui.net/api/yichui/filepool/upload-file?form=file"
-		data      struct {
-			Data struct {
-				Hash string
-			}
-		}
-	)
-
-	// 写入FormFile信息
-	if fw, err = writer.CreateFormFile("file", filepath.Base(url)); err != nil {
-		return
-	}
-
-	fmt.Println(filepath.Base(url))
-
-	// 拷贝内容
-	if _, err = io.Copy(fw, inputBody); err != nil {
-		return
-	}
-
-	// 关闭writer
-	if err = writer.Close(); err != nil {
-		return
-	}
-
-	if resp, err = http.Post(url, writer.FormDataContentType(), body); err != nil {
-		return
-	}
-	bs, _ := ioutil.ReadAll(resp.Body)
-	defer resp.Body.Close()
-	fmt.Println(string(bs))
-	if err = json.Unmarshal(bs, &data); err != nil {
-		return
-	}
-	ret = data.Data.Hash
-	end := time.Now()
-	fmt.Println("filepool return costs:", end.Sub(start).Seconds())
+// 前端传入数据时，将float转为int
+func PubFloatToInt(input float64) (ret int64) {
+	// 初始化成相应n次方类型
+	power := decimal.NewFromFloat(5)
+	// 保留相应的小数位数然后再乘以相应的10的n次方，最后再转换为int类型
+	ret = decimal.NewFromFloat(input).Truncate(5).Mul(power).IntPart()
 	return
+}
+
+// 前端取数据时，将int转为float
+func PubIntToFloat(input int64) (ret float64) {
+	// 保留相应的小数
+	ret = float64(input) / 5
+	return
+}
+
+// 保留有效小数
+func PubKeepDecimal(input float64) (ret float64) {
+	// 保留相应的小数并转换为float
+	ret, _ = decimal.NewFromFloat(input).Truncate(5).Float64()
+	return
+}
+
+// 浮点数加
+func PubFloatAdd(a float64, b float64, vals ...float64) (c float64) {
+	n := decimal.NewFromFloat(a)
+	n = n.Add(decimal.NewFromFloat(b))
+	for _, v := range vals {
+		n = n.Add(decimal.NewFromFloat(v))
+	}
+	c, _ = n.Float64()
+
+	return
+}
+
+// 浮点数加,并保留有效位数
+func PubFloatAddRound(a float64, b float64, vals ...float64) (c float64) {
+	c = PubFloatRoundAuto(PubFloatAdd(a, b, vals...))
+	return
+}
+
+// 浮点数乘
+func PubFloatMul(a float64, b float64) (c float64) {
+	n := decimal.NewFromFloat(a)
+	n = n.Mul(decimal.NewFromFloat(b))
+	c, _ = n.Float64()
+	return
+}
+
+// 浮点数乘,并保留有效位数
+func PubFloatMulRound(a float64, b float64) (c float64) {
+	c = PubFloatRoundAuto(PubFloatMul(a, b))
+	return
+}
+
+// 浮点数除
+func PubFloatDiv(a float64, b float64) (c float64) {
+	n := decimal.NewFromFloat(a)
+	n = n.Div(decimal.NewFromFloat(b))
+	c, _ = n.Float64()
+	return
+}
+
+// 整形转浮点数除
+func PubIntDivToFloat(a, b int64) (c float64) {
+	c = PubFloatDiv(PubIntToFloat(a), PubIntToFloat(b))
+	return
+}
+
+// 浮点数除,并保留有效位数
+func PubFloatDivRound(a float64, b float64) (c float64) {
+	c = PubFloatRoundAuto(PubFloatDiv(a, b))
+	return
+}
+
+func PubFloatRoundAuto(a float64) (c float64) {
+	// 四舍五入
+	r := int32(5)
+	n := decimal.NewFromFloat(a).Round(r)
+	c, _ = n.Float64()
+	return
+}
+func DecodeToMap(s *structpb.Struct) map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	m := map[string]interface{}{}
+	for k, v := range s.Fields {
+		m[k] = decodeValue(v)
+	}
+	return m
+}
+
+func decodeValue(v *structpb.Value) interface{} {
+	switch k := v.Kind.(type) {
+	case *structpb.Value_NullValue:
+		return nil
+	case *structpb.Value_NumberValue:
+		return k.NumberValue
+	case *structpb.Value_StringValue:
+		return k.StringValue
+	case *structpb.Value_BoolValue:
+		return k.BoolValue
+	case *structpb.Value_StructValue:
+		return DecodeToMap(k.StructValue)
+	case *structpb.Value_ListValue:
+		s := make([]interface{}, len(k.ListValue.Values))
+		for i, e := range k.ListValue.Values {
+			s[i] = decodeValue(e)
+		}
+		return s
+	default:
+		panic("protostruct: unknown kind")
+	}
 }

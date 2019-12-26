@@ -18,7 +18,21 @@ func main() {
 
 	// 创建路由
 	app.Handle("GET", "/test", func(ctx iris.Context) {
-		if _, err = ctx.HTML("<h1>Test !!!</h1>"); err != nil {
+		if _, err = ctx.HTML(`<!-- file: web/views/hello/index.html -->
+<html>
+
+<head>
+    <title>{{.Title}} - My App</title>
+</head>
+
+<body>
+<h1>iris test</h1>
+<p>{{hello iris}}</p>
+<img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=4177061481,2004955694&fm=26&gp=0.jpg" />
+</body>
+
+</html>
+`); err != nil {
 			app.Logger().Fatal(err)
 		}
 	})

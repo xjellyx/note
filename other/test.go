@@ -1,34 +1,52 @@
 package main
 
 import (
-	"fmt"
+	"encoding/json"
+	"github.com/ghodss/yaml"
 	"io/ioutil"
-	"log"
-	"net/http"
+	"os"
+	"strconv"
 )
 
-func publicIpController(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, getPublicIp()) //这个写入到w的是输出到客户端的
+type Hw2WeaponData struct {
+	ID           string `json:"id"`
+	FireInterval string `json:"射击间隔"`
+	Hit          string `json:"命中值"`
+	// BulletRadius string `json:"子弹碰撞范围"`
+	// BulletSpeed string `json:"子弹速度"`
+	// BulletCost  string `json:"子弹消耗"`
+	// CatchRadius string `json:"子弹爆炸范围"`
 }
 
-func getPublicIp() string {
-	resp, err := http.Get("http://47.52.66.195:56667")
-	if err != nil {
-		// handle error
-	}
-	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		// handle error
-	}
-	// 正则匹配出IP
-	return string(body)
+type ConfigWeapon struct {
+	ID           int    `yaml:"id"`
+	FireInterval int64  `yaml:"fireInterval"` // 射击间隔
+	Hit          string `yaml:"hit"`          // 命中值
+	BulletRadius string `yaml:"bulletRadius"` // 子弹碰撞范围
+	BulletSpeed  string `yaml:"bulletSpeed"`  // 子弹速度
+	BulletCost   string `yaml:"bulletCost"`   // 子弹消耗
+	Rate         string `yaml:"rate"`
+	CatchRadius  string `yaml:"catchRadius"` // 子弹爆炸范围
 }
 
 func main() {
-	http.HandleFunc("/", publicIpController) //设置访问的路由
-	err := http.ListenAndServe(":9090", nil) //设置监听的端口
-	if err != nil {
-		log.Fatal("Server ERROR: ", err)
+	var (
+		data  = []*Hw2WeaponData{}
+		datas = []*ConfigWeapon{}
+	)
+	d, _ := ioutil.ReadFile("/data/fedora-data/gocode/src/jinguoyule/conf/海王2炮塔表.json")
+	_ = json.Unmarshal(d, &data)
+
+	for _, v := range data {
+		var (
+			d = &ConfigWeapon{}
+		)
+		d.ID, _ = strconv.Atoi(v.ID)
+		d.FireInterval, _ = strconv.ParseInt(v.FireInterval, 10, 64)
+		datas = append(datas, d)
 	}
+	_d, _ := json.Marshal(datas)
+
+	dd, _ := yaml.JSONToYAML(_d)
+	ioutil.WriteFile("test_hw2.yaml", dd, os.ModePerm)
 }

@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/suboat/sorm"
-	_ "github.com/suboat/sorm/driver/mysql"
+	_ "github.com/suboat/sorm/driver/pg"
 	"github.com/suboat/sorm/types"
 )
 
@@ -19,8 +19,8 @@ type configDB struct {
 
 // Student 学生表
 type Student struct {
-	StuID string `sorm:"size(36);primary" json:"stuId"`
-	Name  string `sorm:"size(32);index" json:"name"`
+	StuID string `sorm:"size(48);primary" json:"stuId"`
+	Name  string `sorm:"size(32);unique(age)" json:"name"`
 	Age   int    `sorm:"size(23);index" json:"age"`
 }
 
@@ -31,18 +31,18 @@ func main() {
 	var (
 		db     orm.Database
 		dataDB = &configDB{
-			DbName:   "mysql",
+			DbName:   orm.DriverNamePostgres,
 			User:     "business",
 			Password: "business",
 			Host:     "127.0.0.1",
-			Port:     "33306",
+			Port:     "65432",
 		}
 		err error
 	)
 	str := fmt.Sprintf(`{"user":"%s", "password": "%s", "host": "%s", "port": "%s", "dbname": "%s",
 "sslmode": "disable","database":"business"}`, dataDB.User, dataDB.Password, dataDB.Host, dataDB.Port, dataDB.DbName)
 	// 连接数据库
-	if db, err = orm.New("mysql", str); err != nil {
+	if db, err = orm.New(orm.DriverNamePostgres, str); err != nil {
 		panic(err)
 	}
 	// 给模型赋值
