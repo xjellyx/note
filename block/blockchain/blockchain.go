@@ -2,7 +2,7 @@ package blockchain
 
 import (
 	"errors"
-	"github.com/srlemon/note/block/block"
+	"github.com/olefen/note/block/block"
 )
 
 // 实现一个区块链

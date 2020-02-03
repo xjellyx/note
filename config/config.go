@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"github.com/srlemon/note/log"
+	"github.com/olefen/note/log"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"os"
@@ -48,7 +48,6 @@ func LoadConfiguration(configPath string, targetConfig, defaultConfig interface{
 	if err = yaml.Unmarshal(data, targetConfig); err != nil {
 		return
 	}
-
 	// 设置保存地址对对象指针
 	type configInterface interface {
 		SetSavePath(savePath string) (err error)
@@ -107,6 +106,10 @@ func (c *Config) Save(newConfig interface{}) (err error) {
 		}
 	}
 	return
+}
+
+func (c *Config) SetHookChange(f func(interface{}) error) {
+	c.hookChange = f
 }
 
 // GetSavePath 取保存地址

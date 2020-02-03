@@ -4,7 +4,7 @@ import (
 	"github.com/go-redis/redis"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
-	"github.com/srlemon/note/game"
+	"github.com/olefen/note/game"
 )
 
 var (

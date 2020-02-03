@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/apache/thrift/lib/go/thrift"
-	"github.com/srlemon/note/thrift-rpc/gen-go/demo"
+	"github.com/olefen/note/thrift-rpc/gen-go/demo"
 	"log"
 	"net"
 )

@@ -1,6 +1,6 @@
 package model
 
-import "github.com/srlemon/note/game"
+import "github.com/olefen/note/game"
 
 // PubCreateUser
 func PubCreateUser() (ret *game.User, err error) {

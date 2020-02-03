@@ -67,7 +67,7 @@ func main() {
 	if err = file.Save("demo.xlsx"); err != nil {
 		return
 	}
-	fileDir := "/home/srlemon/金融.xlsx"
+	fileDir := "/home/olefen/金融.xlsx"
 	b, _err := ioutil.ReadFile(fileDir)
 	if _err != nil {
 		panic(_err)

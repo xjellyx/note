@@ -2,10 +2,11 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/ghodss/yaml"
-	"io/ioutil"
-	"os"
+	"fmt"
+	uuid "github.com/satori/go.uuid"
+	"math/rand"
 	"strconv"
+	"time"
 )
 
 type Hw2WeaponData struct {
@@ -30,23 +31,42 @@ type ConfigWeapon struct {
 }
 
 func main() {
-	var (
-		data  = []*Hw2WeaponData{}
-		datas = []*ConfigWeapon{}
-	)
-	d, _ := ioutil.ReadFile("/data/fedora-data/gocode/src/jinguoyule/conf/海王2炮塔表.json")
-	_ = json.Unmarshal(d, &data)
-
-	for _, v := range data {
-		var (
-			d = &ConfigWeapon{}
-		)
-		d.ID, _ = strconv.Atoi(v.ID)
-		d.FireInterval, _ = strconv.ParseInt(v.FireInterval, 10, 64)
-		datas = append(datas, d)
+	a := ConfigWeapon{
+		ID:           0,
+		FireInterval: 0,
+		Hit:          "",
+		BulletRadius: "",
+		BulletSpeed:  "",
+		BulletCost:   "",
+		Rate:         "",
+		CatchRadius:  "",
 	}
-	_d, _ := json.Marshal(datas)
+	json.Marshal(a)
+}
 
-	dd, _ := yaml.JSONToYAML(_d)
-	ioutil.WriteFile("test_hw2.yaml", dd, os.ModePerm)
+func Shuffle(vals []int) []int {
+	newVals := make([]int, 0, len(vals))
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	for _, i := range r.Perm(len(vals)) {
+		newVals = append(newVals, vals[i])
+	}
+	return newVals
+}
+
+func randSeed() (seed int64) {
+	var (
+		s   = uuid.NewV4().String()
+		i   = 0
+		n   = ""
+		err error
+	)
+	for len(n) < 18 {
+		n += fmt.Sprintf("%d", s[i])
+		i += 1
+	}
+	n = n[0:18]
+	if seed, err = strconv.ParseInt(n, 10, 64); err != nil {
+		panic(err)
+	}
+	return
 }

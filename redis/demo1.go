@@ -1,20 +1,24 @@
 package main
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/go-redis/redis"
 	"github.com/suboat/sorm/log"
+	"sync"
 	"time"
 )
 
 type C struct {
 	Conn string
+	Data *sync.Map `json:"-"`
 }
 
 func main() {
 	client := redis.NewClient(&redis.Options{
-		Addr: "localhost:6379",
-		// Password: "123456",
-		DB: 0,
+		Addr:     "localhost:6379",
+		Password: "business",
+		DB:       0,
 	})
 	log.Debug(client.Ping().Result())
 	var (
@@ -22,13 +26,23 @@ func main() {
 	)
 	c := new(C)
 	c.Conn = "ssssssss"
+	c.Data = new(sync.Map)
+
 	// 键值对十秒后过期
 	if err = client.Set("key", []byte(c.Conn), time.Second*5).Err(); err != nil {
 		log.Error(err)
 	}
+	c.Data.Store("uid", "username")
+	_dd, _ := json.Marshal(c)
+	fmt.Println(_dd)
+	client.HSet("room", "demo1", "qqqqqq")
+	client.HSet("room", "demo2", "dqeqweqweqwe")
+	client.HSet("room", "demo1", "qweqwdgtryhtu")
+	client.HSet("room", "demo3", string(_dd))
+	d := client.HGet("room", "demo3").Val()
 
-	d, _ := client.Get("key").Result()
-	println("ssssssssssssss", d)
+	fmt.Println(d)
+	fmt.Println(client.HGetAll("room"))
 	//// 延迟8秒获取
 	//time.Sleep(time.Second * 3)
 	//if val, _err := client.Get("key").Result(); _err != nil {

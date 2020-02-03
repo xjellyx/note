@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/srlemon/note/log"
+	"github.com/olefen/note/log"
 
 	"fmt"
 	"runtime"

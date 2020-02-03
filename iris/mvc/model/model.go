@@ -1,7 +1,7 @@
 package model
 
 import (
-	project "github.com/srlemon/note/iris/mvc"
+	project "github.com/olefen/note/iris/mvc"
 	"github.com/suboat/sorm"
 )
 

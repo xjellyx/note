@@ -14,7 +14,7 @@ import (
         "strconv"
         "strings"
         "github.com/apache/thrift/lib/go/thrift"
-        "github.com/srlemon/node/strings-learn/gen-go/demo"
+        "github.com/olefen/node/strings-learn/gen-go/demo"
 )
 
 

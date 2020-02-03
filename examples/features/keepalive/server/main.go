@@ -23,7 +23,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"github.com/srlemon/note/examples/features/keepalive/pb"
+	"github.com/olefen/note/examples/features/keepalive/pb"
 	"log"
 	"net"
 	"time"

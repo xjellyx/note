@@ -2,7 +2,7 @@ package main
 
 import (
 	"git.yichui.net/tudy/wechat-go/wxweb"
-	"github.com/srlemon/note/wx/serve"
+	"github.com/olefen/note/wx/serve"
 	"github.com/suboat/sorm/log"
 )
 

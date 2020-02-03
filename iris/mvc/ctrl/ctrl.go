@@ -4,7 +4,7 @@ import (
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/mvc"
 	"github.com/kataras/iris/sessions"
-	project "github.com/srlemon/note/iris/mvc"
+	project "github.com/olefen/note/iris/mvc"
 )
 
 type AdminCTRL struct {
