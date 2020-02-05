@@ -1,6 +1,6 @@
 package serve
 
-import "github.com/olefen/note/iris/demo/model"
+import "github.com/olongfen/note/iris/demo/model"
 
 type MovieService interface {
 	GetAll() []model.Movie

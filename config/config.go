@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"github.com/olefen/note/log"
+	"github.com/olongfen/note/log"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"os"

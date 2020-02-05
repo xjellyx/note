@@ -1,8 +1,8 @@
 package main
 
 import (
-	"git.yichui.net/tudy/wechat-go/wxweb"
-	"github.com/olefen/note/wx/serve"
+	"github.com/olongfen/note/wx/serve"
+	"github.com/songtianyi/wechat-go/wxweb"
 	"github.com/suboat/sorm/log"
 )
 

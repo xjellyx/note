@@ -7,7 +7,7 @@ import (
 	"encoding/pem"
 	"flag"
 	"fmt"
-	"github.com/olefen/note"
+	"github.com/olongfen/note"
 	"io/ioutil"
 	"os"
 )

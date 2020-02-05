@@ -3,8 +3,8 @@ package main
 import (
 	"crypto/tls"
 	"github.com/gorilla/websocket"
-	"github.com/olefen/horse/examples/echo"
-	"github.com/olefen/note/log"
+	"github.com/olongfen/horse/examples/echo"
+	"github.com/olongfen/note/log"
 	"time"
 )
 

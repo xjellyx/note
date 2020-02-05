@@ -1,10 +1,11 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
+	"github.com/olongfen/note/log"
 	uuid "github.com/satori/go.uuid"
 	"math/rand"
+	"net/http"
 	"strconv"
 	"time"
 )
@@ -31,17 +32,14 @@ type ConfigWeapon struct {
 }
 
 func main() {
-	a := ConfigWeapon{
-		ID:           0,
-		FireInterval: 0,
-		Hit:          "",
-		BulletRadius: "",
-		BulletSpeed:  "",
-		BulletCost:   "",
-		Rate:         "",
-		CatchRadius:  "",
-	}
-	json.Marshal(a)
+	http.HandleFunc("/test", func(w http.ResponseWriter, r *http.Request) {
+		q := r.URL.Query()
+		v := q.Get("key")
+		log.Println("aaaaaaaaaaaaaa", v)
+		v2 := q.Get("k")
+		log.Println("sdsadsad", v2)
+	})
+	http.ListenAndServe("127.0.0.1:1203", nil)
 }
 
 func Shuffle(vals []int) []int {

@@ -4,9 +4,9 @@ import (
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/_examples/mvc/overview/web/controllers"
 	"github.com/kataras/iris/mvc"
-	"github.com/olefen/note/iris/demo/ctrl"
-	"github.com/olefen/note/iris/demo/model"
-	"github.com/olefen/note/iris/demo/serve"
+	"github.com/olongfen/note/iris/demo/ctrl"
+	"github.com/olongfen/note/iris/demo/model"
+	"github.com/olongfen/note/iris/demo/serve"
 )
 
 func main() {

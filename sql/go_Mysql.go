@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/olongfen/note/log"
+	"github.com/olongfen/note/sql/obj"
 	uuid "github.com/satori/go.uuid"
-	"github.com/olefen/note/log"
-	"github.com/olefen/note/sql/obj"
 	"reflect"
 	"strings"
 )
@@ -40,7 +40,7 @@ func main() {
 	db.Open()
 	defer db.Close()
 
-	str, err := db.ParamSQL("/data/allen/gocode/src/github.com/olefen/note/sql_/test.sql")
+	str, err := db.ParamSQL("/data/allen/gocode/src/github.com/olongfen/note/sql_/test.sql")
 	if err != nil {
 		log.Println(err)
 	}

@@ -3,8 +3,8 @@ package ctrl
 import (
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/core/errors"
-	"github.com/olefen/note/iris/demo/model"
-	"github.com/olefen/note/iris/demo/serve"
+	"github.com/olongfen/note/iris/demo/model"
+	"github.com/olongfen/note/iris/demo/serve"
 )
 
 type MovieCTRL struct {

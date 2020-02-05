@@ -2,7 +2,7 @@ package serve
 
 import (
 	"encoding/json"
-	"git.yichui.net/tudy/wechat-go/wxweb"
+	"github.com/songtianyi/wechat-go/wxweb"
 	"github.com/suboat/sorm/log"
 	"regexp"
 	"strings"

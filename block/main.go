@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/olefen/note/block/serve"
+	"github.com/olongfen/note/block/serve"
 )
 
 func main() {
