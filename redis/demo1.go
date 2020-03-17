@@ -32,6 +32,9 @@ func main() {
 	if err = client.Set("key", []byte(c.Conn), time.Second*5).Err(); err != nil {
 		log.Error(err)
 	}
+	time.Sleep(time.Second * 6)
+	_d, _e := client.Exists("key").Result()
+	fmt.Println(_d, "aaaaaaaaaaaa", _e)
 	c.Data.Store("uid", "username")
 	_dd, _ := json.Marshal(c)
 	fmt.Println(_dd)

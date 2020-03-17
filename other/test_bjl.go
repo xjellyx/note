@@ -1,18 +1,32 @@
 package main
 
 import (
-	"net"
+	"sync"
 )
 
+var (
+	a, b = new(sync.Map), new(sync.Map)
+)
+
+type ddd struct {
+	M int
+	N int
+}
+
+func init() {
+	a.Store(1, "10")
+	var (
+		demo = new(ddd)
+	)
+	demo.M = 22
+	demo.N = 99
+	b.Store("10", demo)
+}
+
 func main() {
-	t, _err := net.Dial("tcp", "192.168.31.180:9091")
-	if _err != nil {
-		panic(_err)
-	}
-	defer t.Close()
 
-	for i := 159; i < 1158; i++ {
-		t.Write()
-	}
+}
 
+func sddd(c **ddd) {
+	(*c).N -= 1
 }

@@ -1,13 +1,16 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"github.com/Shopify/sarama"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/olongfen/note/log"
 	"github.com/olongfen/note/sql/obj"
 	uuid "github.com/satori/go.uuid"
 	"reflect"
 	"strings"
+	"sync"
 )
 
 type student struct {
@@ -16,6 +19,11 @@ type student struct {
 	Age  int    `json:"age"`
 	Sex  string `json:"sex"`
 }
+
+var (
+	wg = sync.WaitGroup{}
+	l  = &sync.RWMutex{}
+)
 
 func main() {
 
@@ -40,7 +48,7 @@ func main() {
 	db.Open()
 	defer db.Close()
 
-	str, err := db.ParamSQL("/data/allen/gocode/src/github.com/olongfen/note/sql_/test.sql")
+	str, err := db.ParamSQL("sql/test.sql")
 	if err != nil {
 		log.Println(err)
 	}
@@ -86,5 +94,45 @@ func main() {
 	}
 	for _, v := range rows {
 		fmt.Println(v)
+	}
+	consumer, err := sarama.NewConsumer([]string{"localhost:9092"}, nil)
+
+	if err != nil {
+		panic(err)
+	}
+
+	partitionList, _err := consumer.Partitions("topic001")
+
+	if _err != nil {
+		panic(_err)
+	}
+
+	for partition := range partitionList {
+		pc, err := consumer.ConsumePartition("topic001", int32(partition), sarama.OffsetNewest)
+		if err != nil {
+			panic(err)
+		}
+
+		defer pc.AsyncClose()
+
+		wg.Add(1)
+
+		go func(sarama.PartitionConsumer) {
+			defer wg.Done()
+			for msg := range pc.Messages() {
+				fmt.Printf("Partition:%d, Offset:%d, Key:%s, Value:%s\n", msg.Partition, msg.Offset, string(msg.Key), string(msg.Value))
+				if err = json.Unmarshal(msg.Value, s); err != nil {
+					log.Errorln("aaaaaaaaaaaaaaa", err)
+					continue
+				}
+				log.Infoln("sssssssssssssssss", s)
+				insert = fmt.Sprintf(`INSERT INTO %s(name,age,id,sex) VALUES ("%s",%d,"%s","%s")`, "student", s.Name, s.Age, s.Id, s.Sex)
+				if err = db.Insert(insert); err != nil {
+					log.Errorln(err)
+				}
+			}
+		}(pc)
+		wg.Wait()
+		consumer.Close()
 	}
 }

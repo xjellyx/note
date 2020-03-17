@@ -2,69 +2,132 @@ package main
 
 import (
 	"fmt"
-	"github.com/olongfen/note/log"
-	uuid "github.com/satori/go.uuid"
 	"math/rand"
-	"net/http"
-	"strconv"
-	"time"
 )
 
-type Hw2WeaponData struct {
-	ID           string `json:"id"`
-	FireInterval string `json:"射击间隔"`
-	Hit          string `json:"命中值"`
-	// BulletRadius string `json:"子弹碰撞范围"`
-	// BulletSpeed string `json:"子弹速度"`
-	// BulletCost  string `json:"子弹消耗"`
-	// CatchRadius string `json:"子弹爆炸范围"`
+// Card 扑克牌类
+type Card struct {
+	val    int // 牌值
+	flower int // 花色
+	point  int // 点数
 }
 
-type ConfigWeapon struct {
-	ID           int    `yaml:"id"`
-	FireInterval int64  `yaml:"fireInterval"` // 射击间隔
-	Hit          string `yaml:"hit"`          // 命中值
-	BulletRadius string `yaml:"bulletRadius"` // 子弹碰撞范围
-	BulletSpeed  string `yaml:"bulletSpeed"`  // 子弹速度
-	BulletCost   string `yaml:"bulletCost"`   // 子弹消耗
-	Rate         string `yaml:"rate"`
-	CatchRadius  string `yaml:"catchRadius"` // 子弹爆炸范围
+// 花色
+const (
+	flowerFANGKUAI = iota + 1 // 方块
+	flowerMEIHUA              // 梅花
+	flowerHONGXIN             //
+	flowerHEITAO              //
+	flowerKing                // 小王,大王
+)
+
+// 点数
+const (
+	pointA = iota + 1
+	point2
+	point3
+	point4
+	point5
+	point6
+	point7
+	point8
+	point9
+	point10
+	pointJ = point10
+	pointQ = point10
+	pointK = point10
+	pointX = point10 // 小王
+	pointY = point10 // 大王
+)
+
+// 点数
+const (
+	value2 = iota + 1
+	value3
+	value4
+	value5
+	value6
+	value7
+	value8
+	value9
+	value10
+	valueJ
+	valueQ
+	valueK
+	valueA
+	valueX // 小王
+	valueY // 大王
+)
+
+type Cards []*Card // 一副牌
+
+// NewCards 新建卡牌
+func NewCards() Cards {
+	cards := make(Cards, 54)
+	// 给牌堆里面的牌赋初始值
+	for i := 0; i < 54; i++ {
+		pCard := NewCard(i + 1) // 这里是从1开始
+		cards[i] = pCard
+	}
+	// 打乱牌的顺序
+	rand.Shuffle(len(cards), func(i, j int) {
+		cards[i], cards[j] = cards[j], cards[i]
+	})
+
+	return cards
+
+}
+
+// NewCard val: 1-54
+func NewCard(val int) *Card {
+	if val <= 0 || val > 54 {
+		return nil
+	}
+	ret := &Card{}
+	ret.val = toCardValue(val)
+	ret.flower = toCardFlower(val)
+	ret.point = toCardPoint(val)
+	return ret
+}
+
+func toCardValue(val int) int {
+	if val == 53 {
+		return valueX // 小王
+	}
+	if val == 54 {
+		return valueY // 大王
+	}
+	return ((val - 1) % 13) + 1
+}
+
+// 从牌值获取花色
+func toCardFlower(val int) int {
+	if val == 53 {
+		return flowerKing
+	}
+	if val == 54 {
+		return flowerKing
+	}
+	return ((val - 1) / 13) + 1
+}
+
+// 从牌值获取点数
+func toCardPoint(val int) int {
+	if val == 53 {
+		return pointX // 小王
+	}
+	if val == 54 {
+		return pointY // 大王
+	}
+	if val%13 > 10 {
+		return point10
+	}
+	return val % 13
 }
 
 func main() {
-	http.HandleFunc("/test", func(w http.ResponseWriter, r *http.Request) {
-		q := r.URL.Query()
-		v := q.Get("key")
-		log.Println("aaaaaaaaaaaaaa", v)
-		v2 := q.Get("k")
-		log.Println("sdsadsad", v2)
-	})
-	http.ListenAndServe("127.0.0.1:1203", nil)
-}
-
-func Shuffle(vals []int) []int {
-	newVals := make([]int, 0, len(vals))
-	r := rand.New(rand.NewSource(time.Now().UnixNano()))
-	for _, i := range r.Perm(len(vals)) {
-		newVals = append(newVals, vals[i])
+	for _, v := range NewCards() {
+		fmt.Println(*v)
 	}
-	return newVals
-}
-
-func randSeed() (seed int64) {
-	var (
-		s   = uuid.NewV4().String()
-		i   = 0
-		n   = ""
-		err error
-	)
-	for len(n) < 18 {
-		n += fmt.Sprintf("%d", s[i])
-		i += 1
-	}
-	n = n[0:18]
-	if seed, err = strconv.ParseInt(n, 10, 64); err != nil {
-		panic(err)
-	}
-	return
+	fmt.Println(len(NewCards()))
 }

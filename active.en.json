@@ -1,7 +1,0 @@
-{
-  "invoices": {
-    "description": "The number of invoices a person has",
-    "one": "You can {{.Count}} invoice",
-    "other": "You have {{.Count}} invoices"
-  }
-}
