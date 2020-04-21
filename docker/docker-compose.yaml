@@ -1,0 +1,85 @@
+version: "3"
+services:
+  lobby:
+    image: centos:7
+    restart: always
+    ports:
+      - "8990:8990"
+    expose:
+      - "8990"
+    working_dir: "/app/"
+
+    volumes:
+      - ./conf:/app/conf
+      - /etc/localtime:/etc/localtime:ro
+      - ./run/lobby:/app/lobby
+      - ./serve.key:/app/serve.key:ro
+      - ./serve.crt:/app/serve.crt:ro
+      - ./public.config.yaml:/app/public.config.yaml:ro
+      # - ./log_lobby.log:/app/log_lobby.log:ro
+    command:
+      - /bin/bash
+      - -c
+      - |
+        /app/lobby
+    environment:
+      - TIME:10
+
+
+  smxyx:
+    image: centos:7
+    restart: always
+    ports:
+      - "10031:10031"
+    working_dir: "/app/"
+    volumes:
+      - ./conf:/app/conf
+      - /etc/localtime:/etc/localtime:ro
+      - ./run/smxyx:/app/smxyx
+      - ./serve.key:/app/serve.key:ro
+      - ./serve.crt:/app/serve.crt:ro
+      - ./public.config.yaml:/app/public.config.yaml:ro
+      # - ./log_hhdz.log:/app/log_hhdz.log:ro
+    links:
+      - lobby:lobby.host
+    command: ["/app/smxyx"]
+
+  ftxy:
+    image: centos:7
+    restart: always
+    ports:
+      - "10017:10017"
+    working_dir: "/app/"
+    volumes:
+      - ./conf:/app/conf
+      - /etc/localtime:/etc/localtime:ro
+      - ./run/ftxy:/app/ftxy
+      - ./serve.key:/app/serve.key:ro
+      - ./serve.crt:/app/serve.crt:ro
+      - ./public.config.yaml:/app/public.config.yaml:ro
+      # - ./log_hhdz.log:/app/log_hhdz.log:ro
+    links:
+      - lobby:lobby.host
+    command: ["/app/ftxy"]
+
+  wp5pk:
+    image: centos:7
+    restart: always
+    ports:
+      - "10032:10032"
+    working_dir: "/app/"
+    volumes:
+      - ./conf:/app/conf
+      - /etc/localtime:/etc/localtime:ro
+      - ./run/wp5pk:/app/wp5pk
+      - ./serve.key:/app/serve.key:ro
+      - ./serve.crt:/app/serve.crt:ro
+      - ./public.config.yaml:/app/public.config.yaml:ro
+      # - ./log_hhdz.log:/app/log_hhdz.log:ro
+    links:
+      - lobby:lobby.host
+    command: ["/app/wp5pk"]
+
+
+
+

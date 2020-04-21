@@ -1,5 +1,6 @@
 {
-  "messages": {
-    "other": "参数非法 >>> {{.vars}}"
+  "configBean": {
+    "other": "参数非法 >>> {{.vars}}",
+    "test": "dadadad"
   }
 }

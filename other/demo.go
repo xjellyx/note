@@ -1,45 +1,45 @@
 package main
 
 import (
-	"fmt"
-	"time"
+	"github.com/olongfen/note/log"
+	"strings"
+
+	"github.com/fsnotify/fsnotify"
 )
 
-type MapSorter []Item
-
-type Item struct {
-	Key string
-	Val int64
-}
-
-func NewMapSorter(m map[string]int64) MapSorter {
-	ms := make(MapSorter, 0, len(m))
-
-	for k, v := range m {
-		ms = append(ms, Item{k, v})
-	}
-
-	return ms
-}
-
-func (ms MapSorter) Len() int {
-	return len(ms)
-}
-
-func (ms MapSorter) Less(i, j int) bool {
-	return ms[i].Val < ms[j].Val // 按值排序
-	//return ms[i].Key < ms[j].Key // 按键排序
-}
-
-func (ms MapSorter) Swap(i, j int) {
-	ms[i], ms[j] = ms[j], ms[i]
-}
-
 func main() {
-	go sayHello()
-	time.Sleep(time.Second)
-}
+	watcher, err := fsnotify.NewWatcher()
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer watcher.Close()
 
-func sayHello() {
-	fmt.Println("Hello Goroutine !!!")
+	done := make(chan bool)
+	go func() {
+		for {
+			select {
+			case event, ok := <-watcher.Events:
+				if !ok {
+					return
+				}
+				if event.Op&fsnotify.Write == fsnotify.Write {
+					log.Debugln(event.Op)
+					if strings.TrimSpace(event.Name) == "./conf.yaml" {
+						log.Println("modified file:", event.Name)
+					}
+				}
+			case err, ok := <-watcher.Errors:
+				if !ok {
+					return
+				}
+				log.Errorln("error:", err)
+			}
+		}
+	}()
+
+	err = watcher.Add("./")
+	if err != nil {
+		log.Fatal(err)
+	}
+	<-done
 }

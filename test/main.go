@@ -48,7 +48,7 @@ func main() {
 		err   error
 		count int
 	)
-	if err = config.LoadConfiguration("project.yaml", c, c); err != nil {
+	if err = config.LoadConfigAndSave("project.yaml", c, c); err != nil {
 		panic(err)
 	}
 	if err = c.Save(nil); err != nil {
