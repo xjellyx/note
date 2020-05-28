@@ -1,4 +1,0 @@
-time="2020-04-21T20:02:16+08:00" level=error msg="[panic-recover] \"/data/gocode/src/github.com/olongfen/note/log/example/main.go:33|ad\" sdwqdqw" func=":44|PanicRecoverError"
-time="2020-04-21T20:28:06+08:00" level=error msg="[panic-recover] \"/data/gocode/src/github.com/olongfen/note/log/example/main.go:33|ad\" sdwqdqw" func=":44|PanicRecoverError"
-time="2020-04-21T20:28:11+08:00" level=error msg="[panic-recover] \"/data/gocode/src/github.com/olongfen/note/log/example/main.go:33|ad\" sdwqdqw" func=":44|PanicRecoverError"
-time="2020-04-21T20:28:15+08:00" level=error msg="[panic-recover] \"/data/gocode/src/github.com/olongfen/note/log/example/main.go:33|ad\" sdwqdqw" func=":44|PanicRecoverError"

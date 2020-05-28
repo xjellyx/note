@@ -42,12 +42,12 @@ func handlerInit(sess *wxweb.Session, data *wxweb.ReceivedMessage) {
 		err       error
 	)
 
-	if v, ok := data.Raw["StatusNotifyUserName"]; ok {
-		switch t := v.(type) {
-		case string:
-			recentArr = strings.Split(t, ",")
-		}
-	}
+	//if v, ok := data.Raw["StatusNotifyUserName"]; ok {
+	//	switch t := v.(type) {
+	//	case string:
+	//		recentArr = strings.Split(t, ",")
+	//	}
+	//}
 
 	if len(recentArr) > 0 {
 		for _, v := range recentArr {
@@ -146,7 +146,7 @@ func handlerTextFriend(sess *wxweb.Session, msg *wxweb.ReceivedMessage) {
 		return
 	}
 	// 标记已读
-	sess.Api.WebWxStatusNotifyAsync(sess.WxWebCommon, sess.WxWebXcg, msg)
+	// sess.Api.WebWxStatusNotifyAsync(sess.WxWebCommon, sess.WxWebXcg, msg)
 	data = sess.Cm.GetContactByUserName(msg.FromUserName)
 	if data != nil {
 		// log.Println("aaaaaaaaaaaaaaa", data.RemarkName)
@@ -154,7 +154,7 @@ func handlerTextFriend(sess *wxweb.Session, msg *wxweb.ReceivedMessage) {
 	}
 
 	if msg.IsGroup {
-		log.Printf(`"%s" 是一个群`, msg.GroupName)
+		log.Printf(`"%s" 是一个群`, msg.ToUserName)
 		return
 	}
 	//if remarkName == `A罩杯` {
@@ -162,7 +162,7 @@ func handlerTextFriend(sess *wxweb.Session, msg *wxweb.ReceivedMessage) {
 	//	return
 	//}
 
-	if reply, err = GetBotReply(msg.Content); err != nil {
+	if reply, err = GetBotReply2(msg.Content); err != nil {
 		log.Error("[GetBotReply] err: ", err)
 	}
 

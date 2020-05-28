@@ -1,6 +1,0 @@
-{
-  "configBean": {
-    "other": "参数非法 >>> {{.vars}}",
-    "test": "dadadad"
-  }
-}

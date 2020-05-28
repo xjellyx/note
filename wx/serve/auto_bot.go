@@ -49,7 +49,7 @@ var (
 // GetBotReply 获取机器人的回答
 func GetBotReply(content string) (ret string, err error) {
 	var (
-		url     = setting.Settings.ChatBot.PostUrl
+		url     = "setting.Settings.ChatBot.PostUrl"
 		client  = &http.Client{}
 		dataReq = &BotRequest{
 			ReqType: 0,
