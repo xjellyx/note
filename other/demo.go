@@ -1,45 +1,79 @@
 package main
 
 import (
-	"github.com/olongfen/note/log"
-	"strings"
-
-	"github.com/fsnotify/fsnotify"
+	"container/list"
+	"fmt"
+	"sort"
 )
 
 func main() {
-	watcher, err := fsnotify.NewWatcher()
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer watcher.Close()
 
-	done := make(chan bool)
-	go func() {
-		for {
-			select {
-			case event, ok := <-watcher.Events:
-				if !ok {
-					return
+	fmt.Println(reorganizeString("vvvlo"))
+
+}
+func reorganizeString(s string) string {
+	var (
+		arr []int
+		lt  = list.New()
+		res string
+		rep = 0
+	)
+	if len(s) == 0 {
+		return ""
+	}
+	for _, v := range s {
+		arr = append(arr, int(v))
+	}
+	lt.PushBack(string(arr[0]))
+	sort.Ints(arr)
+	initLen := len(arr)
+	for i := 1; i < len(arr); i++ {
+		var (
+			try bool
+		)
+		if lt.Back().Value != string(arr[i]) {
+			lt.PushBack(string(arr[i]))
+		} else if lt.Front().Value != string(arr[i]) {
+			lt.PushFront(string(arr[i]))
+		} else {
+			var (
+				data = lt.Back()
+			)
+			for data != nil {
+				if i >= initLen {
+					if data.Prev() == nil {
+						fmt.Println(data, string(arr[i]))
+					} else {
+						fmt.Println(data, data.Prev(), data.Prev().Next(), string(arr[i]))
+					}
+
 				}
-				if event.Op&fsnotify.Write == fsnotify.Write {
-					log.Debugln(event.Op)
-					if strings.TrimSpace(event.Name) == "./conf.yaml" {
-						log.Println("modified file:", event.Name)
+				if data.Prev() != nil && data.Prev().Value != string(arr[i]) && data.Prev().Prev() != nil && data.Prev().Prev().Value != string(arr[i]) {
+					lt.InsertAfter(string(arr[i]), data.Prev().Prev())
+					break
+				} else {
+					if !try {
+						arr = append(arr, arr[i])
+						try = true
+						rep++
+						if rep > initLen*2 {
+							return ""
+						}
 					}
 				}
-			case err, ok := <-watcher.Errors:
-				if !ok {
-					return
-				}
-				log.Errorln("error:", err)
+				data = data.Prev()
 			}
 		}
-	}()
-
-	err = watcher.Add("./")
-	if err != nil {
-		log.Fatal(err)
 	}
-	<-done
+	var data = lt.Front()
+	println(lt.Len())
+	for data != nil {
+		res += data.Value.(string)
+		data = data.Next()
+	}
+	if len(res) != len(s) {
+		fmt.Println(res)
+		return ""
+	}
+	return res
 }
