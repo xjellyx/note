@@ -57,7 +57,6 @@ var (
 type Logger struct {
 	*logrus.Logger
 	// local
-	Name         string //
 	LogFlag      int    // 日志标签 非DEBUG方法
 	LogFlagDebug int    // 日志 DEBUG方法
 	CallerSkip   int    // 定位函数层级
@@ -382,6 +381,7 @@ func (l *Logger) Panicln(args ...interface{}) {
 // EntryWith 格式化输出
 func (l *Logger) EntryWith(flg int, callerSkip int) *logrus.Entry {
 	if flg&(log.Lshortfile|log.Llongfile) != 0 {
+		fmt.Println(runtime.Caller(callerSkip) )
 		if pc, file, line, ok := runtime.Caller(callerSkip); ok {
 			// func
 			var (
@@ -427,7 +427,7 @@ func (l *Logger) Copy() (r *Logger) {
 	//r.Logger = logrus.New()
 	//*r.Logger = *l.Logger
 	//r.Logger.Out = l.Logger.Out
-	r, _ = NewLog(nil)
+	r= NewLog(nil)
 	r.CallerSkip = l.CallerSkip
 	r.SetFlags(l.LogFlag)
 	r.SetLevel(uint32(l.Level))
@@ -468,7 +468,7 @@ func (h *HookError) Fire(entry *logrus.Entry) (err error) {
 }
 
 // NewLog new
-func NewLog(s *Logger) (d *Logger, err error) {
+func NewLog(s *Logger) (d *Logger) {
 	if s != nil {
 		if d = s; d.Logger == nil {
 			d.Logger = logrus.New()
@@ -510,7 +510,7 @@ func NewLogFile(logPath string) (d *Logger) {
 		rf  *rotatelogs.RotateLogs
 		err error
 	)
-	d, _ = NewLog(nil)
+	d= NewLog(nil)
 
 	// ensure director
 	_dir := filepath.Dir(logPath)
@@ -522,13 +522,25 @@ func NewLogFile(logPath string) (d *Logger) {
 
 	// log file(s)
 	if rf, err = rotatelogs.New(
-		logPath+".%Y%m%d",
+		logPath+".%Y-%m-%d.log",
 		//rotatelogs.WithLinkName(logPath),
 		rotatelogs.WithRotationTime(time.Hour*24),
 		rotatelogs.WithMaxAge(-1),
 		rotatelogs.WithRotationCount(RotationCount),
 	); err == nil {
-		d.Out = rf
+		//d.Hooks.Add(lfshook.NewHook(
+		//	lfshook.WriterMap{
+		//		logrus.TraceLevel: rf,
+		//		logrus.DebugLevel: rf,
+		//		logrus.InfoLevel: rf,
+		//		logrus.WarnLevel: rf,
+		//		logrus.ErrorLevel:rf,
+		//		logrus.FatalLevel: rf,
+		//		logrus.PanicLevel: rf,
+		//	},
+		//	&logrus.JSONFormatter{},
+		//	))
+		d.Out=rf
 	} else {
 		Log.Warnln(err)
 	}
@@ -537,14 +549,14 @@ func NewLogFile(logPath string) (d *Logger) {
 	//}
 
 	// hook errors
-	d.AddHook(&HookError{Filepath: logPath + ".error"})
+	//d.AddHook(&HookError{Filepath: logPath + ".error"})
 
 	return
 }
 
 // init
 func init() {
-	Log, _ = NewLog(nil)
+	Log = NewLog(nil)
 }
 
 var (

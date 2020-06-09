@@ -22,9 +22,10 @@ func (a *aa) Log() {
 }
 
 func main() {
-	var l = log.NewLogFile("sss.log")
+	var l = log.NewLogFile("sss")
 	var err error
 	defer PanicRecoverError(l, &err)
+	l.Debugln("dsafwetgfretyrey")
 	ad()
 
 }

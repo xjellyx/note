@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    container_name: pgadmin_work
+    ports:
+    - 8001:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=123456@qq.com
+      - PGADMIN_DEFAULT_PASSWORD=123456
+  pgdata:
+    image: library/postgres:11.2-alpine
+    restart: always
+    container_name: pgdata_one
+    ports:
+    - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=business
+      - POSTGRES_DB=business
+      - POSTGRES_USER=business
+      - TZ=Asia/Shanghai

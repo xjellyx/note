@@ -1,32 +1,30 @@
 package main
 
 import (
-	"sync"
+	"image/png"
+	"os"
+
+	"github.com/boombuler/barcode"
+	"github.com/boombuler/barcode/qr"
 )
-
-var (
-	a, b = new(sync.Map), new(sync.Map)
-)
-
-type ddd struct {
-	M int
-	N int
-}
-
-func init() {
-	a.Store(1, "10")
-	var (
-		demo = new(ddd)
-	)
-	demo.M = 22
-	demo.N = 99
-	b.Store("10", demo)
-}
 
 func main() {
+	// Create the barcode
+	qrCode, _ := qr.Encode("Hello World ddddsadasd", qr.M, qr.Auto)
+
+	// Scale the barcode to 200x200 pixels
+	qrCode, _ = barcode.Scale(qrCode, 200, 200)
+
+	// create the output file
+	file, _ := os.Create("qrcode.png")
+	defer file.Close()
+
+	// encode the barcode as png
+	png.Encode(file, qrCode)
+
 
 }
 
-func sddd(c **ddd) {
-	(*c).N -= 1
-}
+
+
+
