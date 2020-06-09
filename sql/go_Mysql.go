@@ -45,7 +45,9 @@ func main() {
 	)
 	db = new(obj.DB)
 	db.TableName = "student"
-	db.Open()
+	if err := db.Open(); err != nil {
+		panic(err)
+	}
 	defer db.Close()
 
 	str, err := db.ParamSQL("sql/test.sql")

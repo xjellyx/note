@@ -13,10 +13,10 @@ type DB struct {
 }
 
 var (
-	dbhost     = "127.0.0.1:33306"
-	dbusername = "business"
-	dbpassword = "business"
-	dbname     = "business"
+	dbhost     = "127.0.0.1:3306"
+	dbusername = "root"
+	dbpassword = "123456"
+	dbname     = "test_db"
 )
 
 // Open

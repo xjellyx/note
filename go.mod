@@ -9,6 +9,8 @@ require (
 	github.com/boombuler/barcode v1.0.0 // indirect
 	github.com/chenhg5/collection v0.0.0-20191118032303-cb21bccce4c3 // indirect
 	github.com/fsnotify/fsnotify v1.4.7
+	github.com/dchest/captcha v0.0.0-20170622155422-6a29415a8364
+	github.com/gin-contrib/sessions v0.0.3 // indirect
 	github.com/gin-gonic/gin v1.6.2
 	github.com/go-redis/redis v6.15.7+incompatible
 	github.com/go-sql-driver/mysql v1.4.1
@@ -25,12 +27,12 @@ require (
 	github.com/lib/pq v1.6.0
 	github.com/mikespook/gorbac v2.1.0+incompatible // indirect
 	github.com/nicksnyder/go-i18n/v2 v2.0.3 // indirect
-	github.com/olongfen/contrib v0.0.0-20200205020052-c331b11234b4 // indirect
+	github.com/olongfen/contrib v0.0.0-20200417092610-15e4c46a5338 // indirect
 	github.com/olongfen/horse v0.0.0-20200205024234-d04578e11686
 	github.com/pkg/errors v0.9.1
 	github.com/rifflock/lfshook v0.0.0-20180920164130-b9218ef580f5
 	github.com/satori/go.uuid v1.2.0
-	github.com/sirupsen/logrus v1.4.2
+	github.com/sirupsen/logrus v1.6.1-0.20200526070419-42baed85eb23
 	github.com/songtianyi/wechat-go v0.0.0-20181016100313-a8f687684603
 	github.com/spf13/viper v1.6.3 // indirect
 	github.com/suboat/sorm v0.2.0
