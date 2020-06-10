@@ -19,6 +19,9 @@ require (
 	github.com/gogo/protobuf v1.3.1
 	github.com/golang/protobuf v1.3.3
 	github.com/gorilla/websocket v1.4.1
+	github.com/graph-gophers/graphql-go v0.0.0-20200309224638-dae41bde9ef9 // indirect
+	github.com/graphql-go/graphql v0.7.9 // indirect
+	github.com/graphql-go/graphql-go-handler v0.2.3 // indirect
 	github.com/jinzhu/gorm v1.9.12
 	github.com/jszwec/csvutil v1.3.0
 	github.com/kataras/iris v11.1.1+incompatible
