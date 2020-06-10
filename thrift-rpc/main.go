@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	str := " AA bb CC dd FF 7哈哈 "
+	str := " AA bb CC main FF 7哈哈 "
 	fmt.Println("前缀", hasPrefix(str, "AAb"))
 	fmt.Println("后缀", hasSuffix(str, "dFd"))
 	fmt.Println("字符串包含关系", contains(str, "bbC"))
