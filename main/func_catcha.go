@@ -65,11 +65,11 @@ func Serve(w http.ResponseWriter, r *http.Request, id, ext, lang string, downloa
 func main() {
 	router := gin.Default()
 	router.GET("/getCaptchaID", GetCaptchaID)
-	router.GET("/captcha", func(c *gin.Context) {
+	router.GET("/captcha.png", func(c *gin.Context) {
 		Captcha(c)
 	})
 
-	router.GET("/captcha/verify/", func(c *gin.Context) {
+	router.GET("/captcha.png/verify/", func(c *gin.Context) {
 		value := c.Query("value")
 		id := c.Query("id")
 		if CaptchaVerify(id, value) {

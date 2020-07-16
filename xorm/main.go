@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"github.com/go-xorm/xorm"
 	_ "github.com/lib/pq"
 	"github.com/olongfen/note/log"
+	"strconv"
 )
 
 // User
@@ -44,61 +46,65 @@ func main()  {
 	//}
 
 	// 插入一条数据
-	if err = InsertUser(&User{
-		Name:     "张三1",
-		Age:      18,
-		Username: "zhangsan999",
-		ClassId: "3217498375904",
+	for i:=0;i<10;i++{
+		if err = InsertUser(&User{
+			Name:     "张三"+strconv.Itoa(i),
+			Age:      18,
+			Username: "asfdasfas"+strconv.Itoa(i),
+			ClassId: "3217498375904",
 
-	});err!=nil{
-		log.Errorln("[InsertUser] err: ",err)
+		});err!=nil{
+			log.Errorln("[InsertUser] err: ",err)
+		}
 	}
 
-	// 获取信息
-	if _d,_err := GetUserData("zhangsan999");_err!=nil{
-		log.Errorln("[GetUserData] err: ",_err)
-	}else {
-		log.Infoln("[GetUserData] data: ",_d)
-	}
-
-	// 更新数据
-	if err = UpdateUser("zhangsan999", struct {
-		Name string
-		Age  int
-	}{Name:"张三更新" , Age:19 });err!=nil{
-		log.Errorln("[UpdateUser] err: ",err)
-	}
-
-	// 获取信息
-	if _d,_err := GetUserData("zhangsan999");_err!=nil{
-		log.Errorln("[GetUserData] err: ",_err)
-	}else {
-		log.Infoln("[GetUserData] data: ",_d)
-	}
-
-	// 删除数据
-	if err = DeleteUser("zhangsan999");err!=nil{
-		log.Errorln("[DeleteUser] err: ", err )
-	}
-
-	// 获取信息
-	if _d,_err := GetUserData("zhangsan999");_err!=nil{
-		log.Errorln("[GetUserData] err: ",_err)
-	}else {
-		log.Infoln("[GetUserData] data: ",_d)
-	}
+	//// 获取信息
+	//if _d,_err := GetUserData("zhangsan999");_err!=nil{
+	//	log.Errorln("[GetUserData] err: ",_err)
+	//}else {
+	//	log.Infoln("[GetUserData] data: ",_d)
+	//}
+	//
+	//// 更新数据
+	//if err = UpdateUser("zhangsan999", struct {
+	//	Name string
+	//	Age  int
+	//}{Name:"张三更新" , Age:19 });err!=nil{
+	//	log.Errorln("[UpdateUser] err: ",err)
+	//}
+	//
+	//// 获取信息
+	//if _d,_err := GetUserData("zhangsan999");_err!=nil{
+	//	log.Errorln("[GetUserData] err: ",_err)
+	//}else {
+	//	log.Infoln("[GetUserData] data: ",_d)
+	//}
+	//
+	//// 删除数据
+	//if err = DeleteUser("zhangsan999");err!=nil{
+	//	log.Errorln("[DeleteUser] err: ", err )
+	//}
+	//
+	//// 获取信息
+	//if _d,_err := GetUserData("zhangsan999");_err!=nil{
+	//	log.Errorln("[GetUserData] err: ",_err)
+	//}else {
+	//	log.Infoln("[GetUserData] data: ",_d)
+	//}
 
 }
 
 // InsertUser 插入用户数据
 func InsertUser(u *User) error  {
 	var(
+		d int64
 		err error
 	)
 
-	if _,err = engine.Insert(u);err!=nil{
+	if d,err = engine.Insert(u);err!=nil{
 		return err
 	}
+	fmt.Println("aaaaaaaaaaa",d)
 	return nil
 }
 

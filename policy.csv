@@ -1,0 +1,2 @@
+p, user ,/v1/admin/userList/:uid, GET
+p, user ,/v1/admin/edit/:uid, GET
