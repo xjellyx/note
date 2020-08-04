@@ -26,7 +26,7 @@ func main()  {
 		err error
 	)
 	// 连接数据库
-	if engine,err =  xorm.NewEngine("postgres","postgres://business:business@127.0.0.1:5432/business?sslmode=disable");err!=nil{
+	if engine,err =  xorm.NewEngine("mysql","mysql://root:business@192.168.3.13:3306");err!=nil{
 		panic(err)
 	}
 

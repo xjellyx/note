@@ -2,15 +2,12 @@ package main
 
 import (
 	"fmt"
-	"strconv"
+	"os/exec"
 )
 
 func main() {
-
-	fmt.Println( strconv.ParseInt("10", 10, 64))
-
+	c := exec.Command("go", "run", "/data/gocode/src/github.com/olongfen/note/main/fucn_sort_learn.go", "&&", "go", "env")
+	fmt.Println(c.String())
+	out, err := c.Output()
+	fmt.Println(string(out), err)
 }
-
-const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
-

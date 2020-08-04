@@ -37,6 +37,8 @@ require (
 	github.com/kataras/iris v11.1.1+incompatible
 	github.com/lestrrat-go/file-rotatelogs v2.3.0+incompatible
 	github.com/lestrrat-go/strftime v1.0.1 // indirect
+	github.com/lestrrat/go-file-rotatelogs v0.0.0-20180223000712-d3151e2a480f
+	github.com/lestrrat/go-strftime v0.0.0-20180220042222-ba3bf9c1d042 // indirect
 	github.com/lib/pq v1.6.0
 	github.com/mailru/easyjson v0.7.1 // indirect
 	github.com/mikespook/gorbac v2.1.0+incompatible // indirect
