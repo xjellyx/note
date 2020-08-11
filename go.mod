@@ -3,8 +3,9 @@ module github.com/olongfen/note
 go 1.13
 
 require (
-	github.com/PuerkitoBio/goquery v1.4.1
+	github.com/PuerkitoBio/goquery v1.5.1
 	github.com/Shopify/sarama v1.26.1
+	github.com/alexbrainman/sspi v0.0.0-20180613141037-e580b900e9f5 // indirect
 	github.com/betacraft/yaag v1.0.0
 	github.com/boombuler/barcode v1.0.0
 	github.com/casbin/casbin v1.9.1 // indirect
@@ -14,6 +15,7 @@ require (
 	github.com/chenhg5/collection v0.0.0-20191118032303-cb21bccce4c3 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.0 // indirect
 	github.com/dchest/captcha v0.0.0-20170622155422-6a29415a8364
+	github.com/facebookincubator/ent v0.3.0
 	github.com/fsnotify/fsnotify v1.4.7
 	github.com/gin-contrib/sessions v0.0.3 // indirect
 	github.com/gin-gonic/gin v1.6.3
@@ -22,15 +24,16 @@ require (
 	github.com/go-openapi/swag v0.19.9 // indirect
 	github.com/go-playground/validator/v10 v10.3.0 // indirect
 	github.com/go-redis/redis v6.15.7+incompatible
-	github.com/go-sql-driver/mysql v1.5.0
+	github.com/go-sql-driver/mysql v1.5.1-0.20200311113236-681ffa848bae
 	github.com/go-xorm/xorm v0.7.9
 	github.com/gocarina/gocsv v0.0.0-20200330101823-46266ca37bd3
 	github.com/gogo/protobuf v1.3.1
 	github.com/golang/protobuf v1.4.2
-	github.com/gorilla/websocket v1.4.1
+	github.com/gorilla/websocket v1.4.2
 	github.com/graph-gophers/graphql-go v0.0.0-20200309224638-dae41bde9ef9 // indirect
 	github.com/graphql-go/graphql v0.7.9 // indirect
 	github.com/graphql-go/graphql-go-handler v0.2.3 // indirect
+	github.com/jcmturner/gokrb5/v8 v8.2.0 // indirect
 	github.com/jinzhu/gorm v1.9.12
 	github.com/json-iterator/go v1.1.10 // indirect
 	github.com/jszwec/csvutil v1.3.0
@@ -39,10 +42,9 @@ require (
 	github.com/lestrrat-go/strftime v1.0.1 // indirect
 	github.com/lestrrat/go-file-rotatelogs v0.0.0-20180223000712-d3151e2a480f
 	github.com/lestrrat/go-strftime v0.0.0-20180220042222-ba3bf9c1d042 // indirect
-	github.com/lib/pq v1.6.0
+	github.com/lib/pq v1.8.0
 	github.com/mailru/easyjson v0.7.1 // indirect
 	github.com/mikespook/gorbac v2.1.0+incompatible // indirect
-	github.com/mitchellh/mapstructure v1.3.2 // indirect
 	github.com/nicksnyder/go-i18n/v2 v2.0.3 // indirect
 	github.com/olongfen/contrib v0.0.0-20200417092610-15e4c46a5338 // indirect
 	github.com/olongfen/horse v0.0.0-20200205024234-d04578e11686
@@ -66,7 +68,6 @@ require (
 	gocv.io/x/gocv v0.23.0 // indirect
 	golang.org/x/net v0.0.0-20200602114024-627f9648deb9 // indirect
 	golang.org/x/sys v0.0.0-20200602225109-6fdc65e7d980 // indirect
-	golang.org/x/tools v0.0.0-20200610052024-8d7dbee4c8ae // indirect
 	google.golang.org/protobuf v1.24.0 // indirect
 	gopkg.in/go-playground/validator.v9 v9.31.0 // indirect
 	gopkg.in/yaml.v2 v2.3.0

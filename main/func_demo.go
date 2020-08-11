@@ -1,33 +1,36 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"github.com/olongfen/note/log"
-	"os"
 	"time"
 )
 
 func main() {
-	readEachLineScanner("/data/gocode/src/starwiz-customer-micro/log/starwiz-customer-micro/signal_task_33/33.2020-08.log")
+	var (
+		list []int
+	)
+
+	for i := 1; i <= 100000000; i++ {
+		list = append(list, i)
+	}
+	start := time.Now()
+	fmt.Println(getIndex(list, 0, len(list)-1, 96454536))
+	end := time.Now()
+	fmt.Println(float64(end.UnixNano()-start.UnixNano()) / float64(time.Second))
+
 }
 
-func readEachLineScanner(filePath string) {
-	start1 := time.Now()
-	FileHandle, err := os.Open(filePath)
-	if err != nil {
-		log.Println(err)
-		return
+func getIndex(list []int, left, right int, target int) (index int) {
+	if left > right { // 找不到存在的数据, 返回-1
+		return -1
 	}
-	defer FileHandle.Close()
-	lineScanner := bufio.NewScanner(FileHandle)
-	for lineScanner.Scan() {
-		// 相同使用场景下可以使用如下方法
-		// func (s *Scanner) Bytes() []byte
-		// func (s *Scanner) Text() string
-		// 实际逻辑 : 对读取的内容进行某些业务操作
-		// 如下代码打印每次读取的文件行内容
-		fmt.Println(lineScanner.Text())
+	mid := (left + right) / 2 // 每次的中间id
+	if target == list[mid] {
+		return mid
+	} else if target > list[mid] {
+		return getIndex(list, mid+1, right, target)
+	} else {
+		return getIndex(list, left, mid-1, target)
 	}
-	fmt.Println("readEachLineScanner spend : ", time.Now().Sub(start1))
+
 }

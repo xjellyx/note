@@ -13,7 +13,7 @@ var (
 )
 
 func main() {
-	//f := "/data/gocode/src/github.com/olongfen/note/sss.2020-07-27.log"
+	//f := "/data/gocode/src/github.com/olongfen/note/demo.sh"
 	//lines, _ := tail(f, 10000)
 	m := make([]byte, 0)
 	m, _ = base64.StdEncoding.DecodeString("RXhlY3V0ZSA6L3Vzci9iaW4vcHl0aG9uMyAuL3B1YmxpYy9zY3JpcHQvZ2VuX3NpZ25hbC5weSBmYWlsZW" +

@@ -1,5 +1,10 @@
 package main
 
+import (
+	"bytes"
+	"os"
+)
+
 func tail(filename string, n int) (lines []string, err error) {
 	var (
 		f    os.FileInfo
