@@ -2,6 +2,8 @@ package log
 
 import (
 	"github.com/lestrrat-go/file-rotatelogs"
+	rotatelogs2 "github.com/lestrrat/go-file-rotatelogs"
+	"github.com/rifflock/lfshook"
 	"github.com/sirupsen/logrus"
 
 	"fmt"
@@ -14,39 +16,10 @@ import (
 	"time"
 )
 
-const (
-	// Ldate log date
-	Ldate = log.Ldate
-	// Ltime log time
-	Ltime = log.Ltime
-	// Lmicroseconds log microseconds
-	Lmicroseconds = log.Lmicroseconds
-	// Llongfile long file
-	Llongfile = log.Llongfile
-	// Lshortfile short file
-	Lshortfile = log.Lshortfile
-	// LUTC UTC
-	LUTC = log.LUTC
-	// LstdFlags flags
-	LstdFlags = log.LstdFlags
-	// PanicLevel panic level
-	PanicLevel = uint32(logrus.PanicLevel)
-	// FatalLevel fatal level
-	FatalLevel = uint32(logrus.FatalLevel)
-	// ErrorLevel error level
-	ErrorLevel = uint32(logrus.ErrorLevel)
-	// WarnLevel warn level
-	WarnLevel = uint32(logrus.WarnLevel)
-	// InfoLevel info level
-	InfoLevel = uint32(logrus.InfoLevel)
-	// DebugLevel debug level
-	DebugLevel = uint32(logrus.DebugLevel)
-)
+
 
 // Log flag
 var (
-	// LogFlag log flag
-	LogFlag = log.Llongfile //
 	// Log default
 	Log *Logger // default
 	// RotationCount count
@@ -179,23 +152,17 @@ func Fatalln(args ...interface{}) {
 
 // Panic panic
 func Panic(args ...interface{}) {
-	if Log.Level >= logrus.PanicLevel {
-		Log.EntryWith(Log.LogFlag, Log.CallerSkip).Panic(args...)
-	}
+	Log.EntryWith(Log.LogFlag, Log.CallerSkip).Panic(args...)
 }
 
 // Panicf panic
 func Panicf(format string, args ...interface{}) {
-	if Log.Level >= logrus.PanicLevel {
-		Log.EntryWith(Log.LogFlag, Log.CallerSkip).Panicf(format, args...)
-	}
+	Log.EntryWith(Log.LogFlag, Log.CallerSkip).Panicf(format, args...)
 }
 
 // Panicln panic
 func Panicln(args ...interface{}) {
-	if Log.Level >= logrus.PanicLevel {
-		Log.EntryWith(Log.LogFlag, Log.CallerSkip).Panicln(args...)
-	}
+	Log.EntryWith(Log.LogFlag, Log.CallerSkip).Panicln(args...)
 }
 
 // Print print
@@ -381,28 +348,16 @@ func (l *Logger) Panicln(args ...interface{}) {
 // EntryWith 格式化输出
 func (l *Logger) EntryWith(flg int, callerSkip int) *logrus.Entry {
 	if flg&(log.Lshortfile|log.Llongfile) != 0 {
-		fmt.Println(runtime.Caller(callerSkip) )
 		if pc, file, line, ok := runtime.Caller(callerSkip); ok {
 			// func
 			var (
 				_fnName    = runtime.FuncForPC(pc).Name()
-				_fnNameDir = strings.Split(_fnName, "/")
 				_fnNameLis = strings.Split(_fnName, ".")
-				_fnNameSrc string
 			)
-			if len(_fnNameDir) > 1 {
-				_fnNameSrc = _fnNameDir[0] + "/" + _fnNameDir[1] + "/"
-			} else {
-				_fnNameSrc = _fnNameDir[0]
-			}
 			fnName := _fnNameLis[len(_fnNameLis)-1]
 
-			// file
-			_pcLis := strings.Split(file, _fnNameSrc)
-			filePath := strings.Join(_pcLis[1:], "")
-
 			return l.Logger.WithFields(logrus.Fields{
-				"func": fmt.Sprintf("%s:%d|%s", filePath, line, fnName),
+				"message": fmt.Sprintf("file: %s, line: %d, func: %s", file, line, fnName),
 			})
 		}
 	}
@@ -429,7 +384,8 @@ func (l *Logger) Copy() (r *Logger) {
 	//r.Logger.Out = l.Logger.Out
 	r= NewLog(nil)
 	r.CallerSkip = l.CallerSkip
-	r.SetFlags(l.LogFlag)
+	r.SetFlags(l.
+		LogFlag)
 	r.SetLevel(uint32(l.Level))
 	r.Out = l.Out
 	return
@@ -478,8 +434,8 @@ func NewLog(s *Logger) (d *Logger) {
 		d.Logger = logrus.New()
 		// default
 		d.CallerSkip = 2 // 通用
-		d.SetFlags(Llongfile)
-		d.SetLevel(DebugLevel)
+		d.SetFlags(log.Llongfile)
+		d.SetLevel(uint32(logrus.DebugLevel))
 		d.Out = os.Stderr
 	}
 	return
@@ -528,6 +484,7 @@ func NewLogFile(logPath string) (d *Logger) {
 		rotatelogs.WithMaxAge(-1),
 		rotatelogs.WithRotationCount(RotationCount),
 	); err == nil {
+		_ = rf
 		//d.Hooks.Add(lfshook.NewHook(
 		//	lfshook.WriterMap{
 		//		logrus.TraceLevel: rf,
@@ -540,16 +497,23 @@ func NewLogFile(logPath string) (d *Logger) {
 		//	},
 		//	&logrus.JSONFormatter{},
 		//	))
-		d.Out=rf
+		rr, _ := rotatelogs2.New("./access_log.%Y%m%d%H%M")
+		d.Hooks.Add(lfshook.NewHook(
+			lfshook.WriterMap{
+				logrus.TraceLevel: rr,
+				logrus.DebugLevel: rr,
+				logrus.InfoLevel: rr,
+				logrus.WarnLevel: rr,
+				logrus.ErrorLevel:rr,
+				logrus.FatalLevel: rr,
+				logrus.PanicLevel: rr,
+			},
+			&logrus.JSONFormatter{},
+			))
 	} else {
 		Log.Warnln(err)
 	}
-	//if f, err = os.OpenFile(name, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0600); err == nil {
-	//	d.Out = f
-	//}
 
-	// hook errors
-	//d.AddHook(&HookError{Filepath: logPath + ".error"})
 
 	return
 }

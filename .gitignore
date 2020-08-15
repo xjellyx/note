@@ -9,3 +9,5 @@
 *.jpg
 *.yml
 *.png
+public
+dockerFile
