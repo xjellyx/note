@@ -1,79 +1,70 @@
 package main
 
 import (
-	"container/list"
+	"errors"
 	"fmt"
-	"sort"
 )
 
-func main() {
+var (
+	stackIsNil = errors.New("empty stack")
+)
 
-	fmt.Println(reorganizeString("vvvlo"))
+type stack []int
 
+// Push 往stack顶部插入数据
+func (s *stack) Push(e int) {
+	*s = append(*s, e)
+	return
 }
-func reorganizeString(s string) string {
-	var (
-		arr []int
-		lt  = list.New()
-		res string
-		rep = 0
-	)
-	if len(s) == 0 {
-		return ""
-	}
-	for _, v := range s {
-		arr = append(arr, int(v))
-	}
-	lt.PushBack(string(arr[0]))
-	sort.Ints(arr)
-	initLen := len(arr)
-	for i := 1; i < len(arr); i++ {
-		var (
-			try bool
-		)
-		if lt.Back().Value != string(arr[i]) {
-			lt.PushBack(string(arr[i]))
-		} else if lt.Front().Value != string(arr[i]) {
-			lt.PushFront(string(arr[i]))
-		} else {
-			var (
-				data = lt.Back()
-			)
-			for data != nil {
-				if i >= initLen {
-					if data.Prev() == nil {
-						fmt.Println(data, string(arr[i]))
-					} else {
-						fmt.Println(data, data.Prev(), data.Prev().Next(), string(arr[i]))
-					}
 
-				}
-				if data.Prev() != nil && data.Prev().Value != string(arr[i]) && data.Prev().Prev() != nil && data.Prev().Prev().Value != string(arr[i]) {
-					lt.InsertAfter(string(arr[i]), data.Prev().Prev())
-					break
-				} else {
-					if !try {
-						arr = append(arr, arr[i])
-						try = true
-						rep++
-						if rep > initLen*2 {
-							return ""
-						}
-					}
-				}
-				data = data.Prev()
-			}
-		}
+// Pop 删除stack顶部数据并且返回删除的数据
+func (s *stack) Pop() (ret int, err error) {
+	if len(*s) == 0 {
+		return 0, stackIsNil
 	}
-	var data = lt.Front()
-	println(lt.Len())
-	for data != nil {
-		res += data.Value.(string)
-		data = data.Next()
+
+	temp := *s
+	ret = temp[len(temp)-1]
+	temp = temp[:len(temp)-1]
+	*s = temp
+	return
+}
+
+// IsEmpty 判断是否为空
+func (s *stack) IsEmpty() bool {
+	return len(*s) == 0
+}
+
+// Top 获取stack顶部数据
+func (s *stack) Top() (int, error) {
+	if len(*s) == 0 {
+		return 0, stackIsNil
 	}
-	if len(res) != len(s) {
-		fmt.Println(res)
-		return ""
-	}
-	return res
+	temp := *s
+	return temp[len(temp)-1], nil
+}
+
+// Len 获取stack长度
+func (s *stack) Len() int {
+	return len(*s)
+}
+
+func main() {
+	s := new(stack)
+	// 插入1
+	s.Push(1)
+	// 插入2
+	s.Push(2)
+	// 插入5
+	s.Push(5)
+	// 获取长度
+	fmt.Println(s.Len()) // 3
+	// 获取stack顶部数据
+	fmt.Println(s.Top()) // 5
+	// 删除顶部数据
+	fmt.Println(s.Pop()) // 5
+	// 获取长度
+	fmt.Println(s.Len()) // 2
+	// 判断是否为空stack
+	fmt.Println(s.IsEmpty())
 }

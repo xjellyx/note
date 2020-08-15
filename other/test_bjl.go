@@ -10,7 +10,7 @@ import (
 
 func main() {
 	// Create the barcode
-	qrCode, _ := qr.Encode("Hello World ddddsadasd", qr.M, qr.Auto)
+	qrCode, _ := qr.Encode("http://b319.photo.store.qq.com/psb?/V11OLDdE1l74ez/Rn9P8zCw*TvCUL*nO.QyLMmZVhnzKZagf7Pqt3wjZHI!/m/dD8BAAAAAAAAnull&bo=KgM4BCoDOAQRBzA!&rf=photolist&t=5", qr.M, qr.Auto)
 
 	// Scale the barcode to 200x200 pixels
 	qrCode, _ = barcode.Scale(qrCode, 200, 200)
@@ -22,9 +22,4 @@ func main() {
 	// encode the barcode as png
 	png.Encode(file, qrCode)
 
-
 }
-
-
-
-
