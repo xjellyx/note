@@ -8,5 +8,6 @@
 *.xlsx
 *.jpg
 *.yml
+*.png
 public
 dockerFile
