@@ -15,24 +15,24 @@ import (
 
 type Compose struct {
 	config.Config `yaml:"-"`
-	Version  string                 `json:"version" yaml:"version"`
-	Services map[string]interface{} `json:"services" yaml:"services"`
+	Version       string                 `json:"version" yaml:"version"`
+	Services      map[string]interface{} `json:"services" yaml:"services"`
 }
-func main()  {
-	var(
-		f string
+
+func main() {
+	var (
+		f   string
 		err error
 	)
-	f1 :="./chart.py"
-	d,_:=ioutil.ReadFile(f1)
+	f1 := "./demo.sh"
+	d, _ := ioutil.ReadFile(f1)
 
-	if f,err = RunContainer("dsadasdasdas","chart1.py",d,[]string{
-	});err!=nil{
+	if f, err = RunContainer("dsadasdasdas", "chart1.py", d, []string{}); err != nil {
 		log.Warnln(err)
 	}
 	println(f)
 	time.Sleep(time.Second)
-	if err = Output(f);err!=nil{
+	if err = Output(f); err != nil {
 		log.Warnln(err)
 	}
 	//if err = Down(f);err!=nil{
@@ -41,10 +41,10 @@ func main()  {
 
 }
 
-func RunContainer(accessToken string, pyFilename string,pyCode []byte, pkgs []string) (ret string, err error) {
+func RunContainer(accessToken string, pyFilename string, pyCode []byte, pkgs []string) (ret string, err error) {
 	dir := fmt.Sprintf("./public/user/%s", accessToken)
 	ymlFileDir := fmt.Sprintf("%s/%s", dir, "docker-compose.yml")
-	pyFileDir := fmt.Sprintf("%s/%s", dir,pyFilename)
+	pyFileDir := fmt.Sprintf("%s/%s", dir, pyFilename)
 	pipCmds := ""
 	defer func() {
 		ret = ymlFileDir
@@ -94,19 +94,19 @@ func RunContainer(accessToken string, pyFilename string,pyCode []byte, pkgs []st
 		}
 	}
 
-	var(
+	var (
 		file *os.File
 	)
-	if file,err = os.Create(pyFileDir);err!=nil{
+	if file, err = os.Create(pyFileDir); err != nil {
 
 		return
 	}
-	if _,err = file.Write(pyCode);err!=nil{
+	if _, err = file.Write(pyCode); err != nil {
 		return
 	}
 	file.Close()
 
-	 config.LoadConfigAndSave(ymlFileDir, c, c)
+	config.LoadConfigAndSave(ymlFileDir, c, c)
 
 	cmd := exec.Command("docker-compose", "--compatibility", "-f", ymlFileDir, "up", "-d")
 	if err = cmd.Run(); err != nil {
@@ -143,12 +143,12 @@ func Down(ymlFileDir string) (err error) {
 	return os.Remove(ymlFileDir)
 }
 
-func get(spec string)(ret []string)  {
-	var(
-		data =strings.Split(spec," ")
+func get(spec string) (ret []string) {
+	var (
+		data  = strings.Split(spec, " ")
 		title = ""
-		)
-	for i,v:=range data{
+	)
+	for i, v := range data {
 		switch i {
 		case 0:
 			title = "minute"
@@ -159,64 +159,63 @@ func get(spec string)(ret []string)  {
 		case 3:
 			title = "month"
 		case 4:
-			title="week"
+			title = "week"
 		default:
 			return
 		}
-		var(
+		var (
 			mean string
-			and string
+			and  string
 		)
-		if strings.Contains(v,",")  {
-		 if !strings.Contains(v,"-") && !strings.Contains(v,"/"){
-		 	mean = " every " + v + " " + title + " run "
-		 }else {
-			 _data :=strings.Split(v,",")
-			 if len(_data)>=2{
-				 and = "and"
-			 }
-			 for _i,_v:=range _data{
-				 if strings.Contains(_v,"-") && !strings.Contains(_v,"/"){
-					 if _i==0{
-						 mean += " every " + _v +" run interval 1 " + title + " "
-					 }else {
-						 mean += and +" every " + _v +" run interval 1 " + title + " "
-					 }
-				 }else if strings.Contains(_v,"-") && strings.Contains(_v,"/"){
-					 arr:=strings.Split(_v,"/")
-					 if _i==0{
-						 mean +=   " every " + arr[0] +" "+ title + " run interval " + arr[1] +" "+title +" "
-					 }else {
-						 mean += and + " every " + arr[0] +" "+ title + " run interval " + arr[1] +" "+title +" "
-					 }
-				 }
-			 }
-		 }
-		}else {
-				if strings.Contains(v,"-") && !strings.Contains(v,"/"){
-						mean = " every " + v +" run interval 1 " + title + " "
-				}else if  strings.Contains(v,"/"){
-					arr:=strings.Split(v,"/")
-					if  strings.Contains(v,"-"){
-						mean =   " every " + arr[0] +" "+ title + " run interval " + arr[1] +" "+title +" "
-					}else {
-						mean =   " every " + arr[0] +" begin "+ title + " run interval " + arr[1] +" "+title +" "
-					}
-
-				} else {
-					if v=="*"{
-						v=""
-					}else if v=="?" {
-						continue
-					}
-					mean += " every " + v + " " + title + " run "
+		if strings.Contains(v, ",") {
+			if !strings.Contains(v, "-") && !strings.Contains(v, "/") {
+				mean = " every " + v + " " + title + " run "
+			} else {
+				_data := strings.Split(v, ",")
+				if len(_data) >= 2 {
+					and = "and"
 				}
+				for _i, _v := range _data {
+					if strings.Contains(_v, "-") && !strings.Contains(_v, "/") {
+						if _i == 0 {
+							mean += " every " + _v + " run interval 1 " + title + " "
+						} else {
+							mean += and + " every " + _v + " run interval 1 " + title + " "
+						}
+					} else if strings.Contains(_v, "-") && strings.Contains(_v, "/") {
+						arr := strings.Split(_v, "/")
+						if _i == 0 {
+							mean += " every " + arr[0] + " " + title + " run interval " + arr[1] + " " + title + " "
+						} else {
+							mean += and + " every " + arr[0] + " " + title + " run interval " + arr[1] + " " + title + " "
+						}
+					}
+				}
+			}
+		} else {
+			if strings.Contains(v, "-") && !strings.Contains(v, "/") {
+				mean = " every " + v + " run interval 1 " + title + " "
+			} else if strings.Contains(v, "/") {
+				arr := strings.Split(v, "/")
+				if strings.Contains(v, "-") {
+					mean = " every " + arr[0] + " " + title + " run interval " + arr[1] + " " + title + " "
+				} else {
+					mean = " every " + arr[0] + " begin " + title + " run interval " + arr[1] + " " + title + " "
+				}
+
+			} else {
+				if v == "*" {
+					v = ""
+				} else if v == "?" {
+					continue
+				}
+				mean += " every " + v + " " + title + " run "
+			}
 		}
-		ret = append(ret,mean)
+		ret = append(ret, mean)
 	}
 	return
 }
-
 
 // SQLColumnToHumpStyle sql转换成驼峰模式
 func SQLColumnToHumpStyle(in string) (ret string) {

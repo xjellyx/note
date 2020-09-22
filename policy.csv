@@ -1,2 +1,6 @@
-p, user ,/v1/admin/userList/:uid, GET
-p, user ,/v1/admin/edit/:uid, GET
+p, normal ,/v1/admin/userList/:uid, GET
+p, normal ,/v1/admin/edit/:uid, PUT
+p,superAdmin,/v1/admin/addMenu,POST
+g,superAdmin,normal
+g, user1,superAdmin
+g, user2,normal

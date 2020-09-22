@@ -1,2 +1,0 @@
-time="2020-07-31T11:45:31+08:00" level=info msg="Hello, World!" message="file: /data/gocode/src/github.com/olongfen/note/main/func_demo.go, line: 11, func: main"
-{"level":"info","message":"file: /data/gocode/src/github.com/olongfen/note/main/func_demo.go, line: 11, func: main","msg":"Hello, World!","time":"2020-07-31T11:46:28+08:00"}
