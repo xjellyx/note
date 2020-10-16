@@ -6,18 +6,18 @@ import (
 )
 
 var (
-	ErrNilQueue = errors.New("queue is nil")
+	ErrNilQueue = errors.New("arrQueue is nil")
 )
 
-type queue []int
+type arrQueue []int
 
 // Enqueue 队列尾部插入数据
-func (q *queue) Enqueue(e int) {
+func (q *arrQueue) Enqueue(e int) {
 	*q = append(*q, e)
 }
 
 // Dequeue 队列删除第一个元素
-func (q *queue) Dequeue() (ret int, err error) {
+func (q *arrQueue) Dequeue() (ret int, err error) {
 	if len(*q) == 0 {
 		err = ErrNilQueue
 		return
@@ -30,7 +30,7 @@ func (q *queue) Dequeue() (ret int, err error) {
 }
 
 // First 返回第一个数据
-func (q *queue) First() (ret int, err error) {
+func (q *arrQueue) First() (ret int, err error) {
 	if len(*q) == 0 {
 		err = ErrNilQueue
 		return
@@ -40,16 +40,16 @@ func (q *queue) First() (ret int, err error) {
 	return
 }
 
-func (q *queue) IsEmpty() bool {
+func (q *arrQueue) IsEmpty() bool {
 	return len(*q) == 0
 }
 
-func (q *queue) Len() int {
+func (q *arrQueue) Len() int {
 	return len(*q)
 }
 
 func main() {
-	q := new(queue)
+	q := new(arrQueue)
 	q.Enqueue(1)
 	q.Enqueue(10)
 	q.Enqueue(20)

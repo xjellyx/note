@@ -31,6 +31,7 @@ require (
 	github.com/graphql-go/graphql-go-handler v0.2.3
 	github.com/graphql-go/handler v0.2.3 // indirect
 	github.com/jehiah/go-strftime v0.0.0-20171201141054-1d33003b3869 // indirect
+	github.com/jinzhu/gorm v1.9.16
 	github.com/json-iterator/go v1.1.10 // indirect
 	github.com/lestrrat-go/file-rotatelogs v2.3.0+incompatible
 	github.com/lestrrat-go/strftime v1.0.1 // indirect
@@ -58,12 +59,11 @@ require (
 	golang.org/x/net v0.0.0-20200602114024-627f9648deb9 // indirect
 	golang.org/x/sys v0.0.0-20200602225109-6fdc65e7d980 // indirect
 	golang.org/x/text v0.3.3 // indirect
-	golang.org/x/tools v0.0.0-20200615222825-6aa8f57aacd9 // indirect
+	golang.org/x/tools v0.0.0-20200615222825-6aa8f57aacd9
 	google.golang.org/protobuf v1.24.0 // indirect
 	gopkg.in/yaml.v2 v2.3.0
 	gopkg.in/yaml.v3 v3.0.0-20200605160147-a5ece683394c // indirect
+	gorm.io/gorm v1.20.2
 	xorm.io/builder v0.3.7 // indirect
 	xorm.io/core v0.7.2 // indirect
 )
-
-replace github.com/spf13/viper v1.7.1 => github.com/olongfen/viper v1.7.2

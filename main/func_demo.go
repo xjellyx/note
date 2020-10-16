@@ -1,27 +1,101 @@
 package main
 
 import (
+	"container/list"
 	"fmt"
-	"github.com/casbin/casbin/util"
-	"github.com/casbin/casbin/v2"
-	"strings"
 )
 
 func main() {
-	e, _ := casbin.NewEnforcer("model.conf", "policy.csv")
-	e.AddFunction("ParamsMatch", ParamsMatchFunc)
-	fmt.Println(strings.Split("/v1/admin/addMenu", "?")[0])
-	fmt.Println(e.Enforce("user1", strings.Split("/v1/admin/addMenu?a=10", "?")[0], "POST"))
+	//fmt.Println(maxDepth(&Node{
+	//	Val: 1,
+	//	Children: []*Node{
+	//		{Val: 3, Children: []*Node{{Val: 5}, {Val: 6}}},
+	//		{Val: 2},
+	//		{Val: 4},
+	//	},
+	//}))
+	fmt.Println()
+	fmt.Println(
+		flatten(&TreeNode{
+			Val: 1,
+			Left: &TreeNode{
+				Val: 1,
+				//Right: &TreeNode{
+				//	Val:   5,
+				//	Left:  nil,
+				//	Right: nil,
+				//},
+
+			},
+			Right: &TreeNode{Val: 1},
+			//Right: &TreeNode{
+			//	Val: 20,
+			//	Left: &TreeNode{
+			//		Val:   15,
+			//		Left:  nil,
+			//		Right: nil,
+			//	},
+			//	Right: &TreeNode{
+			//		Val:   7,
+			//		Left:  nil,
+			//		Right: nil,
+			//	},
+			//},
+		}))
+
 }
 
-func ParamsMatch(fullNameKey1 string, key2 string) bool {
-	key1 := strings.Split(fullNameKey1, "?")[0]
-	// 剥离路径后再使用casbin的keyMatch2
-	return util.KeyMatch2(key1, key2)
+type Node struct {
+	Val      int
+	Children []*Node
 }
 
-func ParamsMatchFunc(args ...interface{}) (interface{}, error) {
-	name1 := args[0].(string)
-	name2 := args[1].(string)
-	return ParamsMatch(name1, name2), nil
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
+func levelOrder(root *Node) [][]int {
+	var (
+		queue = list.New()
+		data  [][]int
+	)
+	if root == nil {
+		return [][]int{}
+	}
+	queue.PushFront(root)
+	for queue.Len() > 0 {
+		count := queue.Len()
+		arr := []int{}
+		for count > 0 {
+			element := queue.Back()
+			node := element.Value.(*Node)
+			arr = append(arr, node.Val)
+			queue.Remove(element)
+			if len(node.Children) > 0 {
+				for _, v := range node.Children {
+					queue.PushFront(v)
+				}
+			}
+			count--
+		}
+		data = append(data, arr)
+	}
+	return data
+}
+func bsf(root *TreeNode, m *[]int) {
+	if root == nil {
+		return
+	}
+	*m = append(*m, root.Val)
+	bsf(root.Left, m)
+	bsf(root.Right, m)
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
 }
