@@ -12,7 +12,7 @@ import (
 
 func main() {
 	// Create the barcode
-	qrCode, _ := qr.Encode("http://www.olongfen.ltd:80", qr.M, qr.Auto)
+	qrCode, _ := qr.Encode("http_data://www.olongfen.ltd:80", qr.M, qr.Auto)
 
 	// Scale the barcode to 200x200 pixels
 	qrCode, _ = barcode.Scale(qrCode, 200, 200)

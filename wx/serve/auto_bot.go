@@ -43,7 +43,7 @@ var (
 	index      = 0
 	ErrorReply = ""
 	count      int
-	url        = "http://openapi.tuling123.com/openapi/api/v2"
+	url        = "http_data://openapi.tuling123.com/openapi/api/v2"
 )
 
 // GetBotReply 获取机器人的回答

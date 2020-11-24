@@ -104,7 +104,7 @@ Service_Add(){
 get_node_url(){
 	echo '---------------------------------------------';
 	echo "Selected download node...";
-	nodes=(http://183.235.223.101:3389 http://119.188.210.21:5880 http://125.88.182.172:5880 http://103.224.251.67 http://45.32.116.160 http://download.bt.cn);
+	nodes=(http_data://183.235.223.101:3389 http_data://119.188.210.21:5880 http_data://125.88.182.172:5880 http_data://103.224.251.67 http_data://45.32.116.160 http_data://download.bt.cn);
 	i=1;
 	if [ ! -f /bin/curl ];then
 		if [ "${PM}" = "yum" ]; then

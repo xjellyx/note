@@ -16,12 +16,12 @@ func main() {
 		client = &http.Client{}
 		err    error
 	)
-	reqest, err = http.NewRequest("POST", "http://srh.bankofchina.com/search/whpj/search.jsp", strings.NewReader("pjname=1316"))
+	reqest, err = http.NewRequest("POST", "http_data://srh.bankofchina.com/search/whpj/search.jsp", strings.NewReader("pjname=1316"))
 	reqest.Header.Add("User-Agent", "Mozilla/5.0 (X11; Fedora; Linux x86_64) AppleWebKit/537.36 (KHTML, like "+
 		"Gecko) Chrome/73.0.3683.75 Safari/537.36")
 	reqest.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-	reqest.Header.Add("Referer", "http://www.boc.cn/sourcedb/whpj/")
-	reqest.Header.Add("Origin", "http://srh.bankofchina.com")
+	reqest.Header.Add("Referer", "http_data://www.boc.cn/sourcedb/whpj/")
+	reqest.Header.Add("Origin", "http_data://srh.bankofchina.com")
 	reqest.Header.Add("Cookie", "JSESSIONID=0000poVLE_MQLZrCgwhZtvexMYX:-1")
 	reqest.Header.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,"+
 		"image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3")
@@ -65,7 +65,7 @@ func test() {
 }
 func priGetEthPrice() (ret float64, err error) {
 	var (
-		url  = "http://api.zb.cn/data/v1/ticker?market=eth_usdt"
+		url  = "http_data://api.zb.cn/data/v1/ticker?market=eth_usdt"
 		resp *http.Response
 		doc  *goquery.Document
 		data float64

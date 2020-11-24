@@ -21,7 +21,7 @@ func main() {
 	var (
 		err error
 		//美元实时汇率
-		url      = "http://apicloud.mob.com/exchange/rmbquot/query?key=2970534a3dbfe&bank=1"
+		url      = "http_data://apicloud.mob.com/exchange/rmbquot/query?key=2970534a3dbfe&bank=1"
 		resp     *http.Response
 		respByte []byte
 		data     *rateData

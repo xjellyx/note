@@ -18,7 +18,7 @@ require (
 	github.com/fastly/go-utils v0.0.0-20180712184237-d95a45783239 // indirect
 	github.com/fsnotify/fsnotify v1.4.7
 	github.com/gin-gonic/gin v1.6.3
-	github.com/go-playground/validator/v10 v10.3.0 // indirect
+	github.com/go-playground/validator/v10 v10.4.1 // indirect
 	github.com/go-redis/redis v6.15.7+incompatible
 	github.com/go-sql-driver/mysql v1.5.1-0.20200311113236-681ffa848bae
 	github.com/go-xorm/xorm v0.7.9
@@ -33,6 +33,7 @@ require (
 	github.com/jehiah/go-strftime v0.0.0-20171201141054-1d33003b3869 // indirect
 	github.com/jinzhu/gorm v1.9.16
 	github.com/json-iterator/go v1.1.10 // indirect
+	github.com/jung-kurt/gofpdf v1.16.2 // indirect
 	github.com/lestrrat-go/file-rotatelogs v2.3.0+incompatible
 	github.com/lestrrat-go/strftime v1.0.1 // indirect
 	github.com/lib/pq v1.8.0
@@ -53,17 +54,18 @@ require (
 	github.com/tealeg/xlsx v1.0.5
 	github.com/tebeka/strftime v0.1.5 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go v3.0.121+incompatible
+	github.com/unidoc/unipdf/v3 v3.13.0 // indirect
 	go.uber.org/zap v1.15.0 // indirect
-	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9 // indirect
-	golang.org/x/mod v0.3.0 // indirect
-	golang.org/x/net v0.0.0-20200602114024-627f9648deb9 // indirect
-	golang.org/x/sys v0.0.0-20200602225109-6fdc65e7d980 // indirect
+	golang.org/x/exp v0.0.0-20201008143054-e3b2a7f2fdc7 // indirect
 	golang.org/x/text v0.3.3 // indirect
-	golang.org/x/tools v0.0.0-20200615222825-6aa8f57aacd9
+	golang.org/x/tools v0.0.0-20201105220310-78b158585360
+	gonum.org/v1/gonum v0.8.1 // indirect
 	google.golang.org/protobuf v1.24.0 // indirect
 	gopkg.in/yaml.v2 v2.3.0
 	gopkg.in/yaml.v3 v3.0.0-20200605160147-a5ece683394c // indirect
-	gorm.io/gorm v1.20.2
+	gorm.io/driver/mysql v1.0.3
+	gorm.io/driver/postgres v1.0.2
+	gorm.io/gorm v1.20.4
 	xorm.io/builder v0.3.7 // indirect
 	xorm.io/core v0.7.2 // indirect
 )

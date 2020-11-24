@@ -63,8 +63,8 @@ func main() {
 	flag.StringVar(&protocol, "P", "binary", "Specify the protocol (binary, compact, simplejson, json)")
 	flag.StringVar(&urlString, "u", "", "Specify the url")
 	flag.BoolVar(&framed, "framed", false, "Use framed transport")
-	flag.BoolVar(&useHttp, "http", false, "Use http")
-	flag.Var(headers, "H", "Headers to set on the http(s) request (e.g. -H \"Key: Value\")")
+	flag.BoolVar(&useHttp, "http_data", false, "Use http_data")
+	flag.Var(headers, "H", "Headers to set on the http_data(s) request (e.g. -H \"Key: Value\")")
 	flag.Parse()
 
 	if len(urlString) > 0 {
@@ -75,9 +75,9 @@ func main() {
 			flag.Usage()
 		}
 		host = parsedUrl.Host
-		useHttp = len(parsedUrl.Scheme) <= 0 || parsedUrl.Scheme == "http" || parsedUrl.Scheme == "https"
+		useHttp = len(parsedUrl.Scheme) <= 0 || parsedUrl.Scheme == "http_data" || parsedUrl.Scheme == "https"
 	} else if useHttp {
-		_, err := url.Parse(fmt.Sprint("http://", host, ":", port))
+		_, err := url.Parse(fmt.Sprint("http_data://", host, ":", port))
 		if err != nil {
 			fmt.Fprintln(os.Stderr, "Error parsing URL: ", err)
 			flag.Usage()
