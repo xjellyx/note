@@ -1,121 +1,215 @@
 package main
 
 import (
-	"flag"
-	"html/template"
-	"log"
-	"net/http"
-
+	"encoding/json"
 	"github.com/gorilla/websocket"
+	"github.com/olongfen/contrib/log"
+	"net/http"
+	"sync"
 )
 
-var addr = flag.String("addr", "localhost:8080", "http_data service address")
-
-var upgrader = websocket.Upgrader{} // use default options
-
-func echo(w http.ResponseWriter, r *http.Request) {
-	c, err := upgrader.Upgrade(w, r, nil)
-	if err != nil {
-		log.Print("upgrade:", err)
-		return
-	}
-	defer c.Close()
-	for {
-		mt, message, err := c.ReadMessage()
-		if err != nil {
-			log.Println("read:", err)
-			break
-		}
-		log.Printf("recv: %s", message)
-		err = c.WriteMessage(mt, message)
-		if err != nil {
-			log.Println("write:", err)
-			break
-		}
-	}
+type Call struct {
 }
 
-func home(w http.ResponseWriter, r *http.Request) {
-	homeTemplate.Execute(w, "ws://"+r.Host+"/echo")
+func (c *Call) OnMessage(cli *ClientWS, msg []byte) {
+	log.Warnln(string(msg), ":aaaaaaaaaaaaaaaa")
+	cli.AsyncWritePacket(msg)
+
 }
 
 func main() {
-	flag.Parse()
-	log.SetFlags(0)
-	http.HandleFunc("/echo", echo)
-	http.HandleFunc("/", home)
-	log.Fatal(http.ListenAndServe(*addr, nil))
+	c := &Call{}
+	s := NewServerWs(c.OnMessage)
+	s.Wait()
+	http.HandleFunc("/", s.Start)
+	log.Fatal(http.ListenAndServe("0.0.0.0:8196", nil))
 }
 
-var homeTemplate = template.Must(template.New("").Parse(`
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<script>  
-window.addEventListener("load", function(evt) {
-    var output = document.getElementById("output");
-    var input = document.getElementById("input");
-    var ws;
-    var print = function(message) {
-        var d = document.createElement("div");
-        d.innerHTML = message;
-        output.appendChild(d);
-    };
-    document.getElementById("open").onclick = function(evt) {
-        if (ws) {
-            return false;
-        }
-        ws = new WebSocket("{{.}}");
-        ws.onopen = function(evt) {
-            print("OPEN");
-        }
-        ws.onclose = function(evt) {
-            print("CLOSE");
-            ws = null;
-        }
-        ws.onmessage = function(evt) {
-            print("RESPONSE: " + evt.data);
-        }
-        ws.onerror = function(evt) {
-            print("ERROR: " + evt.data);
-        }
-        return false;
-    };
-    document.getElementById("send").onclick = function(evt) {
-        if (!ws) {
-            return false;
-        }
-        print("SEND: " + input.value);
-        ws.send(input.value);
-        return false;
-    };
-    document.getElementById("close").onclick = function(evt) {
-        if (!ws) {
-            return false;
-        }
-        ws.close();
-        return false;
-    };
-});
-</script>
-</head>
-<body>
-<table>
-<tr><td valign="top" width="50%">
-<p>Click "Open" to create a connection to the server, 
-"Send" to send a message to the server and "Close" to close the connection. 
-You can change the message and send multiple times.
-<p>
-<form>
-<button id="open">Open</button>
-<button id="close">Close</button>
-<p><input id="input" type="text" value="Hello world!">
-<button id="send">Send</button>
-</form>
-</td><td valign="top" width="50%">
-<div id="output"></div>
-</td></tr></table>
-</body>
-</html>
-`))
+var (
+	CloseChan = make(chan int)
+)
+
+// Callback
+type Callback interface {
+	OnMessage(conn *ClientWS, msg []byte)
+}
+
+// ServerWS
+type ServerWS struct {
+	connNum   int
+	callback  func(conn *ClientWS, msg []byte)
+	lock      *sync.RWMutex
+	CacheConn map[int]*ClientWS
+	waitGroup *sync.WaitGroup
+}
+
+// NewServerWs
+func NewServerWs(c func(conn *ClientWS, msg []byte)) *ServerWS {
+	s := &ServerWS{
+		waitGroup: &sync.WaitGroup{},
+		callback:  c,
+		lock:      &sync.RWMutex{},
+		CacheConn: map[int]*ClientWS{},
+	}
+	return s
+}
+
+// DeleteCloseConn 删除已经关闭的客户端
+func (s *ServerWS) DeleteCloseConn() {
+	go func() {
+		for {
+			select {
+			case id := <-CloseChan:
+				s.lock.Lock()
+				delete(s.CacheConn, id)
+				s.lock.Unlock()
+			}
+		}
+	}()
+}
+
+func (s *ServerWS) Start(w http.ResponseWriter, r *http.Request) {
+	var (
+		upgrader = websocket.Upgrader{
+			CheckOrigin: func(r *http.Request) bool {
+				return true
+			},
+		}
+		err  error
+		conn *websocket.Conn
+	)
+	if conn, err = upgrader.Upgrade(w, r, nil); err != nil {
+		log.Fatal("[websocket upgrade failed] err: ", err)
+	}
+
+	// 发送连接成功消息
+	msg := make(map[string]interface{})
+	msg["id"] = s.connNum + 1
+	msg["message"] = "success"
+	b, _ := json.Marshal(msg)
+	conn.WriteMessage(websocket.BinaryMessage, b)
+	s.waitGroup.Add(1)
+	s.connNum++
+	go func() {
+		defer s.waitGroup.Done()
+		c := NewClientWS(s.connNum, s.callback, conn)
+		s.lock.Lock()
+		s.CacheConn[c.ID] = c
+		s.lock.Unlock()
+		c.Do()
+	}()
+	s.DeleteCloseConn()
+
+}
+
+// Wait wait service
+func (s *ServerWS) Wait() {
+	s.waitGroup.Wait()
+}
+
+type ClientWS struct {
+	ID       int
+	Conn     *websocket.Conn
+	callback func(conn *ClientWS, msg []byte)
+	Send     chan []byte
+	Msg      chan []byte
+}
+
+func NewClientWS(id int, cl func(conn *ClientWS, msg []byte), conn *websocket.Conn) *ClientWS {
+	c := &ClientWS{
+		Conn:     conn,
+		ID:       id,
+		callback: cl,
+		Send:     make(chan []byte),
+		Msg:      make(chan []byte),
+	}
+	c.Conn.SetPongHandler(func(appData string) error {
+		log.Warnln("asaaaaaaaaaaaaaaaaaaaaa")
+		return c.Conn.WriteMessage(websocket.PongMessage, []byte(appData))
+	})
+	return c
+}
+
+// AsyncWritePacket async writes a packet, this method will never block
+func (c *ClientWS) AsyncWritePacket(data []byte) {
+	c.Send <- data
+}
+
+// Close
+func (c *ClientWS) Close() {
+	c.Conn.Close()
+	go func() {
+		CloseChan <- c.ID
+	}()
+}
+
+// Write
+func (c *ClientWS) Write() {
+	defer func() {
+		c.Close()
+	}()
+
+	for {
+		select {
+		case msg, ok := <-c.Send:
+			if ok {
+				c.Conn.WriteMessage(websocket.BinaryMessage, msg)
+			}
+		}
+	}
+}
+
+// Read
+func (c *ClientWS) Read() {
+	defer func() {
+		c.Close()
+	}()
+
+	for {
+		_, message, err := c.Conn.ReadMessage()
+		if err != nil {
+			break
+		}
+		c.Msg <- message
+	}
+}
+
+// HandleMsg
+func (c *ClientWS) HandleMsg() {
+	defer func() {
+		c.Close()
+	}()
+
+	for {
+		select {
+		case p := <-c.Msg:
+			c.callback(c, p)
+		}
+	}
+}
+
+// Do
+func (c *ClientWS) Do() {
+	var (
+		wg = sync.WaitGroup{}
+	)
+	defer wg.Done()
+	wg.Add(3)
+
+	go func() {
+		defer wg.Done()
+		c.Write()
+	}()
+
+	go func() {
+		defer wg.Done()
+		c.Read()
+	}()
+
+	go func() {
+		defer wg.Done()
+		c.HandleMsg()
+	}()
+
+	wg.Wait()
+}

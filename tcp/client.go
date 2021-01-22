@@ -11,7 +11,7 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-var addr = flag.String("addr", "localhost:8196", "http_data service address")
+var addr = flag.String("addr", "192.168.3.248:8287", "http_data service address")
 
 func main() {
 	flag.Parse()
@@ -20,14 +20,13 @@ func main() {
 	interrupt := make(chan os.Signal, 1)
 	signal.Notify(interrupt, os.Interrupt)
 
-	u := url.URL{Scheme: "ws", Host: *addr, Path: "/"}
+	u := url.URL{Scheme: "ws", Host: *addr, Path: "/echo"}
 	log.Printf("connecting to %s", u.String())
 
 	c, _, err := websocket.DefaultDialer.Dial(u.String(), nil)
 	if err != nil {
 		log.Fatal("dial:", err)
 	}
-
 	done := make(chan struct{})
 
 	go func() {
@@ -39,19 +38,19 @@ func main() {
 				return
 			}
 			log.Printf("recv: %s", message)
+
 		}
 	}()
 
-	ticker := time.NewTicker(time.Second)
+	ticker := time.NewTicker(time.Second * 20)
 	defer ticker.Stop()
 
-	for i := 0; i < 3; i++ {
+	for {
 		select {
 		case <-done:
 			return
 		case t := <-ticker.C:
-
-			err := c.WriteMessage(websocket.TextMessage, []byte(t.String()))
+			err := c.WriteMessage(websocket.PingMessage, []byte(t.String()))
 			if err != nil {
 				log.Println("write:", err)
 				return
@@ -73,5 +72,4 @@ func main() {
 			return
 		}
 	}
-	time.Sleep(time.Second * 3)
 }

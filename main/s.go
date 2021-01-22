@@ -1,73 +1,75 @@
 package main
 
-import "gorm.io/gorm"
+import (
+	"bufio"
+	"encoding/json"
+	"fmt"
+	"io"
+	"io/ioutil"
+	"os"
+	"strings"
+)
 
-// Add add one record
-func (t *User) Add(db *gorm.DB) (err error) {
-	if err = db.Create(t).Error; err != nil {
-		return
+func main() {
+
+	f, _ := ioutil.ReadFile("./d.json")
+	var (
+		data = make(map[string]interface{})
+	)
+	json.Unmarshal(f, &data)
+	fmt.Println(len(data))
+	ff, _ := os.Open("./dd.txt")
+	defer ff.Close()
+	br := bufio.NewReader(ff)
+	count := 0
+	for {
+		s, _, c := br.ReadLine()
+		if c == io.EOF {
+			break
+		}
+		if strings.Contains(string(s), "Tile") {
+			count++
+		}
 	}
-	return
+	fmt.Println(count)
+
 }
 
-// Delete delete record
-func (t *User) Delete(db *gorm.DB) (err error) {
-	if err = db.Delete(t).Error; err != nil {
-		return
+func ee() {
+	var (
+		arrStr = []string{"a\\b\\c", "a\\d\\e", "b\\cst", "d\\"}
+	)
+	for _, v := range arrStr {
+		l := strings.Split(v, "\\")
+		var (
+			space = ""
+		)
+		for _i, _v := range l {
+			if _i >= 1 {
+				space += " "
+			}
+			fmt.Printf("%s%s\n", space, _v)
+		}
 	}
-	return
+
 }
 
-// Updates update record
-func (t *User) Updates(db *gorm.DB, m map[string]interface{}) (err error) {
-	if err = db.Where("id = ?", t.ID).Updates(m).Error; err != nil {
-		return
-	}
-	return
-}
-
-// GetUserAll get all record
-func GetUserAll(db *gorm.DB) (ret []*User, err error) {
-	if err = db.Find(&ret).Error; err != nil {
-		return
-	}
-	return
-}
-
-// GetUserCount get count
-func GetUserCount(db *gorm.DB) (ret int64) {
-	db.Model(&User{}).Count(&ret)
-	return
-}
-
-// GetByID get one record by ID
-func (t *User) GetByID(db *gorm.DB) (err error) {
-	if err = db.First(t, "id = ?", t.ID).Error; err != nil {
-		return
-	}
-	return
-}
-
-// DeleteByID delete record by ID
-func (t *User) DeleteByID(db *gorm.DB) (err error) {
-	if err = db.Delete(t, "id = ?", t.ID).Error; err != inl {
-		return
-	}
-	return
-}
-
-// GetByName get one record by Name
-func (t *User) GetByName(db *gorm.DB) (err error) {
-	if err = db.First(t, "name = ?", t.Name).Error; err != nil {
-		return
-	}
-	return
-}
-
-// DeleteByName delete record by Name
-func (t *User) DeleteByName(db *gorm.DB) (err error) {
-	if err = db.Delete(t, "name = ?", t.Name).Error; err != inl {
-		return
-	}
-	return
-}
+/*
+201710/t4
+201708/t6
+201409/t1.t2
+201411/t3
+201401/t6
+201907/t1
+201911/t3.t5
+201908/t4
+201909/t4
+201903/t6
+201801/t4,t6
+201210/t4
+201504/t4
+201303/t3
+201301/t4
+202001/t1
+202004/t1
+*/

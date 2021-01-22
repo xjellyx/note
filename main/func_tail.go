@@ -1,96 +1,137 @@
 package main
 
 import (
-	"bytes"
+	"encoding/json"
+	"fmt"
+	"github.com/sirupsen/logrus"
+	"io"
+	"io/ioutil"
+	"log"
+	"net/http"
 	"os"
+	"strings"
+	"time"
 )
 
-func tail(filename string, n int) (lines []string, err error) {
-	var (
-		f    os.FileInfo
-		size int64
-		fi   *os.File
-	)
+type Reader struct {
+	io.Reader
+	Total    int64
+	Current  int64
+	Filename string
+}
 
-	if f, err = os.Stat(filename); err != nil {
-		log.Errorln(err)
+func (r *Reader) Read(p []byte) (n int, err error) {
+	n, err = r.Reader.Read(p)
+	r.Current += int64(n)
+	fmt.Printf("下载 %s 进度  %.2f%% \n", r.Filename, float64(r.Current*10000/r.Total)/100)
+	var (
+		complete = float64(100)
+	)
+	if float64(r.Current*10000/r.Total)/100 == complete {
+		//
+	}
+
+	return
+}
+
+func main() {
+	taskDown()
+	t := time.NewTicker(time.Second * 60 * 10)
+	for {
+		select {
+		case <-t.C:
+			taskDown()
+		}
+	}
+	//	var state int32 = 1
+	//	sc := make(chan os.Signal, 1)
+	//	signal.Notify(sc, syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT)
+	//EXIT:
+	//	for {
+	//		sig := <-sc
+	//		logrus.Infoln("signal: ", sig.String())
+	//		switch sig {
+	//		case syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGINT:
+	//			atomic.StoreInt32(&state, 0)
+	//			break EXIT
+	//		case syscall.SIGHUP:
+	//		default:
+	//			break EXIT
+	//		}
+	//	}
+	//
+	//	logrus.Println("exit")
+	//	time.Sleep(time.Second)
+	//	os.Exit(int(atomic.LoadInt32(&state)))
+}
+
+func taskDown() {
+	var (
+		resp *http.Response
+		err  error
+		body []byte
+		m    = make(map[string]map[string]string)
+	)
+	if resp, err = http.Get("http://45.79.100.123:8011/file"); err != nil {
+		log.Fatal(err)
+	}
+	defer resp.Body.Close()
+	if body, err = ioutil.ReadAll(resp.Body); err != nil {
+		log.Fatal(err)
+	}
+	if err = json.Unmarshal(body, &m); err != nil {
+		log.Fatalln(err)
+	}
+
+	for _, v := range m {
+		go downloadFile(v)
+	}
+}
+
+func downloadFile(v map[string]string) {
+	var (
+		err    error
+		client = &http.Client{}
+		req    *http.Request
+		resp   *http.Response
+		fl     os.FileInfo
+	)
+	list := strings.Split(v["dir"], "shared")
+	if fl, err = os.Stat("." + list[1] + v["filename"]); err != nil && !os.IsNotExist(err) {
+		logrus.Errorln(err)
 		return
 	}
-	size = f.Size()
-	if fi, err = os.Open(filename); err != nil {
-		log.Errorln(err)
+
+	if req, err = http.NewRequest("GET", "http://bw.imeizi.ml:8000/financial.starwiz.cn"+list[1]+v["filename"], nil); err != nil {
+		logrus.Errorln(err)
 		return
 	}
-	defer fi.Close()
-	var (
-		b         = make([]byte, defaultBufSize)
-		readSize  = int64(defaultBufSize)
-		lineNum   = n
-		bTail     = bytes.NewBuffer([]byte{})
-		seekStart = size
-		flag      = true
-	)
-	for flag {
-		// 直接从文件头部开始
-		if seekStart < defaultBufSize {
-			readSize = seekStart
-			seekStart = 0
-		} else { // 每次从开始位置减去读取的字节大小读取数据；从文件尾部开始读取,第一次 size-readSize
-			seekStart -= readSize
-		}
-		if _, err = fi.Seek(seekStart, os.SEEK_SET); err != nil {
-			log.Errorln(err)
-			return
-		}
-		mm, _err := fi.Read(b)
-		if _err != nil {
-			err = _err
-			log.Errorln(err)
-			return
-		}
-		if mm > 0 {
-			j := mm
-			// 读取每个字节，以\n为一行
-			for i := mm - 1; i >= 0; i-- {
-				if b[i] == '\n' {
-					bLine := bytes.NewBuffer([]byte{})
-					bLine.Write(b[i+1 : j])
-					j = i
-					if bTail.Len() > 0 {
-						bLine.Write(bTail.Bytes())
-						bTail.Reset()
-					}
-
-					if (lineNum == n && bLine.Len() > 0) || lineNum < n { //skip last "\n"
-						lines = append(lines, bLine.String())
-						lineNum--
-					}
-					if lineNum == 0 {
-						flag = false
-						break
-					}
-				}
-			}
-			if flag && j > 0 {
-				if seekStart == 0 {
-					bLine := bytes.NewBuffer([]byte{})
-					bLine.Write(b[:j])
-					if bTail.Len() > 0 {
-						bLine.Write(bTail.Bytes())
-						bTail.Reset()
-					}
-					lines = append(lines, bLine.String())
-					flag = false
-				} else {
-					bb := make([]byte, bTail.Len())
-					copy(bb, bTail.Bytes())
-					bTail.Reset()
-					bTail.Write(b[:j])
-					bTail.Write(bb)
-				}
-			}
-		}
+	if resp, err = client.Do(req); err != nil {
+		logrus.Errorln(err)
+		return
 	}
+	if resp.StatusCode != http.StatusOK {
+		logrus.Errorln("err: ", resp.Status)
+		return
+	}
+	defer resp.Body.Close()
+	if fl != nil && fl.Size() == resp.ContentLength {
+		return
+	}
+	os.MkdirAll("."+list[1], 0777)
+	f, _err := os.Create("." + list[1] + v["filename"])
+	if _err != nil {
+		logrus.Errorln(_err)
+		return
+	}
+	defer f.Close()
+	r := &Reader{
+		Reader:   resp.Body,
+		Total:    resp.ContentLength,
+		Filename: v["filename"],
+	}
+	io.Copy(f, r)
 
+	http.Get("http://45.79.100.123:8011/complete?filepath=" + v["dir"] + v["filename"])
 	return
 }

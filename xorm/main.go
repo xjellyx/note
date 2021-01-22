@@ -26,7 +26,7 @@ func main() {
 		err error
 	)
 	// 连接数据库
-	if engine, err = xorm.NewEngine("mysql", "business:business@127.0.0.1:3306/business?charset=utf8"); err != nil {
+	if engine, err = xorm.NewEngine("mysql", "business:business@(127.0.0.1:3306)/business?charset=utf8"); err != nil {
 		panic(err)
 	}
 

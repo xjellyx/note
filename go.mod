@@ -12,12 +12,14 @@ require (
 	github.com/casbin/casbin/v2 v2.11.3 // indirect
 	github.com/coreos/etcd v3.3.13+incompatible
 	github.com/coreos/go-systemd v0.0.0-20190719114852-fd7a80b32e1f // indirect
+	github.com/cpuguy83/go-md2man/v2 v2.0.0 // indirect
 	github.com/dchest/captcha v0.0.0-20170622155422-6a29415a8364
 	github.com/denisenkom/go-mssqldb v0.0.0-20191124224453-732737034ffd // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/fastly/go-utils v0.0.0-20180712184237-d95a45783239 // indirect
 	github.com/fsnotify/fsnotify v1.4.7
 	github.com/gin-gonic/gin v1.6.3
+	github.com/go-openapi/spec v0.20.0 // indirect
 	github.com/go-playground/validator/v10 v10.4.1 // indirect
 	github.com/go-redis/redis v6.15.7+incompatible
 	github.com/go-sql-driver/mysql v1.5.1-0.20200311113236-681ffa848bae
@@ -40,9 +42,12 @@ require (
 	github.com/mattn/go-colorable v0.1.6 // indirect
 	github.com/mattn/go-sqlite3 v2.0.1+incompatible // indirect
 	github.com/mitchellh/mapstructure v1.3.3 // indirect
+	github.com/mozillazg/go-pinyin v0.18.0 // indirect
+	github.com/olongfen/contrib v1.0.1 // indirect
 	github.com/pelletier/go-toml v1.8.1
 	github.com/pkg/errors v0.9.1
 	github.com/rifflock/lfshook v0.0.0-20180920164130-b9218ef580f5
+	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/satori/go.uuid v1.2.0
 	github.com/shopspring/decimal v0.0.0-20200227202807-02e2044944cc // indirect
 	github.com/sirupsen/logrus v1.6.1-0.20200526070419-42baed85eb23
@@ -51,18 +56,19 @@ require (
 	github.com/spf13/viper v1.7.1 // indirect
 	github.com/stretchr/testify v1.6.1 // indirect
 	github.com/suboat/sorm v0.2.0
+	github.com/swaggo/swag v1.7.0 // indirect
 	github.com/tealeg/xlsx v1.0.5
 	github.com/tebeka/strftime v0.1.5 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go v3.0.121+incompatible
 	github.com/unidoc/unipdf/v3 v3.13.0 // indirect
 	go.uber.org/zap v1.15.0 // indirect
-	golang.org/x/exp v0.0.0-20201008143054-e3b2a7f2fdc7 // indirect
-	golang.org/x/text v0.3.3 // indirect
-	golang.org/x/tools v0.0.0-20201105220310-78b158585360
-	gonum.org/v1/gonum v0.8.1 // indirect
+	golang.org/x/exp v0.0.0-20201215153530-b5a6e247da10 // indirect
+	golang.org/x/net v0.0.0-20201207224615-747e23833adb // indirect
+	golang.org/x/tools v0.0.0-20201218024724-ae774e9781d2
+	gonum.org/v1/gonum v0.8.2 // indirect
+	google.golang.org/grpc v1.27.0
 	google.golang.org/protobuf v1.24.0 // indirect
-	gopkg.in/yaml.v2 v2.3.0
-	gopkg.in/yaml.v3 v3.0.0-20200605160147-a5ece683394c // indirect
+	gopkg.in/yaml.v2 v2.4.0
 	gorm.io/driver/mysql v1.0.3
 	gorm.io/driver/postgres v1.0.2
 	gorm.io/gorm v1.20.4
