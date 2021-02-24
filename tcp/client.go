@@ -11,7 +11,7 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-var addr = flag.String("addr", "192.168.3.248:8287", "http_data service address")
+var addr = flag.String("addr", "192.168.3.20:9001", "http_data service address")
 
 func main() {
 	flag.Parse()
@@ -20,7 +20,7 @@ func main() {
 	interrupt := make(chan os.Signal, 1)
 	signal.Notify(interrupt, os.Interrupt)
 
-	u := url.URL{Scheme: "ws", Host: *addr, Path: "/echo"}
+	u := url.URL{Scheme: "ws", Host: *addr, Path: "/pc"}
 	log.Printf("connecting to %s", u.String())
 
 	c, _, err := websocket.DefaultDialer.Dial(u.String(), nil)

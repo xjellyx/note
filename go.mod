@@ -4,9 +4,11 @@ go 1.13
 
 require (
 	github.com/360EntSecGroup-Skylar/excelize v1.4.1
+	github.com/360EntSecGroup-Skylar/excelize/v2 v2.3.2
 	github.com/PuerkitoBio/goquery v1.5.1
 	github.com/Shopify/sarama v1.26.1
 	github.com/apache/thrift v0.12.0
+	github.com/beevik/etree v1.1.0 // indirect
 	github.com/boombuler/barcode v1.0.0
 	github.com/casbin/casbin v1.9.1 // indirect
 	github.com/casbin/casbin/v2 v2.11.3 // indirect
@@ -36,6 +38,7 @@ require (
 	github.com/jinzhu/gorm v1.9.16
 	github.com/json-iterator/go v1.1.10 // indirect
 	github.com/jung-kurt/gofpdf v1.16.2 // indirect
+	github.com/leekchan/accounting v0.3.1 // indirect
 	github.com/lestrrat-go/file-rotatelogs v2.3.0+incompatible
 	github.com/lestrrat-go/strftime v1.0.1 // indirect
 	github.com/lib/pq v1.8.0
@@ -51,15 +54,17 @@ require (
 	github.com/satori/go.uuid v1.2.0
 	github.com/shopspring/decimal v0.0.0-20200227202807-02e2044944cc // indirect
 	github.com/sirupsen/logrus v1.6.1-0.20200526070419-42baed85eb23
+	github.com/skip2/go-qrcode v0.0.0-20200617195104-da1b6568686e
 	github.com/songtianyi/wechat-go v0.0.0-20181016100313-a8f687684603
 	github.com/spf13/pflag v1.0.5 // indirect
-	github.com/spf13/viper v1.7.1 // indirect
+	github.com/spf13/viper v1.7.1
 	github.com/stretchr/testify v1.6.1 // indirect
 	github.com/suboat/sorm v0.2.0
 	github.com/swaggo/swag v1.7.0 // indirect
 	github.com/tealeg/xlsx v1.0.5
 	github.com/tebeka/strftime v0.1.5 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go v3.0.121+incompatible
+	github.com/twpayne/go-kml v1.5.2 // indirect
 	github.com/unidoc/unipdf/v3 v3.13.0 // indirect
 	go.uber.org/zap v1.15.0 // indirect
 	golang.org/x/exp v0.0.0-20201215153530-b5a6e247da10 // indirect
