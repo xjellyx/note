@@ -9,7 +9,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"strings"
 	"time"
 )
 
@@ -36,33 +35,13 @@ func (r *Reader1) Read(p []byte) (n int, err error) {
 
 func main() {
 	taskDown()
-	t := time.NewTicker(time.Second * 60 * 10)
+	t := time.NewTicker(time.Second * 60 * 60)
 	for {
 		select {
 		case <-t.C:
 			taskDown()
 		}
 	}
-	//	var state int32 = 1
-	//	sc := make(chan os.Signal, 1)
-	//	signal.Notify(sc, syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT)
-	//EXIT:
-	//	for {
-	//		sig := <-sc
-	//		logrus.Infoln("signal: ", sig.String())
-	//		switch sig {
-	//		case syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGINT:
-	//			atomic.StoreInt32(&state, 0)
-	//			break EXIT
-	//		case syscall.SIGHUP:
-	//		default:
-	//			break EXIT
-	//		}
-	//	}
-	//
-	//	logrus.Println("exit")
-	//	time.Sleep(time.Second)
-	//	os.Exit(int(atomic.LoadInt32(&state)))
 }
 
 func taskDown() {
@@ -70,7 +49,7 @@ func taskDown() {
 		resp *http.Response
 		err  error
 		body []byte
-		m    = make(map[string]map[string]string)
+		m    = make(map[string]string)
 	)
 	if resp, err = http.Get("http://45.79.100.123:8011/file"); err != nil {
 		log.Fatal(err)
@@ -82,27 +61,26 @@ func taskDown() {
 	if err = json.Unmarshal(body, &m); err != nil {
 		log.Fatalln(err)
 	}
-
-	for _, v := range m {
-		go downloadFile(v)
+	for k, v := range m {
+		go downloadFile(k, v)
 	}
 }
 
-func downloadFile(v map[string]string) {
+func downloadFile(filename, dir string) {
 	var (
-		err    error
-		client = &http.Client{}
-		req    *http.Request
-		resp   *http.Response
-		fl     os.FileInfo
+		err      error
+		client   = &http.Client{}
+		req      *http.Request
+		resp     *http.Response
+		fl       os.FileInfo
+		filepath = "~/data/eogdata" + dir + filename
 	)
-	list := strings.Split(v["dir"], "shared")
-	if fl, err = os.Stat("." + list[1] + v["filename"]); err != nil && !os.IsNotExist(err) {
+	if fl, err = os.Stat(filepath); err != nil && !os.IsNotExist(err) {
 		logrus.Errorln(err)
 		return
 	}
 
-	if req, err = http.NewRequest("GET", "http://bw.imeizi.ml:8000/financial.starwiz.cn"+list[1]+v["filename"], nil); err != nil {
+	if req, err = http.NewRequest("GET", "http://bw.imeizi.ml:8000/financial.starwiz.cn"+dir+filename, nil); err != nil {
 		logrus.Errorln(err)
 		return
 	}
@@ -111,15 +89,15 @@ func downloadFile(v map[string]string) {
 		return
 	}
 	if resp.StatusCode != http.StatusOK {
-		logrus.Errorln("err: ", resp.Status)
+		logrus.Errorln("err: ", resp.Status, "\n", dir+filename)
 		return
 	}
 	defer resp.Body.Close()
 	if fl != nil && fl.Size() == resp.ContentLength {
 		return
 	}
-	os.MkdirAll("."+list[1], 0777)
-	f, _err := os.Create("." + list[1] + v["filename"])
+	os.MkdirAll("~/data/eogdata"+dir, 0777)
+	f, _err := os.Create(filepath)
 	if _err != nil {
 		logrus.Errorln(_err)
 		return
@@ -128,10 +106,10 @@ func downloadFile(v map[string]string) {
 	r := &Reader1{
 		Reader:   resp.Body,
 		Total:    resp.ContentLength,
-		Filename: v["filename"],
+		Filename: filename,
 	}
 	io.Copy(f, r)
 
-	http.Get("http://45.79.100.123:8011/complete?filepath=" + v["dir"] + v["filename"])
+	http.Get("http://45.79.100.123:8011/complete?filepath=" + dir + filename)
 	return
 }
