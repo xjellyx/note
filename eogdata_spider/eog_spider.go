@@ -18,22 +18,27 @@ import (
 	"os/signal"
 	"strconv"
 	"strings"
+	"sync"
 	"sync/atomic"
 	"syscall"
 	"time"
 )
 
 type config struct {
-	Dev         bool
-	Cookie      string
-	Dir         string
-	DownloadUrl string
+	Dev          bool
+	Cookie       string
+	Dir          string
+	DownloadUrl  string
+	TaskDownload string
+	TaskMove     string
 }
 
 var (
-	dataMap = make(map[string]map[string]string)
-	downMap = make(map[string]string)
-	cfg     = new(config)
+	dataMap      = make(map[string]map[string]string)
+	downMap      = make(map[string]string) // 已经下载完成的
+	doingDownMap = make(map[string]string) // 正在进行下载的文件
+	cfg          = new(config)
+	lock         = sync.RWMutex{}
 )
 
 func init() {
@@ -67,15 +72,15 @@ func main() {
 		jobCron = cron.New(cron.WithParser(secondParser), cron.WithChain())
 	)
 	// 每月1号执行一次
-	if _, err := jobCron.AddFunc("0 0 1 * ?", taskDownload); err != nil {
+	if _, err := jobCron.AddFunc(cfg.TaskDownload, taskDownload); err != nil {
 		logrus.Fatalln(err)
 	}
 	// 每月2号执行一次
-	if _, err := jobCron.AddFunc("0 0 2 * ?", mvDownloadFile); err != nil {
+	if _, err := jobCron.AddFunc(cfg.TaskMove, mvDownloadFile); err != nil {
 		logrus.Fatalln(err)
 	}
 	jobCron.Start()
-	go taskDownload()
+	taskDownload()
 	mvDownloadFile()
 	var state int32 = 1
 	sc := make(chan os.Signal, 1)
@@ -138,11 +143,12 @@ func taskDownload() {
 				logrus.Infoln(resp.Status)
 			}
 		}
-		logrus.Infoln("异步下载完成")
+		lock.Lock()
 		for _, v := range data {
-			downMap[v["filename"]] = v["dir"]
+			doingDownMap[v["filename"]] = v["dir"]
 		}
-		saveDownFile()
+		lock.Unlock()
+		logrus.Infoln("异步下载完成")
 	} else {
 		logrus.Println("没有新文件下载")
 	}
@@ -195,10 +201,11 @@ func getFileUrl() {
 
 func mvDownloadFile() {
 	var (
-		err   error
-		files []os.FileInfo
-		d     []byte
-		m     = make(map[string]string)
+		err    error
+		files  []os.FileInfo
+		d      []byte
+		isSave bool
+		m      = make(map[string]string)
 	)
 	d, _ = ioutil.ReadFile("./down_file.json")
 	_ = json.Unmarshal(d, &m)
@@ -206,8 +213,10 @@ func mvDownloadFile() {
 		logrus.Errorln(err)
 		return
 	}
+	// 移动下载完成的文件
+	lock.Lock()
 	for _, item := range files {
-		if val, ok := m[item.Name()]; ok {
+		if val, ok := doingDownMap[item.Name()]; ok {
 			if !exists(val) {
 				if err = os.MkdirAll(cfg.Dir+val, 0777); err != nil {
 					logrus.Errorln(err)
@@ -218,7 +227,14 @@ func mvDownloadFile() {
 				logrus.Errorln(err)
 				continue
 			}
+			downMap[item.Name()] = val
+			delete(doingDownMap, item.Name())
+			isSave = true
 		}
+	}
+	lock.Unlock()
+	if isSave {
+		saveDownFile()
 	}
 
 }

@@ -2,21 +2,20 @@ package main
 
 import (
 	"fmt"
-	"strings"
+	"unicode"
 )
 
 func main() {
-	str := `json:"dictValue" gorm:"default:'';comment('字典键值') ;type:varchar(100);uniqueIndex:dict_value_"`
-	if strings.Contains(str, "uniqueIndex:") {
-		fmt.Println(strings.Contains(strings.Split(str, "uniqueIndex:")[1], "dict_value_"))
-	}
-}
 
-func d() (err error) {
-	s := func() bool {
-		err = fmt.Errorf("%s", "dfadasfasd")
-		return false
+	fmt.Println(IsChinese("fgdasdf"))
+}
+func IsChinese(str string) bool {
+	var count int
+	for _, v := range str {
+		if unicode.Is(unicode.Han, v) {
+			count++
+			break
+		}
 	}
-	s()
-	return
+	return count > 0
 }

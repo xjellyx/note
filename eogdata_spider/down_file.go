@@ -6,7 +6,6 @@ import (
 	"github.com/sirupsen/logrus"
 	"io"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"os"
 	"time"
@@ -52,14 +51,17 @@ func taskDown() {
 		m    = make(map[string]string)
 	)
 	if resp, err = http.Get("http://45.79.100.123:8011/file"); err != nil {
-		log.Fatal(err)
+		logrus.Errorln(err)
+		return
 	}
 	defer resp.Body.Close()
 	if body, err = ioutil.ReadAll(resp.Body); err != nil {
-		log.Fatal(err)
+		logrus.Errorln(err)
+		return
 	}
 	if err = json.Unmarshal(body, &m); err != nil {
-		log.Fatalln(err)
+		logrus.Errorln(err)
+		return
 	}
 	for k, v := range m {
 		go downloadFile(k, v)
