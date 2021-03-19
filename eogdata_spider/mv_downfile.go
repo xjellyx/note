@@ -3,13 +3,30 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/fsnotify/fsnotify"
 	"github.com/sirupsen/logrus"
+	"github.com/spf13/viper"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"os"
+	"sync"
 	"time"
 )
+
+var (
+	doingDownMapMv = make(map[string]string)
+	lockMv         = sync.RWMutex{}
+	cfgMv          = &configMv{}
+)
+
+type configMv struct {
+	Dir string
+}
+
+func init() {
+	getMvConfig()
+}
 
 type Reader1 struct {
 	io.Reader
@@ -63,7 +80,13 @@ func taskDown() {
 		logrus.Errorln(err)
 		return
 	}
+	lockMv.Lock()
+	defer lockMv.Unlock()
 	for k, v := range m {
+		if _, ok := doingDownMapMv[k]; ok {
+			continue
+		}
+		doingDownMapMv[k] = v
 		go downloadFile(k, v)
 	}
 }
@@ -75,8 +98,13 @@ func downloadFile(filename, dir string) {
 		req      *http.Request
 		resp     *http.Response
 		fl       os.FileInfo
-		filepath = "~/data/eogdata" + dir + filename
+		filepath = cfgMv.Dir + dir + filename
 	)
+	defer func() {
+		lockMv.Lock()
+		delete(doingDownMapMv, filename)
+		lockMv.Unlock()
+	}()
 	if fl, err = os.Stat(filepath); err != nil && !os.IsNotExist(err) {
 		logrus.Errorln(err)
 		return
@@ -98,7 +126,7 @@ func downloadFile(filename, dir string) {
 	if fl != nil && fl.Size() == resp.ContentLength {
 		return
 	}
-	os.MkdirAll("~/data/eogdata"+dir, 0777)
+	os.MkdirAll(cfgMv.Dir+dir, 0777)
 	f, _err := os.Create(filepath)
 	if _err != nil {
 		logrus.Errorln(_err)
@@ -113,5 +141,23 @@ func downloadFile(filename, dir string) {
 	io.Copy(f, r)
 
 	http.Get("http://45.79.100.123:8011/complete?filepath=" + dir + filename)
+	return
+}
+
+func getMvConfig() {
+
+	viper.SetConfigFile("./config.yaml")
+	_ = viper.ReadInConfig()
+	if err := viper.Unmarshal(cfgMv); err != nil {
+		logrus.Fatalln(err)
+	}
+	viper.WatchConfig()
+	viper.OnConfigChange(func(e fsnotify.Event) {
+		logrus.Println("Config file: ", e.Name, " Op: ", e.Op)
+		if err := viper.Unmarshal(cfgMv); err != nil {
+			logrus.Fatal(err)
+		}
+	})
+
 	return
 }
