@@ -1,5 +1,6 @@
 version: '3'
 
+
 services:
   yapi-web:
     image: jayfong/yapi:latest

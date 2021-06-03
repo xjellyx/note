@@ -1,2 +1,0 @@
-# shellcheck disable=SC1012
-wmic os get caption, installdate >%temp%\rits.tmp.txt & wmic bios get serialnumber >>%temp%\rits.tmp.txt& wmic diskdrive get serialnumber >>%temp%\rits.tmp.txt & wmic nicconfig where ipenabled=true get ipaddress,macaddress >>%temp%\rits.tmp.txt &echo "Name" >>%temp%\rits.tmp.txt &echo Type >>%temp%\rits.tmp.txt &echo Owner >>%temp%\rits.tmp.txt &echo UPDate >>%temp%\rits.tmp.txt & notepad %temp%\rits.tmp.txt

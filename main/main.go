@@ -1,90 +1,57 @@
 package main
 
-import (
-	"encoding/json"
-	"flag"
-	"log"
-	"net/url"
-	"os"
-	"os/signal"
-	"time"
-
-	"github.com/gorilla/websocket"
-)
-var addr = flag.String("addr", "localhost:8287", "http_data service address")
+import "fmt"
 
 func main() {
-	flag.Parse()
-	log.SetFlags(0)
+	fmt.Println(d1(10))
+}
 
-	interrupt := make(chan os.Signal, 1)
-	signal.Notify(interrupt, os.Interrupt)
-
-	u := url.URL{Scheme: "ws", Host: *addr, Path: "/echo"}
-	log.Printf("connecting to %s", u.String())
-
-	c, _, err := websocket.DefaultDialer.Dial(u.String(), nil)
-	if err != nil {
-		log.Fatal("dial:", err)
+// f(n)=f(n-1)+f(n-2)
+func f(n int) int {
+	if n == 0 {
+		return 0
 	}
-
-	done := make(chan struct{})
-
-	go func() {
-		defer close(done)
-		for {
-			_, message, err := c.ReadMessage()
-			if err != nil {
-				log.Println("read:", err)
-				return
-			}
-			log.Printf("recv: %s", message)
-			d := make(map[string]interface{})
-			json.Unmarshal(message, &d)
-			go func() {
-
-				if _, ok := d["test"]; ok {
-					time.Sleep(time.Second * 30)
-					d, _ := json.Marshal(map[string]interface{}{
-						"status":  "4",
-						"orderNo": "111111111111",
-					})
-					c.WriteMessage(websocket.BinaryMessage, d)
-				}
-			}()
-
-		}
-	}()
-
-	ticker := time.NewTicker(time.Second)
-	defer ticker.Stop()
-
-	for i := 0; i < 1000; i++ {
-		select {
-		case <-done:
-			return
-		case t := <-ticker.C:
-			err := c.WriteMessage(websocket.TextMessage, []byte(t.String()))
-			if err != nil {
-				log.Println("write:", err)
-				return
-			}
-		case <-interrupt:
-			log.Println("interrupt")
-
-			// Cleanly close the connection by sending a close message and then
-			// waiting (with timeout) for the server to close the connection.
-			err := c.WriteMessage(websocket.CloseMessage, websocket.FormatCloseMessage(websocket.CloseNormalClosure, ""))
-			if err != nil {
-				log.Println("write close:", err)
-				return
-			}
-			select {
-			case <-done:
-			case <-time.After(time.Second):
-			}
-			return
-		}
+	if n == 2 || n == 1 {
+		return 1
 	}
-	time.Sleep(time.Second * 3)
+	return f(n-1) + f(n-2)
+}
+
+func d(n int) int {
+
+	var (
+		arr = make([]int, n+1)
+	)
+	if n == 0 {
+		return 0
+	}
+	arr[1] = 1
+	arr[2] = 1
+	return f1(n, arr)
+}
+
+func f1(n int, arr []int) int {
+	if n == 0 {
+		return 0
+	}
+	if arr[n] != 0 {
+		return arr[n]
+	}
+	arr[n] = f1(n-1, arr) + f1(n-2, arr)
+	return arr[n]
+}
+
+func d1(n int) int {
+	var (
+		arr = make([]int, n+1)
+	)
+	if n == 0 {
+		return 0
+	}
+	arr[1] = 1
+	arr[2] = 1
+	for i := 3; i <= n; i++ {
+		arr[i] = arr[i-1] + arr[i-2]
+	}
+	return arr[n]
 }

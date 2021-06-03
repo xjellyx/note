@@ -11,5 +11,7 @@
 *.txt
 *.json
 *.png
+*.tif
+*.docx
 public
 dockerFile
