@@ -1,0 +1,26 @@
+version: v1beta1
+plugins:
+  - name: go
+    out: gen/demo
+    opt:
+      - paths=source_relative
+
+  - name: go-grpc
+    out: gen/demo
+    opt:
+      - paths=source_relative
+
+  - name: grpc-gateway
+    out: gen/demo
+    opt:
+      - paths=source_relative
+      - generate_unbound_methods=true
+      - grpc_api_configuration=getway.config.yaml
+      - logtostderr=true
+      - register_func_suffix=GW
+      - allow_delete_body=true
+  - name: openapiv2
+    out: gen/demo
+    opt:
+        - logtostderr=true
+
