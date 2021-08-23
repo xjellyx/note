@@ -51,19 +51,163 @@ func (r Reds) Len() int {
 	return len(r)
 }
 
+type User struct {
+	gorm.Model
+	UUID     string `gorm:"uniqueIndex;not null;type:varchar(36)"`
+	Username string `gorm:"uniqueIndex;not null;type:varchar(36)"` // 用户名
+	Password string `gorm:"type:varchar(16)"`                      // 密码
+	Nickname string `gorm:"type:varchar(36)"`                      // 昵称
+	IsAdmin  bool   `gorm:"default: false"`                        // true：是管理员
+}
+
+func (u *User) Updates() (err error) {
+	if err = db.Model(u).Updates(u).Error; err != nil {
+		return
+	}
+
+	return
+}
+
 func main() {
-	db.AutoMigrate(&CaiPiao{})
-	//bd, _ := ioutil.ReadFile("./ssq.json")
+	//db.AutoMigrate(&CaiPiao{})
+	//bd, _ := ioutil.ReadFile("./t.json")
 	//var data CaiPiaos
 	//json.Unmarshal(bd, &data)
 	//sort.Sort(data)
 	//for _, v := range data {
-	//	if v.Code != "2021078" {
-	//		continue
-	//	}
-	//	arr := strings.Split(v.Red, ",")
 	//	db.Create(v)
 	//}
+
+	// var data CaiPiaos
+	probably()
+
+}
+
+type storeProbably struct {
+	Key   string
+	Value int
+}
+
+type storeProbablyArr []storeProbably
+
+func (s storeProbablyArr) Len() int {
+	return len(s)
+}
+
+func (s storeProbablyArr) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+func (s storeProbablyArr) Less(i, j int) bool {
+	return s[i].Value > s[j].Value
+}
+
+func probably() {
+	var (
+		limit     = 100
+		probablyR = make(map[string]int)
+		probablyB = make(map[string]int)
+		data      []*CaiPiao
+	)
+	db.Order("code desc").Limit(limit).Find(&data)
+	for _, v := range data {
+		for _, s := range strings.Split(v.Red, ",") {
+			if val, ok := probablyR[s]; ok {
+				probablyR[s] = val + 1
+			} else {
+				probablyR[s] = 1
+			}
+		}
+		if val, ok := probablyB[v.Blue]; !ok {
+			probablyB[v.Blue] = 1
+		} else {
+			probablyB[v.Blue] = val + 1
+		}
+	}
+	var (
+		redArr  storeProbablyArr
+		blueArr storeProbablyArr
+	)
+	for k, v := range probablyR {
+		redArr = append(redArr, storeProbably{
+			Key:   k,
+			Value: v,
+		})
+	}
+
+	for k, v := range probablyB {
+		blueArr = append(blueArr, storeProbably{
+			Key:   k,
+			Value: v,
+		})
+	}
+	sort.Sort(redArr)
+	sort.Sort(blueArr)
+	var (
+		redResArr  storeProbablyArr
+		blueResArr storeProbablyArr
+	)
+	for _, v := range redArr {
+		if float64(v.Value)/float64(limit) >= 0.2 {
+			redResArr = append(redResArr, v)
+		}
+	}
+
+	for _, v := range blueArr {
+		if float64(v.Value)/float64(limit) >= 0.065 {
+			blueResArr = append(blueResArr, v)
+		}
+	}
+
+	if len(redResArr) == 0 {
+		return
+	}
+
+	if len(blueResArr) == 0 {
+		return
+	}
+
+	fn := func() (string, string) {
+		var (
+			redKey  = make(map[string]bool)
+			redData []string
+		)
+
+		for len(redData) < 6 {
+			indexRed, _ := rand.Int(rand.Reader, big.NewInt(int64(len(redResArr))))
+			val := redResArr[int(indexRed.Int64())].Key
+			if _, ok := redKey[redResArr[int(indexRed.Int64())].Key]; !ok {
+				redKey[redResArr[int(indexRed.Int64())].Key] = true
+				redData = append(redData, val)
+			} else {
+				continue
+			}
+		}
+		sort.Sort(Reds(redData))
+		r := strings.Join(redData, ",")
+		index, _ := rand.Int(rand.Reader, big.NewInt(int64(len(blueResArr))))
+		b := blueResArr[index.Int64()].Key
+		return r, b
+	}
+	for i := 0; i < 5; i++ {
+		for {
+			d, _ := rand.Int(rand.Reader, big.NewInt(7000000000))
+			if d.Int64() == 19950817 {
+				break
+			}
+		}
+		r, b := fn()
+		if err := db.Model(&CaiPiao{}).Where("red = ?", r).Find(r).Error; err != nil {
+			logrus.Errorln(err)
+			i--
+			continue
+		}
+		fmt.Println(r, b)
+	}
+
+}
+
+func randCaiPiao() {
 	var (
 		count int64
 	)
@@ -76,8 +220,7 @@ func main() {
 		for {
 			count++
 			d, _ := rand.Int(rand.Reader, big.NewInt(1500000000))
-			zhongiang, _ := rand.Int(rand.Reader, big.NewInt(1500000000))
-			if d.Int64() == zhongiang.Int64() {
+			if d.Int64() == 19950817 {
 				break
 			}
 		}
@@ -89,9 +232,6 @@ func main() {
 		}
 		fmt.Println(r, b)
 	}
-	// var data CaiPiaos
-	fmt.Println(count)
-
 }
 
 func gen() (string, string) {
