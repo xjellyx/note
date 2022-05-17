@@ -1,185 +1,171 @@
 package main
 
 import (
-	"context"
-	"database/sql/driver"
+	"database/sql"
 	"encoding/json"
+	"errors"
+	"flag"
 	"fmt"
-	"github.com/gin-gonic/gin"
-	"github.com/opentracing-contrib/go-gin/ginhttp"
-	"github.com/opentracing/opentracing-go"
-	tracerLog "github.com/opentracing/opentracing-go/log"
-	"github.com/prometheus/client_golang/prometheus"
-	"github.com/sirupsen/logrus"
-	"github.com/uber/jaeger-client-go"
-	"github.com/uber/jaeger-client-go/config"
-	jaegerlog "github.com/uber/jaeger-client-go/log"
-	jprom "github.com/uber/jaeger-lib/metrics/prometheus"
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
 	"io"
+	"os"
+
+	"github.com/lib/pq"
+
+	geom "github.com/twpayne/go-geom"
+	"github.com/twpayne/go-geom/encoding/ewkb"
+	"github.com/twpayne/go-geom/encoding/ewkbhex"
+	"github.com/twpayne/go-geom/encoding/geojson"
 )
 
-const samplerParam = 1
-const reportingHost = "192.168.3.85:6831"
-
-type TraceHandler struct {
-	Tracer opentracing.Tracer
-	Closer io.Closer
-}
-
-type CaiPiao struct {
-	ID          uint        `json:"id" gorm:"primaryKey"`
-	Name        string      `json:"name" gorm:"type:varchar(36)"`
-	Code        string      `json:"code" gorm:"type:varchar(12);uniqueIndex"`
-	Date        string      `json:"date" gorm:"type:varchar(36)"`
-	Week        string      `json:"week" gorm:"type:varchar(36)"`
-	Red         string      `json:"red" gorm:"type:varchar(36)"`
-	Blue        string      `json:"blue" gorm:"type:varchar(36)"`
-	Blue2       string      `json:"blue2" gorm:"type:varchar(36)"`
-	Sales       string      `json:"sales" gorm:"type:varchar(36)"`
-	PoolMoney   string      `json:"poolmoney" gorm:"type:varchar(36)"`
-	Content     string      `json:"content" `
-	AddMoney    string      `json:"addmoney" gorm:"type:varchar(36)"`
-	AddMoney2   string      `json:"addmoney2" gorm:"type:varchar(36)"`
-	Msg         string      `json:"msg" `
-	Z2Add       string      `json:"z2add" gorm:"type:varchar(36)"`
-	M2Add       string      `json:"m2add" gorm:"type:varchar(36)"`
-	PrizeGrades PrizeGrades `json:"prizegrades" gorm:"type: json"`
-	Zj1         string      `json:"zj1,omitempty"`
-	Mj1         string      `json:"mj1,omitempty"`
-	Zj6         string      `json:"zj6,omitempty"`
-	Mj6         string      `json:"mj6,omitempty"`
-}
-
-type PrizeGrades []*PrizeGrade
-
-func (p *PrizeGrades) Scan(in interface{}) error {
-	return json.Unmarshal(in.([]byte), p)
-}
-
-func (p PrizeGrades) Value() (driver.Value, error) {
-	return json.Marshal(p)
-}
-
-type PrizeGrade struct {
-	Type      int    `json:"type"`
-	TypeNum   string `json:"type_num"`
-	TypeMoney string `json:"type_money"`
-}
-
-var globalTracerHandler *TraceHandler
 var (
-	db *gorm.DB
+	dsn = flag.String("dsn", "postgres://root:starwiz123@localhost:5439/gis?binary_parameters=yes&sslmode=disable", "data source name")
+
+	create   = flag.Bool("create", false, "create database schema")
+	populate = flag.Bool("populate", false, "populate waypoints")
+	read     = flag.Bool("read", false, "import waypoint from stdin in GeoJSON format")
+	write    = flag.Bool("write", false, "write waypoints to stdout in GeoJSON format")
 )
 
-func init() {
-	cfg := config.Configuration{ServiceName: "jaeger_test",
-		Sampler: &config.SamplerConfig{Type: jaeger.SamplerTypeConst,
-			Param: samplerParam},
-		Reporter: &config.ReporterConfig{
-			LogSpans:           true,
-			LocalAgentHostPort: reportingHost,
-		}}
-	me := jprom.New(jprom.WithRegisterer(prometheus.NewPedanticRegistry()))
-	tracer, closer, err := cfg.NewTracer(config.Logger(jaegerlog.StdLogger), config.Metrics(me))
+// A Waypoint is a location with an identifier and a name.
+type Waypoint struct {
+	ID       int             `json:"id"`
+	Name     string          `json:"name"`
+	Geometry json.RawMessage `json:"geometry"`
+}
+
+// createDB demonstrates create a PostgreSQL/PostGIS database with a table with
+// a geometry column.
+func createDB(db *sql.DB) error {
+	_, err := db.Exec(`
+		CREATE EXTENSION IF NOT EXISTS postgis;
+		CREATE TABLE IF NOT EXISTS waypoints (
+			id SERIAL PRIMARY KEY,
+			name TEXT NOT NULL,
+			geom geometry(POINT, 4326) NOT NULL
+		);
+	`)
+	return err
+}
+
+// populateDB demonstrates populating a PostgreSQL/PostGIS database using
+// pq.CopyIn for fast imports.
+func populateDB(db *sql.DB) error {
+	tx, err := db.Begin()
 	if err != nil {
-		logrus.WithFields(logrus.Fields{"error": err.Error()}).Errorf("%s", "初始化tracer失败")
+		return err
 	}
-	globalTracerHandler = &TraceHandler{Tracer: tracer, Closer: closer}
-	opentracing.SetGlobalTracer(globalTracerHandler.Tracer)
-	if db, err = gorm.Open(postgres.Open(fmt.Sprintf("%s://%s:%s@%s:%s/%s?sslmode=disable", "postgres", "business",
-		"business", "127.0.0.1", "5432", "business"))); err != nil {
-		logrus.Panic(err)
+	defer tx.Rollback()
+	stmt, err := tx.Prepare(pq.CopyIn("waypoints", "name", "geom"))
+	if err != nil {
+		return err
 	}
-	db.Use(&OpentracingPlugin{})
-}
-
-func get(c *gin.Context) {
-	//span := globalTracerHandler.Tracer.StartSpan("hello")
-	span, _ := opentracing.StartSpanFromContext(c.Request.Context(), "获取数据")
-	defer span.Finish()
-
-	ctx := opentracing.ContextWithSpan(c.Request.Context(), span)
-	c.JSON(200, gin.H{"data": srvGet(ctx, c.Query("say"))})
-}
-
-func srvGet(ctx context.Context, param string) (res []*CaiPiao) {
-	// 创建子span
-	span, _ := opentracing.StartSpanFromContext(ctx, "返回数据")
-	defer func() {
-		span.SetTag("recv", param)
-		span.Finish()
-	}()
-	db.WithContext(ctx).Model(&CaiPiao{}).Limit(10).Find(&res)
-	return res
-}
-
-// 包内静态变量
-const gormSpanKey = "__gorm_span"
-const (
-	callBackBeforeName = "opentracing:before"
-	callBackAfterName  = "opentracing:after"
-)
-
-type OpentracingPlugin struct{}
-
-// 告诉编译器这个结构体实现了gorm.Plugin接口
-var _ gorm.Plugin = &OpentracingPlugin{}
-
-func (op *OpentracingPlugin) Initialize(db *gorm.DB) (err error) {
-	// 开始前 - 并不是都用相同的方法，可以自己自定义
-	db.Callback().Create().Before("gorm:before_create").Register(callBackBeforeName, before)
-	db.Callback().Query().Before("gorm:query").Register(callBackBeforeName, before)
-	db.Callback().Delete().Before("gorm:before_delete").Register(callBackBeforeName, before)
-	db.Callback().Update().Before("gorm:setup_reflect_value").Register(callBackBeforeName, before)
-	db.Callback().Row().Before("gorm:row").Register(callBackBeforeName, before)
-	db.Callback().Raw().Before("gorm:raw").Register(callBackBeforeName, before)
-
-	// 结束后 - 并不是都用相同的方法，可以自己自定义
-	db.Callback().Create().After("gorm:after_create").Register(callBackAfterName, after)
-	db.Callback().Query().After("gorm:after_query").Register(callBackAfterName, after)
-	db.Callback().Delete().After("gorm:after_delete").Register(callBackAfterName, after)
-	db.Callback().Update().After("gorm:after_update").Register(callBackAfterName, after)
-	db.Callback().Row().After("gorm:row").Register(callBackAfterName, after)
-	db.Callback().Raw().After("gorm:raw").Register(callBackAfterName, after)
-	return
-}
-
-func (op *OpentracingPlugin) Name() string {
-	return "opentracingPlugin"
-}
-func before(db *gorm.DB) {
-	span, _ := opentracing.StartSpanFromContext(db.Statement.Context, "gorm")
-	// 利用db实例去传递span
-	db.InstanceSet(gormSpanKey, span)
-}
-
-func after(db *gorm.DB) {
-	_span, exist := db.InstanceGet(gormSpanKey)
-	if !exist {
-		return
+	for _, waypoint := range []struct {
+		name string
+		geom *geom.Point
+	}{
+		{"London", geom.NewPoint(geom.XY).MustSetCoords([]float64{0.1275, 51.50722}).SetSRID(4326)},
+	} {
+		ewkbhexGeom, err := ewkbhex.Encode(waypoint.geom, ewkbhex.NDR)
+		if err != nil {
+			return err
+		}
+		if _, err := stmt.Exec(waypoint.name, ewkbhexGeom); err != nil {
+			return err
+		}
 	}
-	// 断言类型
-	span, ok := _span.(opentracing.Span)
+	if _, err := stmt.Exec(); err != nil {
+		return err
+	}
+	return tx.Commit()
+}
+
+// readGeoJSON demonstrates reading data in GeoJSON format and inserting it
+// into a database in EWKB format.
+func readGeoJSON(db *sql.DB, r io.Reader) error {
+	var waypoint Waypoint
+	if err := json.NewDecoder(r).Decode(&waypoint); err != nil {
+		return err
+	}
+	var geometry geom.T
+	if err := geojson.Unmarshal(waypoint.Geometry, &geometry); err != nil {
+		return err
+	}
+	point, ok := geometry.(*geom.Point)
 	if !ok {
-		return
+		return errors.New("geometry is not a point")
 	}
+	_, err := db.Exec(`
+		INSERT INTO waypoints(name, geom) VALUES ($1, $2);
+	`, waypoint.Name, &ewkb.Point{Point: point.SetSRID(4326)})
+	return err
+}
 
-	defer span.Finish()
-
-	if db.Error != nil {
-		span.LogFields(tracerLog.Error(db.Error))
+// writeGeoJSON demonstrates reading data from a database in EWKB format and
+// writing it as GeoJSON.
+func writeGeoJSON(db *sql.DB, w io.Writer) error {
+	rows, err := db.Query(`SELECT ST_AsTIFF(rast, 'LZW') AS rasttiff FROM test WHERE rid=1;`)
+	if err != nil {
+		return err
 	}
+	defer rows.Close()
+	for rows.Next() {
+		var id int
+		var name []byte
+		//var ewkbPoint ewkb.Point
+		if err := rows.Scan(&id, &name); err != nil {
+			return err
+		}
+		fmt.Println(id, name)
+		os.WriteFile("a.png", name, 0777)
+		//geometry, err := geojson.Marshal(ewkbPoint.Point)
+		//if err != nil {
+		//	return err
+		//}
+		//if err := json.NewEncoder(w).Encode(&Waypoint{
+		//	ID:       id,
+		//	Name:     name,
+		//	Geometry: geometry,
+		//}); err != nil {
+		//	return err
+		//}
+	}
+	return nil
+}
 
-	span.LogFields(tracerLog.String("sql", db.Dialector.Explain(db.Statement.SQL.String(), db.Statement.Vars...)))
-
+func run() error {
+	flag.Parse()
+	db, err := sql.Open("postgres", *dsn)
+	if err != nil {
+		return err
+	}
+	defer db.Close()
+	if err := db.Ping(); err != nil {
+		return err
+	}
+	//if *create {
+	//	if err := createDB(db); err != nil {
+	//		return err
+	//	}
+	//}
+	if *populate {
+		if err := populateDB(db); err != nil {
+			return err
+		}
+	}
+	//if *read {
+	//	if err := readGeoJSON(db, os.Stdin); err != nil {
+	//		return err
+	//	}
+	//}
+	if err := writeGeoJSON(db, os.Stdout); err != nil {
+		return err
+	}
+	return nil
 }
 
 func main() {
-
-	mux := gin.Default()
-	mux.Use(ginhttp.Middleware(globalTracerHandler.Tracer))
-	mux.GET("", get)
-	mux.Run()
+	if err := run(); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
 }

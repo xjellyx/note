@@ -15,3 +15,8 @@ t.json
 *.docx
 public
 dockerFile
+static
+*.kml
+*.tiff
+*.zip
+

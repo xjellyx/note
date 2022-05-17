@@ -199,6 +199,13 @@ func max(val int, val2 int) int {
 	return val2
 }
 
+func min(val int, val2 int) int {
+	if val < val2 {
+		return val
+	}
+	return val2
+}
+
 // rob2 打家劫舍二
 func rob2(nums []int) int {
 	var (
@@ -263,6 +270,248 @@ func jump(nums []int) int {
 	}
 	return steps
 }
+
+func maxSubarraySumCircular(nums []int) int {
+	l := len(nums)
+	maxVal := nums[0]
+	if l == 1 {
+		return maxVal
+	}
+	for i := 0; i < l; i++ {
+		maxVal = max(maxVal, nums[i])
+		v := nums[i]
+
+		for j := i + 1; j <= l; j++ {
+			if j < l {
+				v += nums[j]
+			} else {
+				for m := 0; m < i; m++ {
+					v += nums[m]
+					maxVal = max(maxVal, v)
+				}
+			}
+
+			maxVal = max(maxVal, v)
+		}
+
+	}
+	return maxVal
+}
+
+// maxProfit 买卖股票最大收益
+func maxProfit(nums []int) int {
+	var (
+		minV = nums[0]
+		maxV = 0
+		l    = len(nums)
+	)
+	for i := 0; i < l; i++ {
+		maxV = max(maxV, nums[i]-minV)
+		minV = min(minV, nums[i])
+	}
+	return maxV
+}
+
+// maxProfit2 买卖股票最大收益 2
+func maxProfit2(nums []int) int {
+	var (
+		sum int
+		l   = len(nums)
+	)
+	for i := 1; i < l; i++ {
+		val := nums[i] - nums[i-1]
+		if val > 0 {
+			sum += val
+		}
+	}
+	return sum
+}
+
+// generateParenthesis 括号生成
+func generateParenthesis(n int) []string {
+
+	res := make([]string, 0, 16)
+	var dfs func(path string, left, right int)
+	dfs = func(path string, left, right int) {
+		if left > n || right > left {
+			return
+		}
+		if len(path) == n*2 {
+			res = append(res, path)
+			return
+		}
+		dfs(path+"(", left+1, right)
+		dfs(path+")", left, right+1)
+	}
+	dfs("", 0, 0)
+	return res
+}
+
+//  杨辉三角
+func generate(numRows int) [][]int {
+	var (
+		dp = make([][]int, numRows)
+	)
+	if numRows == 1 {
+		return [][]int{{1}}
+	}
+	for i := 0; i < numRows; i++ {
+		dp[i] = make([]int, i+1)
+	}
+	dp[0][0] = 1
+	dp[1][0] = 1
+	dp[1][1] = 1
+
+	for i := 2; i < numRows; i++ {
+		dp[i][0] = 1
+		dp[i][i] = 1
+		for j := 1; j < i; j++ {
+			dp[i][j] = dp[i-1][j-1] + dp[i-1][j]
+		}
+	}
+
+	return dp
+}
+
+// 杨辉三角 II
+func getRow(rowIndex int) []int {
+	var (
+		dp = make([][]int, rowIndex+1)
+	)
+	if rowIndex == 0 {
+		return []int{1}
+	}
+	for i := 0; i < rowIndex+1; i++ {
+		dp[i] = make([]int, i+1)
+	}
+	dp[0][0] = 1
+	dp[1][0] = 1
+	dp[1][1] = 1
+
+	for i := 2; i < rowIndex+1; i++ {
+		dp[i][0] = 1
+		dp[i][i] = 1
+		for j := 1; j < i; j++ {
+			dp[i][j] = dp[i-1][j-1] + dp[i-1][j]
+		}
+	}
+
+	return dp[rowIndex]
+}
+
+func isSubsequence(s string, t string) bool {
+	n, m := len(s), len(t)
+	i, j := 0, 0
+	for i < n && j < m {
+		if s[i] == t[j] {
+			i++
+		}
+		j++
+	}
+	return i == n
+}
+
+func getMaxLen(nums []int) int {
+	l := len(nums)
+	var (
+		maxVal = 0
+		maxL   = 0
+		m      int
+	)
+	if l == 1 {
+		return 1
+	}
+
+	for i := 0; i < l; i++ {
+		v := nums[i]
+		m = 1
+		maxVal = max(maxVal, v)
+		for j := i + 1; j < l; j++ {
+			v *= nums[j]
+			if maxVal < v {
+				m++
+			}
+			maxVal = max(maxVal, v)
+		}
+		maxL = max(maxL, m)
+	}
+
+	return maxL
+}
+
+// 1014. 最佳观光组合
+func maxScoreSightseeingPair(values []int) int {
+	var (
+		l    = len(values)
+		maxV = values[0] + 0
+		res  = 0
+	)
+	for i := 1; i < l; i++ {
+		fmt.Println(res, maxV, values[i]-i, i)
+		res = max(res, maxV+values[i]-i)
+		maxV = max(maxV, values[i]+i)
+	}
+	return res
+}
+
+func maxProfit3(prices []int, fee int) int {
+	var (
+		dpIn  = make([]int, len(prices))
+		dpOut = make([]int, len(prices))
+	)
+	dpIn[0] = prices[0]
+	for i := 1; i < len(prices); i++ {
+		dpIn[i] = max(dpIn[i-1], dpOut[i-1]-prices[i])
+		dpOut[i] = max(dpOut[i-1], dpIn[i-1]+prices[i]-fee)
+
+	}
+	return dpOut[len(prices)-1]
+}
+
+func test(s string) (res string) {
+	var (
+		sb   = []byte(s)
+		l    = len(sb)
+		slow = 0
+	)
+	for fast := 0; fast < l; fast++ {
+		if sb[fast] != '#' {
+			sb[slow] = sb[fast]
+			slow++
+		} else if slow > 0 {
+			slow--
+		}
+	}
+
+	res = string(sb[:slow])
+	return res
+}
+
+func sortedSquares2(nums []int) []int {
+	var (
+		l       = len(nums)
+		slow    = l - 1
+		fast    = 0
+		index   = l - 1
+		newNums = make([]int, l)
+	)
+	for fast <= slow {
+		v1 := nums[fast] * nums[fast]
+		v2 := nums[slow] * nums[slow]
+		if v1 > v2 {
+			newNums[index] = v1
+			fast++
+		} else {
+			newNums[index] = v2
+			slow--
+		}
+		index--
+	}
+
+	return newNums
+}
+
 func main() {
-	fmt.Println(rob2([]int{1, 2, 3, 1}))
+	fmt.Println(sortedSquares2([]int{-5, -4, -2, -1, 0, 10}))
+
 }

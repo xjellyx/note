@@ -1,0 +1,18 @@
+apiVersion:  extensions/v1beta1
+kind: Deployment
+metadata:
+  name: olongfen-blog
+  namespace: olongfen-blog
+
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        blog-app: olongfen-blog
+    spec:
+      containers:
+        - name: olongfen-blog
+          image: olongfen.blog:latest
+          ports:
+            - containerPort: 9001

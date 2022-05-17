@@ -1,0 +1,47 @@
+version: "3"
+
+
+services:
+  tileService:
+    image: maptiler/tileserver-gl:latest
+    container_name: tileServiceGL
+    restart: always
+    volumes:
+      - ./data:/data
+    command:
+      - --config=/data/tileServerGLConfig.json
+    ports:
+      - "58787:8080"
+
+
+  satelliteOrder:
+    ports:
+      - "9001:9001"
+      - "9002:9002"
+      - "7001:7001"
+    image: satellite_order:latest
+    container_name: satellite_order
+    restart: always
+    privileged: true
+    working_dir: /usr/local/starwiz-satellite-order-back-go
+    volumes:
+        - ./bin:/usr/local/starwiz-satellite-order-back-go/bin
+        - ./config:/usr/local/starwiz-satellite-order-back-go/config
+        - .//:/usr/local/starwiz-satellite-order-back-go/cpp
+        - ./log:/usr/local/starwiz-satellite-order-back-go/log
+        - ./spider://usr/local/starwiz-satellite-order-back-go/spider
+        - ./static:/usr/local/starwiz-satellite-order-back-go/static
+        - ./tif:/usr/local/starwiz-satellite-order-back-go/tif
+        - ./satelliteOrder:/usr/local/starwiz-satellite-order-back-go/satelliteOrder
+        - ./databases:/usr/local/starwiz-satellite-order-back-go/databases
+    command:
+        - /bin/bash
+        - -c
+        - |
+          ./satelliteOrder &
+          cd cpp/build && cmake .. && \
+          make && \
+          cp sat_plan/sat_plan bin && \
+          cp end_plan/end_plan bin && \
+          cd - && \
+          ./starwiz-satellite-track-back/starwiz-satellite-track-back start /snapshot/starwiz-satellite-track-back --port=7001 --title=test_pkg
