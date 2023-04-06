@@ -1,0 +1,11 @@
+
+scalar UUID
+
+type Query {
+    demo: String!
+}
+
+
+type Mutation {
+   demo(hello: String!): String!
+}
