@@ -2,26 +2,52 @@ package main
 
 import (
 	"fmt"
-	"net/http"
+	"github.com/joho/godotenv"
+	"github.com/spf13/pflag"
+	"github.com/spf13/viper"
+	"strings"
 )
 
+type Config struct {
+	HTTP HTTP
+}
+
+type HTTP struct {
+	IP   string
+	Port int64 `mapstructure:"port"`
+}
+
 func main() {
-	http.HandleFunc("/", homePage)
-	http.HandleFunc("/login", loginPage)
-	http.HandleFunc("/dashboard", dashboardPage)
 
-	fmt.Println("Server running on port 8080")
-	http.ListenAndServe(":8080", nil)
-}
+	// 设置默认值
+	viper.SetDefault("http.ip", "0.0.0.0")
+	viper.SetDefault("http.port", "9998")
+	pflag.String("http.ip", "127.0.0.1", "--http.ip=127.0.0.1")
+	pflag.Int64("http.port", 8888, "")
+	pflag.Parse()
 
-func homePage(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, `<html><head><title>Home Page</title></head><body><h1>Welcome to my website!</h1><p><a href="/login">Click here to login</a></p></body></html>`)
-}
-
-func loginPage(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, `<html><head><title>Login Page</title></head><body><h1>Login to my website</h1><form><input type="text" name="username" placeholder="Username"><br><br><input type="password" name="password" placeholder="Password"><br><br><input type="submit" value="Login"></form></body></html>`)
-}
-
-func dashboardPage(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, `<html><head><title>Dashboard</title></head><body><h1>Welcome to your dashboard</h1><p>Here you can manage your account.</p><ul><li><a href="#">Profile</a></li><li><a href="#">Settings</a></li><li><a href="#">Logout</a></li></ul></body></html>`)
+	// 绑定命令行参数e
+	err := viper.BindPFlags(pflag.CommandLine)
+	if err != nil {
+		panic(err)
+	}
+	// 绑定环境变量
+	godotenv.Load()
+	viper.AutomaticEnv()
+	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_", "-", "_"))
+	// 设置配置文件信息，io.Reader 方式读取配置时，也需要这些配置
+	viper.AddConfigPath(".") // // 把当前目录加入到配置文件的搜索路径中，可调用多次添加多个搜索路径
+	viper.SetConfigName("config")
+	viper.SetConfigType("yaml")
+	//搜索配置文件，获取配置
+	if err := viper.ReadInConfig(); err != nil {
+		panic(err)
+	}
+	// 序列化
+	var (
+		cfg = new(Config)
+	)
+	viper.Unmarshal(cfg)
+	fmt.Println("===== 序列化 =====")
+	fmt.Println(cfg)
 }

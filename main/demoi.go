@@ -4,6 +4,7 @@ import (
 	"math"
 )
 
+// Tile
 type Tile[T INumeric] struct {
 	tileSize          T
 	initialResolution T
@@ -55,7 +56,6 @@ func (t *Tile[T]) PixelsToMeters(px, py, zoom T) (mx, my T) {
 	my = py*res - t.originShift
 	return
 }
-
 
 func (t *Tile[T]) TileBounds(tx, ty, zoom T) (minx, miny, maxx, maxy T) {
 	minx, miny = t.PixelsToMeters(tx*t.tileSize, ty*t.tileSize, zoom)
