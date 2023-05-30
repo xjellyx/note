@@ -1,57 +1,39 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+	"sync/atomic"
+	"unsafe"
+)
+
+type Pill int
+
+const (
+	Placebo Pill = iota
+	Aspirin
+	Ibuprofen
+	Paracetamol
+	Acetaminophen = Paracetamol
+)
+
+func (p Pill) String() string {
+	return strconv.Itoa(int(p))
+}
+
+type QQ struct {
+	Name string `json:"name"`
+	Age  int    `json:"age"`
+}
 
 func main() {
-	arr := []int{5, 8, 1, 3, 9, 6}
-	fmt.Println("Before sorting:", arr)
-	arr = mergeSort(arr)
-	fmt.Println("After sorting:", arr)
-}
-
-func mergeSort(arr []int) []int {
-	length := len(arr)
-	if length == 1 {
-		return arr
+	var q = QQ{
+		Name: "wwwwwwww",
+		Age:  111111,
 	}
-
-	mid := length / 2
-	left := arr[:mid]
-	right := arr[mid:]
-
-	leftArr := mergeSort(left)
-	rightArr := mergeSort(right)
-
-	mergedArr := merge(leftArr, rightArr)
-
-	return mergedArr
-}
-
-func merge(left []int, right []int) []int {
-	var i, j int
-	leftLen := len(left)
-	rightLen := len(right)
-	mergedArr := make([]int, leftLen+rightLen)
-
-	for i < leftLen && j < rightLen {
-		if left[i] < right[j] {
-			mergedArr[i+j] = left[i]
-			i++
-		} else {
-			mergedArr[i+j] = right[j]
-			j++
-		}
-	}
-
-	for i < leftLen {
-		mergedArr[i+j] = left[i]
-		i++
-	}
-
-	for j < rightLen {
-		mergedArr[i+j] = right[j]
-		j++
-	}
-
-	return mergedArr
+	var aa = unsafe.Pointer(&q)
+	d := (*QQ)(atomic.LoadPointer(&aa))
+	d.Name = "我改了名称，下面也被改了"
+	fmt.Println(*d)
+	fmt.Println(q)
 }

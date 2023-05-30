@@ -20,3 +20,5 @@ mv demo.mbtiles /home/starwiz/app/pacific-insurance-api/tilesets
 # 手动把链接写入数据库，样式参照数据库原有数据 /demo字段加入raster表的mbtiles字段
 # 项目tif上传通过上传tif接口上传，把项目tif转成cog格式（转方法见 https://gdal.org/drivers/raster/cog.html）在上传，
 ```
+
+// GOOS=linux CGO_ENABLED=0 go build -ldflags="-s -w" -o app ./main/fsnotify_demo.go && tar c app | docker import - app:latest
